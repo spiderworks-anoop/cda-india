@@ -4503,7 +4503,7 @@ section#TermsCondition-section {
     font-style: normal;
     font-weight: 400;
     line-height: 29px;   
-    transition: all 0.6s; 
+    width: 100%;
   }
   .ser-why-sec .btn {
     border-radius: 0;
