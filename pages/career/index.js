@@ -32,6 +32,7 @@ export default function career({ listdata, data, general, process}) {
       <Process
       prosTitle={process?.content?.title_1}
       procesList={process?.content?.smart_accounting_listing_id}
+       ProsImg={process?.content?.media_id_3?.file_path}
       />
       <Footercontent />
     </Base>

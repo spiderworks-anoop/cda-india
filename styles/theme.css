@@ -1891,19 +1891,10 @@ footer {
   font-style: normal;
   font-weight: 400;
   line-height: 29px; /* 161.111% */
-  width: 0;
-  height: 100px;
-  overflow: hidden;
-  transition: all 1s;
-  transform: translateX(-80px);
-  opacity: 0;
-}
-.ser-offer-list:hover p {
   width: 40%;
-  transform: translateX(0px);
-  transition: all 1s;
-  opacity: 1;
+  height: 100px; 
 }
+ 
 .ser-offer-list .btn {
   color: #101828;
 }
@@ -4511,22 +4502,8 @@ section#TermsCondition-section {
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
-    line-height: 29px;
-    width: 100%;
-    height: auto;
-    overflow: visible;
-    transition: all 0.6s;
-    transform: translateX(0px);
-    opacity: 1;
-  }
-
-  .ser-offer-list:hover p {
-    width: 100%;
-    height: auto;
-    overflow: visible;
-    transition: all 0.6s;
-    transform: translateX(0px);
-    opacity: 1;
+    line-height: 29px;   
+    transition: all 0.6s; 
   }
   .ser-why-sec .btn {
     border-radius: 0;

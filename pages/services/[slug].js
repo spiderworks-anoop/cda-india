@@ -82,6 +82,7 @@ export default function Home ({
       <Process
         prosTitle={process?.content?.title_1}
         procesList={process?.content?.smart_accounting_listing_id}
+         ProsImg={process?.content?.media_id_3?.file_path}
       />
 
    {serviceDetail?.bottom_description && (
