@@ -7,7 +7,7 @@ import Associates from '@/components/home/Associates'
 import Faq from '@/components/home/Faq'
 import Process from '@/components/home/Process'
 import Footercontent from '@/components/common/Footercontent'
- 
+
 import SerDetFinance from '@/components/servicedetails/finance'
 import SerDetAdvantage from '@/components/servicedetails/advantage'
 import SerOffer from '@/components/common/Servoffer'
@@ -22,7 +22,7 @@ import { IndustryApi } from '@/Datas/endpoints/industry'
 
 import IndDetBnr from '@/components/industry/banner'
 
-export default function Home ({
+export default function Home({
   data,
   general,
   process,
@@ -35,8 +35,6 @@ export default function Home ({
   return (
     <Base data={industryDetail} general={general} bottomContent={'Bottom Content'}>
 
-
-      
       <IndDetBnr data={industryDetail} />
 
       {/* <SerDetFinance data={serviceDetail}/>
@@ -64,8 +62,7 @@ export default function Home ({
         }
       />
 
-<Testimonials data={testimonials}/>
-
+      <Testimonials data={testimonials} />
 
       <Associates
         associateTitle={ourassociates?.content?.title}
@@ -85,15 +82,18 @@ export default function Home ({
       faqrightdiscription={data?.content?.short_description}
       faqrightbtn={data?.content?.button_text_4}
        /> */}
+
       <Process
         prosTitle={process?.content?.title_1}
         procesList={process?.content?.smart_accounting_listing_id}
-         ProsImg={process?.content?.media_id_3?.file_path}
+        ProsImg={process?.content?.media_id_3?.file_path}
       />
+
       <Footercontent
         footerContentTitle={data?.content?.title_5}
         footerContentDiscription={data?.content?.description_5}
       />
+
     </Base>
   )
 }
@@ -134,7 +134,7 @@ export const getStaticProps = async ({ params }) => {
         financialSolutions: WidgetData?.data?.data,
         certifications: CertificationsData?.data?.data,
         ourassociates: OurassociatesData?.data?.data,
-        testimonials:TestimonialsData?.data?.data
+        testimonials: TestimonialsData?.data?.data
       },
       revalidate: 60 // Optional: revalidate every 60 seconds
     }

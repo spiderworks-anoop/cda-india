@@ -42,7 +42,11 @@ export default function Accordion({
         }}
         className="accordion_data"
       >
-        <div className="mt-2" dangerouslySetInnerHTML={{__html:content}}/> 
+        {typeof content === "string" ? (
+          <div className="mt-2" dangerouslySetInnerHTML={{ __html: content }} />
+        ) : (
+          <div className="mt-2">{content}</div>
+        )}
       </div>
     </div>
   );

@@ -86,7 +86,7 @@ const ConsultationForm = ({ data, contact, blog }) => {
             <div>
              
               <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="grid md:grid-cols-2 gap-[25px] mt-[15px]">
+                <div className="consultation-form grid md:grid-cols-2 gap-[25px] mt-[15px]">
                   <div>
                     <label>Name</label>
                     <input
@@ -119,7 +119,7 @@ const ConsultationForm = ({ data, contact, blog }) => {
                       country={"sa"}
                       value={phone}
                       onChange={onPhoneChange}
-                      enableSearch
+                      enableSearch={false}
                       inputClass={`w-full ${
                         phoneError ? "border-red-500" : "border-gray-300"
                       }`}

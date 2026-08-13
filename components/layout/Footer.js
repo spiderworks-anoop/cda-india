@@ -188,6 +188,7 @@ const Footer = ({ general }) => {
                     <Link
                       target='_blank'
                       href={general?.all_settings['twitter-link']}
+                      className='inline-flex opacity-70 transition duration-300 ease-out hover:-translate-y-[2px] hover:opacity-100'
                     >
                       <Xicon />{' '}
                     </Link>
@@ -197,6 +198,7 @@ const Footer = ({ general }) => {
                     <Link
                       target='_blank'
                       href={general?.all_settings['facebook-link']}
+                      className='inline-flex opacity-70 transition duration-300 ease-out hover:-translate-y-[2px] hover:opacity-100'
                     >
                       <Faceicon />{' '}
                     </Link>
@@ -206,6 +208,7 @@ const Footer = ({ general }) => {
                     <Link
                       target='_blank'
                       href={general?.all_settings['instagram-link']}
+                      className='inline-flex opacity-70 transition duration-300 ease-out hover:-translate-y-[2px] hover:opacity-100'
                     >
                       <Instaicon />{' '}
                     </Link>
@@ -215,6 +218,7 @@ const Footer = ({ general }) => {
                     <Link
                       target='_blank'
                       href={general?.all_settings['youtube-link']}
+                      className='inline-flex opacity-70 transition duration-300 ease-out hover:-translate-y-[2px] hover:opacity-100'
                     >
                       <Youicon />{' '}
                     </Link>
@@ -224,6 +228,7 @@ const Footer = ({ general }) => {
                     <Link
                       target='_blank'
                       href={general?.all_settings['linkedin-link']}
+                      className='inline-flex opacity-70 transition duration-300 ease-out hover:-translate-y-[2px] hover:opacity-100'
                     >
                       <Linkicon />{' '}
                     </Link>

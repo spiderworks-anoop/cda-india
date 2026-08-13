@@ -26,8 +26,6 @@ export default function career({ listdata, data, general, process}) {
       <CareerList listdata={listdata} data={data}/>
  
 
-       
-
 
       <Process
       prosTitle={process?.content?.title_1}
