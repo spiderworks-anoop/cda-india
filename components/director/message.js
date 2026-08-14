@@ -30,7 +30,7 @@ const DMessage = ({data}) => {
 
             <div className='mt-[25px] md:mt-[0] md:w-[80%]'>
               
-                <p dangerouslySetInnerHTML={{__html:data?.content?.description_2}}/>   
+                <div className='p' dangerouslySetInnerHTML={{__html:data?.content?.description_2}}/>   
                 
             </div>
 

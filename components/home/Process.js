@@ -6,7 +6,7 @@ import Pros3 from "../../public/images/pros3.png";
 import { LongArrowicon } from "../common/svgicon";
 import Link from "next/link";
 
-const Process = ({ prosTitle, procesList, ProsImg  }) => {
+const Process = ({ prosTitle, procesList, ProsImg }) => {
   return (
     <section className="home-process">
       <div className="container">
@@ -18,20 +18,20 @@ const Process = ({ prosTitle, procesList, ProsImg  }) => {
 
           <div className="flex items-center gap-[25px] flex-wrap">
             {procesList?.map((items, index) => (
-              <div key={index} className="pros_list img-zoom">
-                <Image
-                  src={items?.media_id?.file_path}
-                  alt=""
-                  width={272}
-                  height={101}
-                />
-                <div className="flex items-center mt-[34px] gap-[15px]">
-                  <h4> {items?.title} </h4>
-                  <Link href={`/${items?.url || "#"}`}>
+              <Link key={index} href={`/${items?.url || "#"}`}>
+                <div  className="pros_list img-zoom">
+                  <Image
+                    src={items?.media_id?.file_path}
+                    alt=""
+                    width={272}
+                    height={101}
+                  />
+                  <div className="flex items-center mt-[34px] gap-[15px]">
+                    <h4> {items?.title} </h4>
                     <LongArrowicon />
-                  </Link>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

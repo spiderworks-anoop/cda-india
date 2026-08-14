@@ -3,11 +3,10 @@ const nextConfig = {
   reactStrictMode: false,
 
   images: {
-    domains: ["cda-sa.spider.ws"],
-  },
-  reactStrictMode: false,
-  images: {
-    domains: [ "cda-sa.spider.ws" ],
+    domains: [
+      "cda-sa.spider.ws",
+      "dashboard.cdaaudit.in",
+    ],
   },
 };
 

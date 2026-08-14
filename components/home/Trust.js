@@ -12,27 +12,31 @@ const Trust = ({ data }) => {
   const [inView, setInView] = useState(false);
 
   useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setInView(true);
+          observer.disconnect();
         }
       },
       {
-        threshold: 0.3, // Adjust as needed
+        // On small screens the section is taller than the viewport, so a
+        // ratio based threshold can never be reached. Fire once it has
+        // scrolled 15% into the viewport instead.
+        threshold: 0,
+        rootMargin: "0px 0px -15% 0px",
       }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+    observer.observe(section);
 
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
+    return () => observer.disconnect();
   }, []);
+
+
 
   return (
     <>
@@ -48,7 +52,7 @@ const Trust = ({ data }) => {
           <div className="md:flex gap-[40px]">
             <div className="trust_right w-full md:hidden">
               <div className="max-w-[575px] mx-auto flex flex-col items-center  mb-[30px]">
-                <motion.h3
+                <motion.div className='h3'
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
@@ -58,7 +62,7 @@ const Trust = ({ data }) => {
                   }}
                 />
 
-                <p
+                <div className='p'
                   dangerouslySetInnerHTML={{
                     __html: data?.content?.description_2,
                   }}
@@ -86,7 +90,7 @@ const Trust = ({ data }) => {
 
             <div className="trust_right w-full">
               <div className="max-w-[575px] mx-auto hidden md:flex flex-col items-center  mb-[30px]">
-                <motion.h3
+                <motion.div className='h3'
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
@@ -95,7 +99,7 @@ const Trust = ({ data }) => {
                     __html: data?.content?.title_2,
                   }}
                 />
-                <p
+                <div className='p'
                   dangerouslySetInnerHTML={{
                     __html: data?.content?.description_2,
                   }}
@@ -109,7 +113,7 @@ const Trust = ({ data }) => {
               </div>
 
               <div className="grid md:grid-cols-3 gap-[35px]  md:gap-[5px] lg:gap-[35px] mt-[30px] md:mt-[0] ">
-                {data.content.trusted_partners_listing_id.map((item, index) => (
+                {data?.content?.trusted_partners_listing_id?.map((item, index) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 20 }}

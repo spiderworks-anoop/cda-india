@@ -77,7 +77,7 @@ const Service = ({ data }) => {
       <div className="container sticky top-[25px]">
         <div className="home-service-cntr">
           <div className="max-w-[1005px] mx-auto">
-            <h4
+            <div className='h4'
               ref={textRef}
               dangerouslySetInnerHTML={{ __html: data?.content?.description_3 }}
             />

@@ -12,7 +12,8 @@ import ContactForm from '@/components/contact/getform'
 import { ContactApi } from '@/Datas/endpoints/contact'
 
 export default function BlogDetails ({ general, blogDetail, process , data }) {
-  console.log('dd', blogDetail)
+
+  // console.log('dd', blogDetail)
 
   return (
     <Base general={general} bottomContent={'Bottom Content'} data={blogDetail}>
@@ -82,7 +83,7 @@ export const getStaticPaths = async () => {
 
 // Fetch data for each blog page
 export const getStaticProps = async ({ params }) => {
-  console.log(params)
+  // console.log(params)
   try {
     const BlogPageData = await BlogApi.blogDetail({ slug: params.slug })
     const GeneralData = await GeneralApi.general()

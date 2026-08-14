@@ -83,7 +83,7 @@ const About = ({ data }) => {
             Innovate
           </div>
 
-          <h3 dangerouslySetInnerHTML={{ __html: data?.content?.title_3 }} />
+          <div dangerouslySetInnerHTML={{ __html: data?.content?.title_3 }} />
           <h5> {data?.content?.short_title_3} </h5>
 
           <div className="animate-bounce popover text-[#fff] rounded-tl-[24px] rounded-tr-[2px] rounded-bl-[24px] rounded-br-[24px] absolute left-0 bottom-[30px] md:bottom-0 bg-[#6A7796]">
@@ -111,7 +111,7 @@ const About = ({ data }) => {
           </div>
 
           <div className="md:hidden">
-            <p
+            <div
               ref={textRef}
               dangerouslySetInnerHTML={{ __html: data?.content?.description_4 }}
             />
@@ -126,7 +126,7 @@ const About = ({ data }) => {
           </div>
 
           <div className="hidden md:block">
-            <p
+            <div
               ref={textRef}
               dangerouslySetInnerHTML={{ __html: data?.content?.description_4 }}
             />

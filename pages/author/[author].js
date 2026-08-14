@@ -10,28 +10,29 @@ import { WidgetApi } from '@/Datas/endpoints/widget'
 import { GeneralApi } from '@/Datas/endpoints/general'
 import BlogList from '@/components/blog/list'
 
-export default function AuthorDetails ({ general, athorDetail }) {
-  
-console.log(athorDetail?.author?.name)
+export default function AuthorDetails({ general, athorDetail }) {
+
+  // console.log(athorDetail?.author?.name)
+
   return (
-      <Base  general={general} data={athorDetail}>
+    <Base general={general} data={athorDetail}>
 
-<div className="Small_banner">
-            <CommBanner  
-            title={athorDetail?.author?.name} 
-             discription={athorDetail?.author?.designation} 
-              short_description={athorDetail?.author?.short_description} 
-              Authimg={athorDetail?.author?.featured_image?.file_path}
-               /> 
-          
-       </div>
-        
-      <BlogList data={athorDetail?.blogs}/>
- 
+      <div className="Small_banner">
+        <CommBanner
+          title={athorDetail?.author?.name}
+          discription={athorDetail?.author?.designation}
+          short_description={athorDetail?.author?.short_description}
+          Authimg={athorDetail?.author?.featured_image?.file_path}
+        />
 
-       
+      </div>
 
- 
+      <BlogList data={athorDetail?.blogs} />
+
+
+
+
+
     </Base>
   )
 }
@@ -53,7 +54,7 @@ export const getStaticPaths = async () => {
 
 // Fetch data for each blog page
 export const getStaticProps = async ({ params }) => {
-  console.log(params)
+  // console.log(params)
   try {
     const AuthorPageData = await BlogApi.athorDetail({ slug: params.author })
     const GeneralData = await GeneralApi.general()
@@ -68,7 +69,7 @@ export const getStaticProps = async ({ params }) => {
     }
   } catch (error) {
     console.log(error)
-    
+
     if (error?.error == 'Author not found') {
       return {
         notFound: true

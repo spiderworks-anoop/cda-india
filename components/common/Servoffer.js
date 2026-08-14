@@ -39,7 +39,7 @@ const SerOffer = ({ IsServiceDetails, shorttitle, title, discription, listdata }
 
             <div>
               <div className='max-w-[506px]'>
-                <p dangerouslySetInnerHTML={{__html:discription}}/> 
+                <div className='p' dangerouslySetInnerHTML={{__html:discription}}/> 
                  
               </div>
             </div>

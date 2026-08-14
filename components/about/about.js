@@ -32,7 +32,7 @@ const Aboutabout = ({data}) => {
             <Image src={Abt2} alt='' width={500} height={500} />
             </div>
 
-            <p dangerouslySetInnerHTML={{__html:data?.content?.description_1}} />
+            <div className='p' dangerouslySetInnerHTML={{__html:data?.content?.description_1}} />
                 
                
                 

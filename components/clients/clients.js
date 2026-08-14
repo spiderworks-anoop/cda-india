@@ -29,13 +29,13 @@ const ClientsList = ({data}) => {
       <div className="grid md:grid-cols-2 gap-[20px] mb-[40px] md:mb-[80px]"> 
                 <div>
                     <div className='max-w-[520px]'>
-                        <h3 dangerouslySetInnerHTML={{__html:data?.content?.title_1}}/>  
+                        <div className='h3' dangerouslySetInnerHTML={{__html:data?.content?.title_1}}/>  
                     </div> 
                 </div>
 
                 <div className='flex md:justify-end'>
                      <div className='max-w-[560px]'>
-                        <p dangerouslySetInnerHTML={{__html:data?.content?.description_1}}/>  
+                        <div className='p' dangerouslySetInnerHTML={{__html:data?.content?.description_1}}/>  
                     </div>
                 </div> 
             </div>

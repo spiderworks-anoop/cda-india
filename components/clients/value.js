@@ -34,7 +34,7 @@ const OurValue = ({data}) => {
     <section className='home-clients'>
       <div className='container'>
 
-        <h3 dangerouslySetInnerHTML={{__html:data?.content?.title}}/>
+        <div className='h3' dangerouslySetInnerHTML={{__html:data?.content?.title}}/>
 
           <div className='flex flex-col md:flex-row items-center gap-[30px] rounded-[12px] overflow-hidden border border-[#E5E5E5] mt-[27px]'> 
 

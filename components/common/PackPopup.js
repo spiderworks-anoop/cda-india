@@ -59,7 +59,7 @@ const PackPopup = ({ isOpen, onClose, serData, packageData }) => {
     } else {
       setPhoneError(false)
     }
-    console.log(data)
+    // console.log(data)
     let datatosubmit = {
       package_id: packageData?.id,
       ...data,
@@ -91,7 +91,7 @@ const PackPopup = ({ isOpen, onClose, serData, packageData }) => {
     }
   }
   // Return null AFTER hooks
-  console.log('object', list)
+  // console.log('object', list)
   return (
     <div className='aaaaa fixed inset-0 flex items-center justify-center z-10 popup_bg'>
       <div className='Packpopup Enquiry_popup  relative'>
@@ -110,7 +110,7 @@ const PackPopup = ({ isOpen, onClose, serData, packageData }) => {
             <h4>{packageData?.title}</h4>
             <div className='flex items-center gap-[15px]'>
               <h6>Starting from</h6>
-              <h3
+              <div className='h3'
                 dangerouslySetInnerHTML={{
                   __html: packageData?.content?.value_per_month_1
                 }}

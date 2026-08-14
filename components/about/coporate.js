@@ -34,7 +34,7 @@ const AboutCoporate = ({ data }) => {
             className="md:flex justify-center items-center"
           >
             <div className="max-w-[610px]">
-              <h4
+              <div className='h4'
                 dangerouslySetInnerHTML={{ __html: data?.content?.title_5 }}
               />
 

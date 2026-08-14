@@ -65,7 +65,7 @@ const Why = ({ data }) => {
         <div className="grid md:grid-cols-2 gap-[20px]">
           <div>
             <div className="md:max-w-[520px] max-w-[300px]">
-              <h3
+              <div
                 dangerouslySetInnerHTML={{ __html: data?.content?.title_4 }}
               />
             </div>
@@ -73,7 +73,7 @@ const Why = ({ data }) => {
 
           <div className="flex md:justify-end">
             <div className="md:max-w-[560px] max-w-[330px]">
-              <p
+              <div
                 ref={textRef}
                 dangerouslySetInnerHTML={{ __html: data?.content?.content_4 }}
               />

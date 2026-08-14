@@ -149,17 +149,17 @@ const CareerList = ({ listdata, data }) => {
               title={item?.title}
               content={
                 <div className="relative">
-                  <h5
+                  <div className='h5'
                     dangerouslySetInnerHTML={{
                       __html: item?.short_description,
                     }}
                   />
-                  <h5
+                  <div className='h5'
                     dangerouslySetInnerHTML={{
                       __html: item?.last_application_date,
                     }}
                   />
-                  <h5
+                  <div className='h5'
                     dangerouslySetInnerHTML={{
                       __html: item?.department,
                     }}
@@ -175,11 +175,11 @@ const CareerList = ({ listdata, data }) => {
                   <div dangerouslySetInnerHTML={{ __html: item?.skills }} />
                   <div className="flex items-center gap-[15px]">
                     <h5>No: of Vacancies:</h5>
-                    <h5 dangerouslySetInnerHTML={{ __html: item?.vacancies }} />
+                    <div className='h5' dangerouslySetInnerHTML={{ __html: item?.vacancies }} />
                   </div>
                   <div className="flex items-center gap-[15px]">
                     <h5>Job Locations:</h5>
-                    <h5
+                    <div className='h5'
                       dangerouslySetInnerHTML={{
                         __html: item?.job_location,
                       }}

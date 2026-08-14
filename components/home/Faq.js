@@ -55,7 +55,7 @@ const Faq = ({ servfaqs, faqrighttitle, faqrightdiscription, faqrightbtn }) => {
               <div className="min-w-[360px] xl:min-w-[460px] flex md:justify-end pr-[40px]">
                 <div className="px-[15px] md:px-0  max-w-[270px]">
                   <h4> {faqrighttitle}</h4>
-                  <p
+                  <div className='p'
                     dangerouslySetInnerHTML={{ __html: faqrightdiscription }}
                   />
 

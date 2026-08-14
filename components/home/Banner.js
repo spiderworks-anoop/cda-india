@@ -47,7 +47,7 @@ const Banner = ({ data }) => {
           <div className="max-w-[672px] mx-auto flex flex-col items-center justify-center gap-[15px]">
             <GradualSpacing text={data?.content?.title_1 || ""} />
 
-            <p
+            <div
               dangerouslySetInnerHTML={{ __html: data?.content?.description_1 }}
             />
 
@@ -80,7 +80,7 @@ const Banner = ({ data }) => {
               </svg>
             </div>
 
-            <h5
+            <div
               className="hidden md:block"
               dangerouslySetInnerHTML={{
                 __html: data?.content?.short_description,

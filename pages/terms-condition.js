@@ -29,7 +29,7 @@ export default function Home({
   exceptionalclients,
   terms,
 }) {
-  console.log("GM", data);
+  // console.log("GM", data);
 
   return (
     <Base general={general} data={data} bottomContent={"Bottom Content"}>

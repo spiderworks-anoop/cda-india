@@ -22,7 +22,8 @@ import { WidgetApi } from "@/Datas/endpoints/widget";
 
 
 export default function Home({ data, listdata, general, financialSolutions, certifications, process, ourassociates, faqrigthtext }) {
-  console.log(data)
+  
+  // console.log(data)
 
   return (
     <Base general={general} data={data} bottomContent={'Bottom Content'}>
@@ -31,16 +32,13 @@ export default function Home({ data, listdata, general, financialSolutions, cert
         title={data?.content?.title_1}
         subtitle={data?.content?.short_title_1}
         discription={data?.content?.short_description_1}
-        bnrimg={data?.content?.media_id_1?.file_path} />
-
-
-
-
+        bnrimg={data?.content?.media_id_1?.file_path}
+      />
 
       <SerOffer listdata={listdata} shorttitle={data?.content?.short_title_2}
         title={data?.content?.title_2}
-        discription={data?.content?.description_2} />
-
+        discription={data?.content?.description_2}
+      />
 
       <SerWhy shorttitle={data?.content?.short_title_3}
         title={data?.content?.title_3}
@@ -52,9 +50,7 @@ export default function Home({ data, listdata, general, financialSolutions, cert
         whyimgcap={data?.content?.image_title_3}
         whyimgsubcap={"SAUDI"}
         whyimgbtntxt={data?.content?.image_button_text}
-
       />
-
 
       <SerSolution
         soluVideo={financialSolutions?.content?.media_id_1?.file_path}
@@ -69,9 +65,7 @@ export default function Home({ data, listdata, general, financialSolutions, cert
 
       />
 
-
       <Testimonials />
-
 
       <Associates
         associateTitle={ourassociates?.content?.title}
@@ -86,9 +80,6 @@ export default function Home({ data, listdata, general, financialSolutions, cert
 
       />
 
-
-
-
       <Faq
         servfaqs={data?.faq}
         faqrighttitle={faqrigthtext?.content?.title}
@@ -96,21 +87,16 @@ export default function Home({ data, listdata, general, financialSolutions, cert
         faqrightbtn={faqrigthtext?.content?.btn_text}
       />
 
-
-
       <Process
         prosTitle={process?.content?.title_1}
         procesList={process?.content?.smart_accounting_listing_id}
         ProsImg={process?.content?.media_id_3?.file_path}
       />
 
-
       <Footercontent
         footerContentTitle={data?.content?.title_5}
         footerContentDiscription={data?.content?.description_5}
       />
-
-
 
     </Base>
   );

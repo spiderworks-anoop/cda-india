@@ -58,7 +58,7 @@ const FooterSection = ({ items }) => {
 const FooterColumn = ({ title, items }) => {
   const [showAll, setShowAll] = useState(false)
   const [isActive, setIsActive] = useState(false)
-  console.log('gddjdjd', items)
+  // console.log('gddjdjd', items)
   return (
     <div className='border-b md:border-b-0 border-[#E5E5E5]'>
       <div
@@ -103,6 +103,7 @@ const FooterColumn = ({ title, items }) => {
 }
 
 const Footer = ({ general }) => {
+
   const [isPopupOpen, setPopupOpen] = useState(false)
 
    const [show, setShow] = useState(false)

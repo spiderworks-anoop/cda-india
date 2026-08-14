@@ -39,7 +39,7 @@ const SerDetHead = ({ data }) => {
                 <h2> {data?.content?.title_1} </h2>
                 {/* <CurveLargeArrowicon /> */}
                 
-                <p
+                <div className='p'
                   dangerouslySetInnerHTML={{
                     __html: data?.content?.description_1
                   }}

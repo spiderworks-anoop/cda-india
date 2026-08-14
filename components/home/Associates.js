@@ -49,7 +49,7 @@ const Associates = ({associateTitle, associateSubTitle, satisfiedClientsCount, s
 
         }
         
-        <h4 dangerouslySetInnerHTML={{__html:loc?.title}}/>  
+        <div className='h4' dangerouslySetInnerHTML={{__html:loc?.title}}/>  
       </div>
     </div>
   ))}

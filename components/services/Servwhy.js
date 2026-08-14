@@ -39,7 +39,7 @@ const SerWhy = ({shorttitle, title, Whycdalist, discription, btntext, whyimgtext
                 <h5> {shorttitle}</h5> 
                         <h3>  {title}</h3> 
                        
-                        <p dangerouslySetInnerHTML={{__html:discription}  }/>
+                        <div className='p' dangerouslySetInnerHTML={{__html:discription}  }/>
 
                         <ul className='why-cda-list'>
                         

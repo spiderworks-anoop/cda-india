@@ -44,7 +44,7 @@ const SerDetAdvantage = ({ data }) => {
         <section className="ser-det-advantage pt-[50px]">
           <div className="container relative z-[1]">
             <div className="max-w-[425px]">
-              <h2
+              <div className='h2'
                 dangerouslySetInnerHTML={{ __html: data?.content?.title_3 }}
               />
             </div>

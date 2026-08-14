@@ -55,10 +55,10 @@ const Certificate = ({
   return (
     <section className="home-cartificate" ref={sectionRef}>
       <div className="container">
-        <h3>
-          <span dangerouslySetInnerHTML={{ __html: certificatHead }} />{" "}
+        <div className='h3'>
+          <div className='span' dangerouslySetInnerHTML={{ __html: certificatHead }} />{" "}
           <Medalicon />
-        </h3>
+        </div>
         <h5>{certificatSubHead}</h5>
 
         <div className="flex flex-col md:flex-row items-center justify-center mt-[50px]">

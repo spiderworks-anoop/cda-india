@@ -115,7 +115,7 @@ export const getStaticPaths = async () => {
 
 // Fetch data for each blog page
 export const getStaticProps = async ({ params }) => {
-  console.log(params)
+  // console.log(params)
   try {
     const IndustryPageData = await IndustryApi.industryDetail({
       slug: params.slug

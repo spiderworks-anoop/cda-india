@@ -18,7 +18,7 @@ import { ServicesApi } from '@/Datas/endpoints/services'
 import { GeneralApi } from '@/Datas/endpoints/general'
 import { WidgetApi } from '@/Datas/endpoints/widget'
 
-export default function Home ({
+export default function Home({
   data,
   general,
   process,
@@ -30,7 +30,7 @@ export default function Home ({
   faqrigthtext,
   testimonials
 }) {
-  console.log(serviceDetail)
+  // console.log(serviceDetail)
   return (
     <Base general={general} data={serviceDetail} bottomContent={'Bottom Content'}>
       <SerDetHead data={serviceDetail} />
@@ -82,15 +82,15 @@ export default function Home ({
       <Process
         prosTitle={process?.content?.title_1}
         procesList={process?.content?.smart_accounting_listing_id}
-         ProsImg={process?.content?.media_id_3?.file_path}
+        ProsImg={process?.content?.media_id_3?.file_path}
       />
 
-   {serviceDetail?.bottom_description && (
-  <Footercontent
-    footerContentTitle={serviceDetail.bottom_title}
-    footerContentDiscription={serviceDetail.bottom_description}
-  />
-)}
+      {serviceDetail?.bottom_description && (
+        <Footercontent
+          footerContentTitle={serviceDetail.bottom_title}
+          footerContentDiscription={serviceDetail.bottom_description}
+        />
+      )}
 
 
 

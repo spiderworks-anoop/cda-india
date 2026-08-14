@@ -18,6 +18,44 @@ import { GeneralApi } from "@/Datas/endpoints/general";
 import { WidgetApi } from "@/Datas/endpoints/widget";
 import { HomeApi } from "@/Datas/endpoints";
 
+
+
+export async function getStaticProps() {
+  try {
+    const GeneralData = await GeneralApi.general();
+    // const WidgetData = await WidgetApi.financialSolutions();
+    const ProcessData = await WidgetApi.process();
+    const HomeData = await HomeApi.page();
+    const OurassociatesData = await WidgetApi.ourassociates();
+    const CertificationsData = await WidgetApi.certifications();
+    const FaqrigthtextData = await WidgetApi.faqrigthtext();
+    const exceptionalclientsData = await WidgetApi.exceptionalclients();
+
+
+    return {
+      props: {
+        general: GeneralData?.data?.data,
+        // financialSolutions: WidgetData?.data?.data,
+        process: ProcessData?.data?.data,
+        data: HomeData?.data?.data,
+        ourassociates: OurassociatesData?.data?.data,
+        certifications: CertificationsData?.data?.data,
+        faqrigthtext: FaqrigthtextData?.data?.data,
+        exceptionalclients: exceptionalclientsData?.data?.data,
+      },
+      revalidate: 10,
+    };
+  } catch (error) {
+    console.log("Home Page static Props", error);
+    throw error;
+    // return{
+    //   notFound:true
+    // }
+  }
+}
+
+
+
 export default function Home({
   data,
   process,
@@ -27,10 +65,12 @@ export default function Home({
   faqrigthtext,
   exceptionalclients
 }) {
-  console.log("GM", data);
+
+  // console.log("GM", data);
 
   return (
     <Base general={general} data={data} bottomContent={"Bottom Content"}>
+      
       <Banner data={data} />
 
       <Trust data={data} />
@@ -82,56 +122,18 @@ export default function Home({
         faqrightdiscription={faqrigthtext?.content?.text}
         faqrightbtn={faqrigthtext?.content?.btn_text}
       />
- 
+
       <Process
         prosTitle={process?.content?.title_1}
         procesList={process?.content?.smart_accounting_listing_id}
         ProsImg={process?.content?.media_id_3?.file_path}
       />
- 
+
       <Footercontent
         footerContentTitle={data?.h1_title}
         footerContentDiscription={data?.bottom_description}
       />
-    
+
     </Base>
   );
-}
-
-export async function getStaticProps() {
-  try {
-    const GeneralData = await GeneralApi.general();
-    // const WidgetData = await WidgetApi.financialSolutions();
-     const ProcessData = await WidgetApi.process();
-    const HomeData = await HomeApi.page();
-     const OurassociatesData = await WidgetApi.ourassociates();
-    const CertificationsData = await WidgetApi.certifications();
-    const FaqrigthtextData = await WidgetApi.faqrigthtext();
-    const exceptionalclientsData = await WidgetApi.exceptionalclients();
-
-    
-
-
-    
-
-    return {
-      props: {
-        general: GeneralData?.data?.data,
-        // financialSolutions: WidgetData?.data?.data,
-         process: ProcessData?.data?.data,
-        data: HomeData?.data?.data,
-         ourassociates: OurassociatesData?.data?.data,
-        certifications: CertificationsData?.data?.data,
-        faqrigthtext: FaqrigthtextData?.data?.data,
-        exceptionalclients: exceptionalclientsData?.data?.data,
-      },
-      revalidate: 10,
-    };
-  } catch (error) {
-    console.log("www", error);
-    throw error;
-    // return{
-    //   notFound:true
-    // }
-  }
 }

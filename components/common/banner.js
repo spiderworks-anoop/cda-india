@@ -23,7 +23,7 @@ const CommBanner = ({
   bnrimg,
   Authimg
 }) => {
-  console.log(data);
+  // console.log(data);
   return (
     <section className="ser-det-banner  relative mb-[45px] inner-banner">
       <Image src={bnrimg || Ser1} alt="" width={1920} height={773} />
@@ -47,7 +47,7 @@ const CommBanner = ({
                 <h2>{title}</h2>
                 {/* <CurveLargeArrowicon /> */}
 
-                <p className="max-w-[800px]"
+                <div className="max-w-[800px] p"
                   dangerouslySetInnerHTML={{
                     __html: (short_description || "")
                       .substring(0, 200),

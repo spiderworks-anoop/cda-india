@@ -26,14 +26,14 @@ const SerDetFinance = ({data}) => {
             className='md:flex justify-center items-center'>
               <div className='max-w-[610px]'>
                
-                <h4 dangerouslySetInnerHTML={{__html:data?.content?.title_2}}/>  
+                <div className='h4' dangerouslySetInnerHTML={{__html:data?.content?.title_2}}/>  
 
 
                 <div className=' pt-[25] pb-[55px] md:hidden'>
             <Image src={data?.content?.media_id_2?.file_path} alt='' width={1920} height={773} />
             </div>
                 
-                <p dangerouslySetInnerHTML={{__html:data?.content?.description_2}}/> 
+                <div className='p' dangerouslySetInnerHTML={{__html:data?.content?.description_2}}/> 
                 <Link href={`/contact-us`}><BlueBtn btntext={data?.content?.button_text_2}/> </Link>
               </div>
           

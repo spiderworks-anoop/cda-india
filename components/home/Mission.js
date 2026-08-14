@@ -71,12 +71,12 @@ const Mission = ({
             <div className="relative z-[1] flex flex-col justify-between h-full">
               <div>
                 <h4> {maintitle || "Why CDA"} </h4>
-                <span
+                <div className='span'
                   dangerouslySetInnerHTML={{
                     __html:
                       shorttitle || "<b>100%</b> Corporate Finance Solutions",
                   }}
-                ></span>
+                ></div>
               </div>
               <Image src={MisImg || Miss1} alt="" width={445} height={350} />
             </div>

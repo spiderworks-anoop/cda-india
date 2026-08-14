@@ -55,7 +55,7 @@ const ConsultationForm = ({ data, contact, blog }) => {
         lead_type: `free-consultation`
       };
       const response = await ContactApi.contact(payload); // Make sure ContactApi.career supports JSON
-      console.log("Submitted:", response);
+      // console.log("Submitted:", response);
       reset();
       if (response?.status === 200) {
         router.push("/thank-you");
@@ -75,7 +75,7 @@ const ConsultationForm = ({ data, contact, blog }) => {
 
             <div>
             
-                 <h3
+                 <div className='h3'
                 dangerouslySetInnerHTML={{ __html: data?.title }}
               />
               <p> {data?.content?.short_description_1} </p>

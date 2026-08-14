@@ -1,5 +1,5 @@
 // components/Popup.js
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Callicon, Closeicon, WhatsAppicon } from './svgicon'
 import { ContactApi } from '@/Datas/endpoints/contact'
 import { set, useForm } from 'react-hook-form'
@@ -26,6 +26,37 @@ const Popup = ({ isOpen, onClose, ifBrochure }) => {
   const [phone, setPhone] = useState('')
   const [phoneError, setPhoneError] = useState(false)
   const [general, setGeneral] = useState()
+  const serviceRef = useRef(null)
+
+  // stop the page behind the popup from scrolling
+  useEffect(() => {
+    const previous = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = previous
+    }
+  }, [])
+
+  // close the service dropdown on outside click / Escape
+  useEffect(() => {
+    if (!open) return
+
+    const handleOutside = e => {
+      if (serviceRef.current && !serviceRef.current.contains(e.target)) {
+        setOpen(false)
+      }
+    }
+    const handleKey = e => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+
+    document.addEventListener('mousedown', handleOutside)
+    document.addEventListener('keydown', handleKey)
+    return () => {
+      document.removeEventListener('mousedown', handleOutside)
+      document.removeEventListener('keydown', handleKey)
+    }
+  }, [open])
 
   const onPhoneChange = value => {
     setPhone(value)
@@ -70,7 +101,7 @@ const Popup = ({ isOpen, onClose, ifBrochure }) => {
     } else {
       setPhoneError(false)
     }
-    console.log(data)
+    // console.log(data)
     let datatosubmit = {
       service_id: serviceId?.id,
       ...data,
@@ -102,149 +133,167 @@ const Popup = ({ isOpen, onClose, ifBrochure }) => {
     }
   }
   // Return null AFTER hooks
-  console.log(general)
+  // console.log(general)
   return (
-    <div className='fixed inset-0 flex items-center justify-center z-10 popup_bg'>
-      <div className='Enquiry_popup relative'>
-        <button
-          className='absolute top-[25px] right-[20px] cursor-pointer'
-          onClick={onClose}
-        >
-          <Closeicon />
-        </button>
+    <div
+      className='fixed inset-0 z-10 popup_bg overflow-y-auto overscroll-contain'
+      data-lenis-prevent
+    >
+      <div className='flex min-h-full items-center justify-center p-[12px] md:p-[20px]'>
+        <div className='Enquiry_popup relative'>
+          <button
+            className='absolute top-[10px] right-[10px] md:top-[25px] md:right-[20px] p-[5px] cursor-pointer z-[2]'
+            onClick={onClose}
+          >
+            <Closeicon />
+          </button>
 
-        <h2>
-          Simplify <br /> Your Finances <br /> with Expert Help
-        </h2>
-        <p>
-          Get expert guidance and tailored solutions for your business needs!
-        </p>
+          <h2>
+            Simplify <br /> Your Finances <br /> with Expert Help
+          </h2>
+          <p>
+            Get expert guidance and tailored solutions for your business needs!
+          </p>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className='grid md:grid-cols-2 md:gap-[34px] gap-[10px] md:mt-[26px] mt-[10px]'>
-            <div>
-              <label>Name</label>
-              <input
-                type='text'
-                {...register('name', { required: 'Name is required' })}
-                placeholder='Enter your name'
-                className={`w-full p-2 border ${
-                  errors.name ? 'border-red-500' : 'border-gray-300'
-                }`}
-              />
-            </div>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className='grid md:grid-cols-2 md:gap-[34px] gap-[10px] md:mt-[26px] mt-[10px]'>
+              <div>
+                <label>Name</label>
+                <input
+                  type='text'
+                  {...register('name', { required: 'Name is required' })}
+                  placeholder='Enter your name'
+                  className={`w-full p-2 border ${
+                    errors.name ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                />
+              </div>
 
-            <div>
-              <label>Email</label>
-              <input
-                type='text'
-                {...register('email', {
-                  required: 'Email is required',
-                  pattern: {
-                    value: /^\S+@\S+$/i,
-                    message: 'Enter a valid email'
-                  }
-                })}
-                placeholder='Enter your email'
-                className={`w-full p-2 border ${
-                  errors.email ? 'border-red-500' : 'border-gray-300'
-                }`}
-              />
-            </div>
+              <div>
+                <label>Email</label>
+                <input
+                  type='text'
+                  {...register('email', {
+                    required: 'Email is required',
+                    pattern: {
+                      value: /^\S+@\S+$/i,
+                      message: 'Enter a valid email'
+                    }
+                  })}
+                  placeholder='Enter your email'
+                  className={`w-full p-2 border ${
+                    errors.email ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                />
+              </div>
 
-            <div>
-              <label>Number</label>
-              <PhoneInput
-                country={'sa'}
-                value={phone}
-                onChange={onPhoneChange}
-                enableSearch
-                inputClass={`w-full ${
-                  phoneError ? 'border-red-500' : 'border-gray-300'
-                }`}
-                inputStyle={{
-                  width: '100%',
-                  height: '40px',
-                  paddingLeft: '48px',
-                  borderColor: phoneError ? '#f87171' : '#d1d5db',
-                  borderRadius: '4px',
-                  fontSize: '14px'
-                }}
-              />
-            </div>
+              <div>
+                <label>Number</label>
+                <PhoneInput
+                  country={'sa'}
+                  value={phone}
+                  onChange={onPhoneChange}
+                  enableSearch
+                  inputClass={`w-full ${
+                    phoneError ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                  inputStyle={{
+                    width: '100%',
+                    height: '40px',
+                    paddingLeft: '48px',
+                    borderColor: phoneError ? '#f87171' : '#d1d5db',
+                    borderRadius: '4px',
+                    fontSize: '16px'
+                  }}
+                />
+              </div>
 
-            <div className='relative'>
-              <label>Service</label>
-              {/* <input
+              <div className='relative' ref={serviceRef}>
+                <label>Service</label>
+                {/* <input
                 type="text"
                 {...register("subject")}
                 placeholder="Select the Service"
                 className="w-full p-2 border border-gray-300"
               /> */}
-              <div
-                onClick={() => setOpen(!open)}
-                className=' cursor-pointer w-full p-[5px] bg-white rounded-[5px] h-[40px] text-[12px] text-black  flex items-center justify-between'
-              >
-                {serviceId ? serviceId?.title : 'Select Service'}
-
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  width='16'
-                  height='16'
-                  viewBox='0 0 24 24'
-                  fill='none'
+                <div
+                  onClick={() => setOpen(!open)}
+                  className={`service_select ${open ? 'is-open' : ''}`}
                 >
-                  <path d='M12 15L17 10H7L12 15Z' fill='#000'></path>
-                </svg>
-              </div>
-              {open && (
-                <div className='mt-[10px] md:absolute relative w-full'>
-                  {list?.map((data, i) => (
-                    <div
-                      onClick={() => handleService(data)}
-                      key={i}
-                      className='cursor-pointer bg-white w-full h-[30px] flex items-center border-b text-black text-[12px]  p-[5px]'
-                    >
-                      {data?.title}
-                      {console.log('iioioio', serviceId)}
-                    </div>
-                  ))}
+                  <span className={serviceId ? '' : 'placeholder'}>
+                    {serviceId ? serviceId?.title : 'Select Service'}
+                  </span>
+
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='16'
+                    height='16'
+                    viewBox='0 0 24 24'
+                    fill='none'
+                  >
+                    <path d='M12 15L17 10H7L12 15Z' fill='#101828'></path>
+                  </svg>
                 </div>
-              )}
+                {open && (
+                  <div className='service_dropdown'>
+                    {list?.length ? (
+                      list.map((data, i) => (
+                        <div
+                          onClick={() => handleService(data)}
+                          key={i}
+                          className={`service_option ${
+                            serviceId?.id === data?.id ? 'is-selected' : ''
+                          }`}
+                        >
+                          {data?.title}
+                        </div>
+                      ))
+                    ) : (
+                      <div className='service_option is-empty'>
+                        No services found
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
 
-          {successMessage && (
-            <div className='mt-4 text-green-600'>{successMessage}</div>
-          )}
+            {successMessage && (
+              <div className='mt-4 text-green-600'>{successMessage}</div>
+            )}
 
-          <div className='mt-6'>
-            <button
-              type='submit'
-              disabled={isSubmitting}
-              className={`btn ripple-button px-6 py-2 text-white rounded ${
-                isSubmitting ? 'bg-gray-400' : 'bg-black'
-              }`}
+            <div className='md:mt-6 mt-[20px]'>
+              <button
+                type='submit'
+                disabled={isSubmitting}
+                className={`btn ripple-button px-6 py-2 text-white rounded ${
+                  isSubmitting ? 'bg-gray-400' : 'bg-black'
+                }`}
+              >
+                {isSubmitting ? 'Submitting...' : 'Submit Now'}
+              </button>
+            </div>
+          </form>
+
+          <hr className='md:mt-[25px] mt-[20px] border-[#fff]' />
+
+          <div className='md:pt-[25px] pt-[20px] flex items-center gap-[12px] md:gap-[20px] justify-center'>
+            <a
+              href={`tel:${general?.all_settings?.contact_number}`}
+              className='call-back flex items-center gap-[15px] justify-between flex-1 max-w-[140px] md:flex-none'
             >
-              {isSubmitting ? 'Submitting...' : 'Submit Now'}
-            </button>
+              {' '}
+              Call <Callicon />{' '}
+            </a>
+            <a
+              className='chat-back flex items-center gap-[15px] justify-between flex-1 max-w-[140px] md:flex-none'
+              href={`https://wa.me/${general?.all_settings?.whatsapp_number}`}
+              target='_blank'
+            >
+              {' '}
+              Chat <WhatsAppicon />{' '}
+            </a>
           </div>
-        </form>
-
-        <hr className='mt-[25px] border-[#fff]' />
-
-        <div className='pt-[25px] flex items-center gap-[20px] justify-center '>
-          <a
-            href={`tel:${general?.all_settings?.contact_number}`}
-            className='call-back flex items-center gap-[15px] justify-between'
-          >
-            {' '}
-            Call <Callicon />{' '}
-          </a>
-          <a className='chat-back flex items-center gap-[15px] justify-between'  href={`https://wa.me/${general?.all_settings?.whatsapp_number}`} target="_blank">
-            {' '}
-            Chat <WhatsAppicon />{' '}
-          </a>
         </div>
       </div>
     </div>

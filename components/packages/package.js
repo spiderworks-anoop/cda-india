@@ -37,10 +37,10 @@ const PackageListing = ({ listing, data }) => {
         <div className='container relative z-[1]'>
           <div className='grid md:grid-cols-2 gap-[20px] pack-listing_head mt-[80px] mb-[25px]'>
             <div className='max-w-[500px]'>
-              <h3 dangerouslySetInnerHTML={{ __html: data?.title }} />
+              <div className='h3' dangerouslySetInnerHTML={{ __html: data?.title }} />
             </div>
             <div className='flex md:justify-end max-w-[560px]'>
-              <p
+              <div className='p'
                 dangerouslySetInnerHTML={{ __html: data?.short_description }}
               />
             </div>
@@ -56,7 +56,7 @@ const PackageListing = ({ listing, data }) => {
                   <h3>{Pakdata.title}</h3>
                   <div className='package-list-titile'>
                     <h5>Starting from</h5>
-                    <h2
+                    <div className='h2'
                       dangerouslySetInnerHTML={{
                         __html: Pakdata?.content?.value_per_month_1
                       }}
@@ -117,7 +117,7 @@ const PackageListing = ({ listing, data }) => {
                     )}
 
                     {Pakdata?.content?.discount && (
-                      <p
+                      <div className='p'
                         dangerouslySetInnerHTML={{
                           __html: Pakdata?.content?.discount
                         }}

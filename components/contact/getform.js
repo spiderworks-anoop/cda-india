@@ -55,7 +55,7 @@ const ContactForm = ({ data, contact, blog }) => {
         ...(blog?{lead_type: `Blog Details`} :{}) 
       };
       const response = await ContactApi.contact(payload); // Make sure ContactApi.career supports JSON
-      console.log("Submitted:", response);
+      // console.log("Submitted:", response);
       reset();
       if (response?.status === 200) {
         router.push("/thank-you");
@@ -77,7 +77,7 @@ const ContactForm = ({ data, contact, blog }) => {
             </div>
 
             <div>
-              <h4
+              <div className='h4'
                 dangerouslySetInnerHTML={{ __html: data?.content?.title_7 }}
               />
               <p> {data?.content?.description}</p>
