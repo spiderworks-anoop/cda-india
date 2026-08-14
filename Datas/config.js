@@ -12,6 +12,7 @@ apiClient.interceptors.request.use((config) => {
         ...config,
         headers: {
             "Cache-Control": "no-store",
+            "Accept":"application/json"
         },
     })
 },
