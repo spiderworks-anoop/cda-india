@@ -116,7 +116,7 @@ const ConsultationForm = ({ data, contact, blog }) => {
                   <div>
                     <label>Phone Number</label>
                     <PhoneInput
-                      country={"sa"}
+                      country={"in"}
                       value={phone}
                       onChange={onPhoneChange}
                       enableSearch={false}

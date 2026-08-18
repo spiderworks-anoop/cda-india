@@ -32,7 +32,7 @@ import { IoLogoWhatsapp } from 'react-icons/io5'
 const FooterSection = ({ items }) => {
   const [isActive, setIsActive] = useState(false)
 
-   
+
   return (
     <div className='border-b md:border-b-0 border-[#3A3A3A]'>
       <div
@@ -106,7 +106,7 @@ const Footer = ({ general }) => {
 
   const [isPopupOpen, setPopupOpen] = useState(false)
 
-   const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -314,49 +314,50 @@ const Footer = ({ general }) => {
           </div> */}
       </footer>
 
-     <div className={`main-contact-icon-right-sd ${show ? 'show' : 'hide'}`}>
+
+
+      {/* floating */}
+
+      <div className={`main-contact-icon-right-sd ${show ? 'show' : 'hide'}`}>
         <div className='main-contact-icon-wrap'>
-          <div className='call-right quick-contact flex items-center justify-center'>
+          <a
+            className='call-right quick-contact flex items-center justify-center'
+            href={`tel:${general?.all_settings?.contact_number}`}
+            aria-label={`Call ${general?.all_settings?.contact_number}`}
+          >
             <Callicon />
-            <a
-              className='slide-left'
-              href={`tel:${general?.all_settings?.contact_number}`}
-            >
-              <span>
-                <b> {general?.all_settings?.contact_number} </b>
-              </span>
-            </a>
-          </div>
+            <span className='slide-left'>
+              <b> {general?.all_settings?.contact_number} </b>
+            </span>
+          </a>
 
-          <div className='mail-right quick-contact flex items-center justify-center'>
+          <a
+            className='mail-right quick-contact flex items-center justify-center'
+            href={`mailto:${general?.all_settings?.contact_email}`}
+            target='_blank'
+            aria-label={`Mail ${general?.all_settings?.contact_email}`}
+          >
             <Envelopicon />
-            <a
-              href={`mailto:${general?.all_settings?.contact_email}`}
-              target='_blank'
-              className='slide-left'
-            >
-              <span>
-                {' '}
-                <b> {general?.all_settings?.contact_email} </b>
-              </span>
-            </a>
-          </div>
+            <span className='slide-left'>
+              <b> {general?.all_settings?.contact_email} </b>
+            </span>
+          </a>
 
-          <div className='whatsapp-right quick-contact flex items-center justify-center'>
+          <a
+            className='whatsapp-right quick-contact flex items-center justify-center'
+            href={`https://wa.me/${general?.all_settings?.whatsapp_number}`}
+            target='_blank'
+            aria-label={`WhatsApp ${general?.all_settings?.whatsapp_number}`}
+          >
             <WhatsAppicon />
-
-            <a
-              className='slide-left'
-              href={`https://wa.me/${general?.all_settings?.whatsapp_number}`}
-              target='_blank'
-            >
-              <span>
-                <b> {general?.all_settings?.whatsapp_number} </b>
-              </span>
-            </a>
-          </div>
+            <span className='slide-left'>
+              <b> {general?.all_settings?.whatsapp_number} </b>
+            </span>
+          </a>
         </div>
       </div>
+
+
     </>
   )
 }
