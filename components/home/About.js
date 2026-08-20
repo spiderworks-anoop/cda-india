@@ -126,7 +126,7 @@ const About = ({ data }) => {
   return (
     <section ref={sectionRef} className="home-about">
       <div className="container md:sticky md:top-[50px] ">
-        <div className="about-head relative max-w-[1006px] mx-auto flex flex-col items-center justify-center">
+        <div className="about-head relative max-w-[1006px] mx-auto flex flex-col items-center justify-center md:py-[60px]">
           <div className="animate-bounce text-[#000] popover rounded-tl-[24px] rounded-tr-[2px] rounded-bl-[24px] rounded-br-[24px] absolute left-[25px] top-[-50px] md:top-0">
             <div className="absolute top-[-20px] right-[-20px]">
               <UpArrowicon />

@@ -6,16 +6,10 @@ import Teamlist from './teamlist';
 
 
 const TeamManagement = ({ data }) => {
-  // console.log(data);
-
-
-
+ 
   return (
     <section className='management-listing pt-[20px] md:pt-[80px] pb-[40px] md:pb-[80px]'>
       <div className='container relative z-[1]'>
-
-
-
 
         <div className="grid md:grid-cols-2 gap-[20px] pack-listing_head mb-[55px]">
           <div className='max-w-[500px]'>
@@ -26,9 +20,7 @@ const TeamManagement = ({ data }) => {
           </div>
         </div>
 
-
         <div className="grid md:grid-cols-3 gap-[40px] mb-[25px]">
-
 
           <div>
             <Teamlist
@@ -36,7 +28,6 @@ const TeamManagement = ({ data }) => {
               manImg={data?.content?.media_id_2?.file_path}
               manName={data?.content?.chairman_name} />
           </div>
-
 
           <div>
             <Teamlist
@@ -53,16 +44,6 @@ const TeamManagement = ({ data }) => {
           </div>
 
         </div>
-
-
-
-
-
-
-
-
-
-
 
       </div>
     </section>
