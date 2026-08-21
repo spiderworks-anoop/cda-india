@@ -54,10 +54,7 @@ export async function getStaticProps() {
       revalidate: 10,
     };
   } catch (error) {
-    console.log("www", error);
-    throw error;
-    // return{
-    //   notFound:true
-    // }
+    console.log("why cda page error", error);
+    throw error
   }
 }

@@ -16,7 +16,8 @@ const AboutCoporate = ({ data }) => {
     <section className="ser-det-finance  ">
       <div className="container relative z-[1]">
         <div className="grid md:grid-cols-2 gap-[15px] items-center">
-          <div className="h-full">
+
+          <div className="h-full hidden md:block">
             <Image
               src={data?.content?.media_id_5?.file_path}
               alt=""

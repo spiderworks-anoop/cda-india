@@ -46,27 +46,31 @@ const SerDetMore = ({ data }) => {
                 <Swiper
                   navigation={true}
                   modules={[Autoplay, Navigation]}
-                  spaceBetween={30}
-                  slidesPerView={3}
+                  // Swiper breakpoints are min-width, so what is set here is
+                  // the SMALLEST screen, not a fallback. Having 3 up here is
+                  // what crammed 3 slides into anything under 400px.
+                  slidesPerView={1}
+                  spaceBetween={16}
+                  watchOverflow={true}
                   autoplay={{
                     delay: 2500,
                     disableOnInteraction: false,
                   }}
-                  loop={true}
+                  loop={data?.more_services?.length > 3}
                   breakpoints={{
-                    400: {
-                      slidesPerView: 1,
-                      spaceBetween: 0,
-                    },
                     640: {
                       slidesPerView: 2,
                       spaceBetween: 20,
                     },
                     768: {
                       slidesPerView: 2,
-                      spaceBetween: 30,
+                      spaceBetween: 24,
                     },
                     1024: {
+                      slidesPerView: 3,
+                      spaceBetween: 24,
+                    },
+                    1280: {
                       slidesPerView: 3,
                       spaceBetween: 30,
                     },
@@ -91,6 +95,7 @@ const SerDetMore = ({ data }) => {
                               }
                               width={313}
                               height={280}
+                              sizes="(max-width: 639px) 90vw, (max-width: 1023px) 45vw, 25vw"
                             />
                           </div>
                         </div>

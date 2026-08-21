@@ -1,116 +1,111 @@
-import { useEffect, useState, useRef } from "react";
-import Image from "next/image";
-import Logo1 from "../../public/images/logo.svg";
+import { useCallback, useMemo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCoverflow, Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination } from "swiper/modules";
+import { motion } from "framer-motion";
 
 import Noise from "../../components/common/Noise";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-import { WidgetApi } from "@/Datas/endpoints/widget";
+const Testimonials = ({ data }) => {
+  // The testimonials come in as a prop from the page's getStaticProps /
+  // getServerSideProps. Fetching them from the browser instead would hit the
+  // API cross origin and be blocked by CORS.
+  const videosTests = useMemo(
+    () =>
+      data?.filter((item) => item?.comment_type === "Video from Computer") ?? [],
+    [data]
+  );
 
-const Testimonials = () => {
-  const [videosTests, setvideosTests] = useState([]);
-  const sectionRef = useRef(null);
+  // With loop enabled Swiper clones slides, so every clone would otherwise be
+  // decoding its own copy of the video at the same time. Keep only the slides
+  // actually on screen playing.
+  const syncVideos = useCallback((swiper) => {
+    swiper?.slides?.forEach((slide) => {
+      const video = slide.querySelector("video");
+      if (!video) return;
 
-  const fetchData = async () => {
-    const response = await WidgetApi.testimonials();
-    const items = response?.data?.data;
-    setvideosTests(
-      items?.filter((item) => item?.comment_type === "Video from Computer")
-    );
-  };
-
-  useEffect(() => {
-    fetchData();
+      if (slide.classList.contains("swiper-slide-visible")) {
+        const played = video.play();
+        if (played?.catch) played.catch(() => {});
+      } else if (!video.paused) {
+        video.pause();
+      }
+    });
   }, []);
 
-  useEffect(() => {
-    if (videosTests.length === 0) return;
+  // Nothing decodes while the slider is mid transition - that is where the
+  // dropped frames were most obvious on mobile.
+  const pauseAll = useCallback((swiper) => {
+    swiper?.slides?.forEach((slide) => {
+      const video = slide.querySelector("video");
+      if (video && !video.paused) video.pause();
+    });
+  }, []);
 
-    const section = sectionRef.current;
-    gsap.fromTo(
-      section,
-      { autoAlpha: 0, y: 150 },
-      {
-        autoAlpha: 1,
-        y: 0,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 80%",
-          toggleActions: "play none none reverse",
-          id: "testimonialReveal",
-        },
-      }
-    );
-
-    return () => {
-      ScrollTrigger.getById("testimonialReveal")?.kill();
-    };
-  }, [videosTests]);
+  if (videosTests.length === 0) return null;
 
   return (
-    <>
-      {videosTests?.length > 0 && (
-        <section className="home-testimonials" ref={sectionRef}>
-          <Noise
-            patternSize={250}
-            patternScaleX={1}
-            patternScaleY={1}
-            patternRefreshInterval={2}
-            patternAlpha={15}
-          />
+    <motion.section
+      className="home-testimonials"
+      initial={{ y: 60 }}
+      whileInView={{ y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <Noise
+        patternSize={250}
+        patternScaleX={1}
+        patternScaleY={1}
+        patternRefreshInterval={4}
+        patternAlpha={15}
+      />
 
-          <div className="container">
-            <h3>Voices of Trust And Satisfaction</h3>
+      <div className="container">
+        <h3>Voices of Trust And Satisfaction</h3>
 
-            <div>
-              <Swiper
-                slidesPerView={1.5}
-                spaceBetween={30}
-                grabCursor={true}
-                centeredSlides={true}
-                loop={true}
-                pagination={{ clickable: true }}
-                navigation={true}
-                speed={800} // Smooth transition speed in ms
-                effect="slide" // You can also try "fade", "cube", or "coverflow"
-                modules={[Pagination, Navigation, EffectCoverflow]}
-                className="custom-swiper"
-              >
-                {videosTests.map((item, index) => (
-                  <SwiperSlide key={index}>
-                    <div className="vid_prv_cntr">
-                      <div>
-                        <video
-                          src={item?.video?.file_path}
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
-                        />
-                        <h4>{item?.name}</h4>
-                        <p>{item?.designation}</p>
-                      </div>
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </div>
-          </div>
-        </section>
-      )}
-    </>
+        <div>
+          <Swiper
+            slidesPerView={1.5}
+            spaceBetween={30}
+            grabCursor={true}
+            centeredSlides={true}
+            loop={true}
+            watchSlidesProgress={true}
+            threshold={5}
+            pagination={{ clickable: true }}
+            navigation={true}
+            speed={600}
+            modules={[Pagination, Navigation]}
+            onSwiper={syncVideos}
+            onSlideChangeTransitionStart={pauseAll}
+            onSlideChangeTransitionEnd={syncVideos}
+            className="custom-swiper"
+          >
+            {videosTests.map((item, index) => (
+              <SwiperSlide key={index}>
+                <div className="vid_prv_cntr">
+                  <div>
+                    <video
+                      src={item?.video?.file_path}
+                      loop
+                      muted
+                      playsInline
+                      preload="metadata"
+                    />
+                    <h4>{item?.name}</h4>
+                    <p>{item?.designation}</p>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </div>
+    </motion.section>
   );
 };
 

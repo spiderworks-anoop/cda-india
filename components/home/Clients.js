@@ -1,9 +1,6 @@
-import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { CircleArrowicon } from "../common/svgicon";
 
 
@@ -35,7 +32,7 @@ const Ourclients = ({ data }) => {
           </div>
 
           <div className="clients_right w-full">
-            <div className="grid grid-cols-3 md:grid-cols-5 gap-[20px] xl:gap-[45px]">
+            <div className="px-2 lg:px-4 grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-[15px] lg:gap-[25px] xl:gap-[45px]">
               {data?.content?.our_exceptional_clients_listing_id?.map(
                 (client, index) => (
                   <div className="clients_list" key={index}>

@@ -30,6 +30,7 @@ export async function getStaticProps() {
     const CertificationsData = await WidgetApi.certifications();
     const FaqrigthtextData = await WidgetApi.faqrigthtext();
     const exceptionalclientsData = await WidgetApi.exceptionalclients();
+    const TestimonialsData = await WidgetApi.testimonials();
 
 
     return {
@@ -42,6 +43,7 @@ export async function getStaticProps() {
         certifications: CertificationsData?.data?.data,
         faqrigthtext: FaqrigthtextData?.data?.data,
         exceptionalclients: exceptionalclientsData?.data?.data,
+        testimonials: TestimonialsData?.data?.data,
       },
       revalidate: 10,
     };
@@ -63,7 +65,8 @@ export default function Home({
   certifications,
   ourassociates,
   faqrigthtext,
-  exceptionalclients
+  exceptionalclients,
+  testimonials
 }) {
 
   // console.log("GM", data);
@@ -100,7 +103,7 @@ export default function Home({
         }
       />
 
-      <Testimonials />
+      <Testimonials data={testimonials} />
 
       <Ourclients data={exceptionalclients} />
 

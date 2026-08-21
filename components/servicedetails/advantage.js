@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import Image from "next/image";
 import { BlueBtn, Eye2icon, Eyeicon } from "../common/svgicon";
@@ -23,7 +23,21 @@ const ToggleItem = ({ capt, title, text, isOpen, onClick }) => {
             <h4>{title}</h4>
             {isOpen ? <Eye2icon /> : <Eyeicon />}
           </div>
-          {isOpen && <p>{text}</p>}
+
+          <AnimatePresence initial={false}>
+            {isOpen && (
+              <motion.div
+                key="content"
+                initial={{ height: 0 }}
+                animate={{ height: "auto" }}
+                exit={{ height: 0 }}
+                transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                style={{ overflow: "hidden" }}
+              >
+                <p>{text}</p>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </motion.div>
@@ -31,6 +45,7 @@ const ToggleItem = ({ capt, title, text, isOpen, onClick }) => {
 };
 
 const SerDetAdvantage = ({ data }) => {
+  
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [openIndex, setOpenIndex] = useState(null);
 

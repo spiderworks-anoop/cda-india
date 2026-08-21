@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Logo1 from "../../public/images/logo.svg";
 import Logo2 from "../../public/images/cl1.png";
@@ -9,11 +9,6 @@ import Logo5 from "../../public/images/cl4.png";
 import { LargeArrowicon, Lineicon, Medalicon } from "../common/svgicon";
 import { motion } from "framer-motion";
 
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
-
 const Certificate = ({
   certificatHead,
   certificatSubHead,
@@ -22,7 +17,6 @@ const Certificate = ({
 }) => {
   const colors = ["#fff", "#111", "#ccc", "#333", "#666"];
   const [color, setColor] = useState(colors[0]);
-  const sectionRef = useRef(null);
 
   useEffect(() => {
     let index = 0;
@@ -33,27 +27,14 @@ const Certificate = ({
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    const section = sectionRef.current;
-    gsap.fromTo(
-      section,
-      { autoAlpha: 0, y: 150 },
-      {
-        autoAlpha: 1,
-        y: 0,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 80%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-  }, []);
-
   return (
-    <section className="home-cartificate" ref={sectionRef}>
+    <motion.section
+      className="home-cartificate"
+      initial={{ y: 80 }}
+      whileInView={{ y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+    >
       <div className="container">
         <div className='h3'>
           <div className='span' dangerouslySetInnerHTML={{ __html: certificatHead }} />{" "}
@@ -108,7 +89,7 @@ const Certificate = ({
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

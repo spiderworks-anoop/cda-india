@@ -80,7 +80,7 @@ export async function getStaticProps() {
       revalidate: 10,
     };
   } catch (error) {
-    console.log("www", error);
+    console.log("About page error", error);
     throw error;
     // return{
     //   notFound:true

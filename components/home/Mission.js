@@ -24,42 +24,62 @@ const Mission = ({
   const visionRef = useRef();
 
   useEffect(() => {
-    const animateText = (textElement) => {
-      if (!textElement) return;
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
 
-      const characters = textElement.textContent.split("");
-      textElement.innerHTML = ""; // Clear existing text
+    const elements = [missionRef.current, visionRef.current].filter(Boolean);
+    const originals = elements.map((el) => el.textContent);
+    const tweens = [];
 
-      characters.forEach((char) => {
-        const span = document.createElement("span");
-        span.textContent = char;
-        textElement.appendChild(span);
+    if (!reduceMotion) {
+      elements.forEach((textElement) => {
+        const characters = textElement.textContent.split("");
+        textElement.innerHTML = ""; // Clear existing text
+
+        characters.forEach((char) => {
+          const span = document.createElement("span");
+          span.textContent = char;
+          textElement.appendChild(span);
+        });
+
+        tweens.push(
+          gsap.to(textElement.children, {
+            color: "#000",
+            duration: 0.5,
+            scrollTrigger: {
+              trigger: textElement,
+              start: "top 40%",
+              end: "bottom 40%",
+              scrub: true,
+            },
+            stagger: {
+              each: 0.3,
+              from: "start",
+            },
+          })
+        );
+      });
+    }
+
+    return () => {
+      tweens.forEach((tween) => {
+        tween.scrollTrigger?.kill();
+        tween.kill();
       });
 
-      gsap.to(textElement.children, {
-        color: "#000",
-        duration: 0.5,
-        scrollTrigger: {
-          trigger: textElement,
-          start: "top 40%",
-          end: "bottom 40%",
-          scrub: true,
-        },
-        stagger: {
-          each: 0.3,
-          from: "start",
-        },
+      // Drop the per character spans so a re-run splits clean text instead of
+      // stacking spans inside spans.
+      elements.forEach((el, i) => {
+        el.textContent = originals[i];
       });
     };
-
-    animateText(missionRef.current);
-    animateText(visionRef.current);
-  }, []);
+  }, [missdescription_1, missdescription_2]);
 
   return (
     <section className="home-mission" data-aos="fade-up">
       <div className="container sticky top-[80px]">
-        <div className="flex flex-col md:flex-row items-center gap-[40px] xl:gap-[83px]">
+        <div className="flex flex-col lg:flex-row items-center gap-[40px] xl:gap-[83px]">
           <div className="miss_bg ">
             <Squares
               speed={0.5}
@@ -78,7 +98,13 @@ const Mission = ({
                   }}
                 ></div>
               </div>
-              <Image src={MisImg || Miss1} alt="" width={445} height={350} />
+              <Image
+                src={MisImg || Miss1}
+                alt=""
+                width={445}
+                height={350}
+                className="w-full max-w-[445px] h-auto object-contain mx-auto"
+              />
             </div>
 
             <div className="absolute right-[30px] bottom-[30px] cursor-pointer z-[2] mission-arrow">
@@ -88,8 +114,8 @@ const Mission = ({
             </div>
           </div>
 
-          <div className="mt-[100px] md:mt-0">
-            <div className="md:mb-[114px] mb-[60px]">
+          <div className="w-full mt-[40px] lg:mt-0">
+            <div className="mb-[40px] sm:mb-[60px] lg:mb-[114px]">
               <h5> {misstitle_1} </h5>
               <p ref={missionRef}>{missdescription_1}</p>
             </div>

@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import dynamic from "next/dynamic";
 import {
   CircleArrow2icon,
   CircleArrowicon,
@@ -10,11 +9,6 @@ import {
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Link from "next/link";
-
-// Dynamically import DecayCard with SSR disabled
-const DecayCard = dynamic(() => import("@/components/common/DecayCard"), {
-  ssr: false,
-});
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -159,24 +153,31 @@ const About = ({ data }) => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 items-center gap-[45px] xl:gap-[98px] mt-[50px]">
-          <div className="flex gap-[20px] order-3 md:order-1">
+        <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-[45px] lg:gap-[60px] xl:gap-[98px] mt-[50px]">
+          <div className="flex gap-[20px] order-3 md:order-1 min-w-0">
             <h2>#1</h2>
-            <div className="relative">
+            <div className="relative min-w-0">
               <h4>{data?.content?.text_1}</h4>
               <span className="county-tag">{data?.content?.text_2}</span>
             </div>
           </div>
 
-          <div className="order-2">
-            <DecayCard
-              width={422}
-              height={422}
-              image={data?.content?.media_id_3?.file_path}
-            />
+          <div className="order-2 min-w-0">
+            <div className="about-media relative w-full max-w-[422px] aspect-square mx-auto overflow-hidden rounded-[16px]">
+              {data?.content?.media_id_3?.file_path && (
+                <Image
+                  src={data?.content?.media_id_3?.file_path}
+                  alt={data?.content?.media_id_3?.alt_text || ""}
+                  width={422}
+                  height={422}
+                  sizes="(max-width: 767px) 90vw, (max-width: 1279px) 33vw, 422px"
+                  className="w-full h-full object-cover"
+                />
+              )}
+            </div>
           </div>
 
-          <div className="order-1 md:order-3">
+          <div className="order-1 md:order-3 min-w-0">
             <div
               ref={textRef}
               className="about-desc"

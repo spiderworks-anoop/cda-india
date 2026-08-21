@@ -759,6 +759,38 @@ section.Career_List_cntr p {
   font-weight: 600;
 }
 
+/* The section heading comes from the CMS, so the tag it ships in varies.
+   Style the wrapper and whatever heading/paragraph tag lands inside it, so
+   the title always reads as a section heading instead of falling back to
+   body copy. */
+.home-why .why-head,
+.home-why .why-head h1,
+.home-why .why-head h2,
+.home-why .why-head h3,
+.home-why .why-head h4,
+.home-why .why-head h5,
+.home-why .why-head h6,
+.home-why .why-head p {
+  color: #101828;
+  font-family: "Plus Jakarta Sans";
+  font-size: 44px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 54px;
+  letter-spacing: -0.6px;
+  margin: 0;
+  overflow-wrap: break-word;
+}
+
+.home-why .why-head b,
+.home-why .why-head strong {
+  font-weight: 600;
+}
+
+.home-why .why-head>*+* {
+  margin-top: 14px;
+}
+
 .home-why p {
   color: #9b9b9b;
   font-family: 'Plus Jakarta Sans';
@@ -766,7 +798,55 @@ section.Career_List_cntr p {
   font-style: normal;
   font-weight: 400;
   line-height: 29px;
-  word-break: break-all;
+  overflow-wrap: break-word;
+}
+
+/* Cell dividers. The grid is 1 / 2 / 4 columns, so which edges need a rule
+   changes per breakpoint - doing it here keeps the markup free of index
+   based border classes that only ever worked for a 4 across row. */
+.hm-why-list>div {
+  border-top: 1px solid #e4e4e4;
+  border-left: 0;
+}
+
+.hm-why-list>div:first-child {
+  border-top: 0;
+}
+
+@media (min-width: 640px) {
+
+  /* 2 columns */
+  .hm-why-list>div {
+    border-left: 1px solid #e4e4e4;
+  }
+
+  .hm-why-list>div:nth-child(2n + 1) {
+    border-left: 0;
+  }
+
+  .hm-why-list>div:nth-child(-n + 2) {
+    border-top: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+
+  /* 4 columns */
+  .hm-why-list>div:nth-child(2n + 1) {
+    border-left: 1px solid #e4e4e4;
+  }
+
+  .hm-why-list>div:nth-child(4n + 1) {
+    border-left: 0;
+  }
+
+  .hm-why-list>div:nth-child(-n + 4) {
+    border-top: 0;
+  }
+
+  .hm-why-list>div:nth-child(n + 5) {
+    border-top: 1px solid #e4e4e4;
+  }
 }
 
 .hm-why-list span {
@@ -825,6 +905,30 @@ section.Career_List_cntr p {
       #0d0d0d 100%);
 }
 
+/* Below the side by side breakpoint the card is stacked and full width, so a
+   fixed min-width would push it past the viewport and the fixed height would
+   crop the artwork. Let it size to its content instead. */
+@media (max-width: 1023px) {
+  .miss_bg {
+    min-width: 0;
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    padding-bottom: 25px;
+    margin: 0 auto;
+  }
+
+  /* The sticky scroll effect only exists to hold the card in place next to the
+     scrolling copy. Stacked, it just leaves two screens of dead scroll. */
+  .home-mission {
+    height: auto;
+  }
+
+  .home-mission .container {
+    position: static;
+  }
+}
+
 .miss_bg h4 {
   color: #fff;
   font-family: "Plus Jakarta Sans";
@@ -834,6 +938,16 @@ section.Career_List_cntr p {
   line-height: 114%;
   /* 41.04px */
   margin-bottom: 15px;
+}
+
+@media (max-width: 640px) {
+  .miss_bg h4 {
+    font-size: 28px;
+  }
+
+  .miss_bg {
+    padding: 20px 20px 20px 20px;
+  }
 }
 
 .miss_bg span,
@@ -935,30 +1049,6 @@ section.Career_List_cntr p {
   transition: 0.25s ease all;
 }
 
-.client-logo-list:hover {
-  transform: rotate(2deg);
-  transition: 0.25s ease all;
-  animation: animRotate 1s ease-in-out infinite;
-}
-
-@keyframes animRotate {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  33.33% {
-    transform: rotate(-5deg);
-  }
-
-  66.66% {
-    transform: rotate(5deg);
-  }
-
-  100% {
-    transform: rotate(0deg);
-  }
-}
-
 .client-logo-list img {
   max-width: 180px;
   width: 100%;
@@ -1008,17 +1098,8 @@ section.Career_List_cntr p {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: transform 1s ease-in-out;
   position: relative;
   height: 600px;
-}
-
-.swiper-backface-hidden .swiper-slide {
-  transition: transform 1s ease-in-out;
-}
-
-.swiper-wrapper {
-  transition-timing-function: ease-in-out;
 }
 
 
@@ -1544,6 +1625,53 @@ section.Career_List_cntr p {
 
 .pros_list svg line {
   stroke: #fff;
+}
+
+/* Home process cards: two across down to lg by shrinking the cards instead of
+   wrapping them, then one per row from tablet down. */
+.pros_list_cntr {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  gap: 25px;
+  min-width: 0;
+}
+
+.pros_list_cntr > a {
+  display: block;
+  flex: 1 1 0;
+  min-width: 200px;
+  max-width: 290px;
+}
+
+.home-process .pros_list {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  max-width: none;
+}
+
+@media (max-width: 1023px) {
+  .pros_list_cntr {
+    flex-wrap: wrap;
+  }
+
+  .pros_list_cntr > a {
+    flex: 1 1 240px;
+    max-width: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .pros_list_cntr {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .pros_list_cntr > a {
+    flex: 1 1 100%;
+    max-width: 440px;
+  }
 }
 
 .footer-content {
@@ -2151,7 +2279,7 @@ footer {
 .ser-offer-list {
   border-radius: 0;
   background: transparent;
-  transition: all 0.5s;
+  transition: background-color 0.35s ease, border-radius 0.35s ease;
   margin: 30px 0;
   padding: 0 40px;
 }
@@ -2159,7 +2287,7 @@ footer {
 .ser-offer-list:hover {
   border-radius: 12px;
   background: #f2f6ff;
-  transition: 0.5s ease-in-out;
+  transition: background-color 0.35s ease, border-radius 0.35s ease;
 }
 
 .ser-offer-list h5 {
@@ -3311,6 +3439,12 @@ footer {
   margin-bottom: 35px;
 }
 
+/* With no list under it the description's trailing margin becomes dead space
+   at the bottom of the card. */
+.why_choose p:last-child {
+  margin-bottom: 0;
+}
+
 .why_choose ul li {
   color: #101828;
   font-family: "Plus Jakarta Sans";
@@ -3320,6 +3454,25 @@ footer {
   line-height: 24px;
   /* 155% */
   font-style: italic;
+}
+
+/* The list when it stands in for the testimonial slider in the right column.
+   Sitting on its own it needs markers to read as a list rather than as a run
+   of loose lines. */
+.why_choose .why_choose_list li {
+  position: relative;
+  padding-left: 22px;
+}
+
+.why_choose .why_choose_list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #0b63e5;
 }
 
 .text_testimonials {
@@ -4660,10 +4813,6 @@ section#TermsCondition-section {
     line-height: 30px;
   }
 
-  .miss_bg {
-    min-width: auto;
-    width: 100%;
-  }
 
   .ser-offer-list img {
     width: 110px;
@@ -4737,12 +4886,17 @@ section#TermsCondition-section {
     object-position: center;
   }
 
+  /* The left panel is still a fixed width sidebar at this size, so it has to
+     give the logo grid enough room to render the logos at a usable size. */
+  .clients_left {
+    min-width: 360px;
+  }
+
   .clients_list {
-    padding: 5px 2px;
+    padding: 10px 6px;
   }
 
   .pros_list {
-    min-width: 215px;
   }
 
   .associates_count {
@@ -4909,17 +5063,11 @@ section#TermsCondition-section {
 
   .home-mission {
     padding: 75px 0;
-    height: auto;
-  }
-
-  .miss_bg {
-    height: 370px;
-    overflow: hidden;
   }
 
   .home-mission p {
-    font-size: 36px;
-    line-height: 48px;
+    font-size: 28px;
+    line-height: 38px;
   }
 
   .home-cartificate {
@@ -5207,10 +5355,38 @@ section#TermsCondition-section {
 
   .ser-offer-list {
     padding: 0;
+    margin: 0 0 40px;
   }
 
+  /* Stacked, so the image fills the row instead of the fixed 338px / 110px
+     desktop widths, and the 222px height stops cropping it to a letterbox. */
   .ser-offer-list img {
-    width: 75%;
+    width: 100%;
+    height: 200px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* 92px in a 50px box overflowed its own column at every width. */
+  .ser-offer-list h5 {
+    font-size: 54px;
+    line-height: 1;
+    width: auto;
+    flex: none;
+  }
+
+  /* width:40% left the copy as a thin ribbon between 641 and 767, and the
+     fixed height from the 998px block left dead space under short copy. */
+  .ser-offer-list p {
+    width: 100%;
+    height: auto;
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .ser-offer-list h3 {
+    font-size: 22px;
+    line-height: 30px;
   }
 
   .ser-offer-list .btn {
@@ -5220,11 +5396,12 @@ section#TermsCondition-section {
     font-weight: 400;
     line-height: 17.197px;
     /* 122.837% */
-    width: 185px;
+    width: auto;
+    flex: none;
   }
 
   .ser-offer-list .btn svg {
-    width: 60px;
+    width: 44px;
   }
 
   .ser-why-sec h3 {
@@ -5248,13 +5425,10 @@ section#TermsCondition-section {
     margin: 0 auto;
   }
 
-  .home-about .content {
+  .home-about .about-media {
     margin: 0px auto;
   }
 
-  .hm-why-list>div {
-    padding: 20px !important;
-  }
 
   .clients_left_cap {
     padding: 30px;
@@ -5264,10 +5438,10 @@ section#TermsCondition-section {
 @media (max-width: 640px) {
   .ser-offer-list p {
     color: #101828;
-    font-size: 18px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 29px;
+    line-height: 26px;
     width: 100%;
   }
 
@@ -5367,6 +5541,23 @@ section#TermsCondition-section {
 
   .more_list .more_cap h4 {
     font-size: 24px;
+  }
+
+  /* One slide per view below 640, so the card is near full width - give the
+     image back some height and keep the arrows off the card edges. */
+  .more_list img {
+    height: 260px;
+  }
+
+  .ser-det-more .swiper-button-prev,
+  .ser-det-more .swiper-button-next {
+    width: 32px;
+    height: 32px;
+  }
+
+  .ser-det-more .swiper-button-prev::after,
+  .ser-det-more .swiper-button-next::after {
+    font-size: 18px;
   }
 
   .ser-det-banner img {
@@ -5543,9 +5734,10 @@ section#TermsCondition-section {
     max-width: 245px;
   }
 
-  .home-about .content {
-    width: 250px !important;
-    height: 350px !important;
+  /* keep the portrait crop the section had on phones */
+  .home-about .about-media {
+    max-width: 250px;
+    aspect-ratio: 250 / 350;
   }
 
   .home-about .gap-\[45px\] {
@@ -5558,8 +5750,8 @@ section#TermsCondition-section {
   }
 
   .home-mission p {
-    font-size: 28px;
-    line-height: 38px;
+    font-size: 23px;
+    line-height: 33px;
   }
 
   .main-contact-icon-right-sd {
@@ -5618,5 +5810,412 @@ section#TermsCondition-section {
   .home-about span.county-tag {
     font-size: 52px;
     line-height: 55px;
+  }
+}
+@media (max-width: 998px) {
+
+  .home-why .why-head,
+  .home-why .why-head h1,
+  .home-why .why-head h2,
+  .home-why .why-head h3,
+  .home-why .why-head h4,
+  .home-why .why-head h5,
+  .home-why .why-head h6,
+  .home-why .why-head p {
+    font-size: 34px;
+    line-height: 44px;
+    letter-spacing: -0.4px;
+  }
+}
+
+@media (max-width: 767px) {
+
+  .home-why .why-head,
+  .home-why .why-head h1,
+  .home-why .why-head h2,
+  .home-why .why-head h3,
+  .home-why .why-head h4,
+  .home-why .why-head h5,
+  .home-why .why-head h6,
+  .home-why .why-head p {
+    font-size: 28px;
+    line-height: 38px;
+    letter-spacing: -0.3px;
+  }
+}
+
+/* ---- Career apply popup ------------------------------------------------ */
+/* Same visual language as .Enquiry_popup - translucent brand blue over a
+   blurred page - but its own class so the extra fields (textarea, resume
+   drop zone) can be styled without touching the enquiry form. */
+.career_popup_bg {
+  background: rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(5px);
+}
+
+.career_popup {
+  border-radius: 10px;
+  background: rgba(11, 99, 229, 0.46);
+  backdrop-filter: blur(37.5px);
+  padding: 32px 40px;
+  width: 100%;
+  max-width: 660px;
+}
+
+.career_popup h2 {
+  color: #fff;
+  font-family: "Plus Jakarta Sans";
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 36px;
+  margin-bottom: 6px;
+  padding-right: 30px;
+}
+
+.career_popup>p {
+  color: #fff;
+  font-family: "Plus Jakarta Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  opacity: 0.85;
+}
+
+.career_popup label {
+  display: block;
+  color: #fff;
+  font-family: "Plus Jakarta Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 30px;
+}
+
+.career_popup input[type="text"],
+.career_popup input[type="email"],
+.career_popup textarea {
+  border-radius: 4px;
+  background: #f5f7fa;
+  border: 1px solid #d1d5db;
+  width: 100%;
+  outline: none;
+  color: #171717;
+  font-family: "Plus Jakarta Sans";
+  font-size: 14px;
+  font-weight: 400;
+  padding: 0 12px;
+  line-height: 40px;
+  height: 42px;
+}
+
+.career_popup textarea {
+  height: auto;
+  line-height: 22px;
+  padding: 10px 12px;
+  resize: vertical;
+  min-height: 88px;
+}
+
+.career_popup input::placeholder,
+.career_popup textarea::placeholder {
+  color: #9aa2b1;
+}
+
+.career_popup input:focus,
+.career_popup textarea:focus {
+  border-color: #fff;
+}
+
+.career_popup .has-error {
+  border-color: #f87171;
+}
+
+.career_popup .field_error {
+  display: block;
+  color: #ffe0e0;
+  font-family: "Plus Jakarta Sans";
+  font-size: 12px;
+  line-height: 18px;
+  margin-top: 4px;
+}
+
+.career_popup_close {
+  color: #fff;
+  line-height: 0;
+  opacity: 0.85;
+  transition: opacity 0.25s ease;
+}
+
+.career_popup_close:hover {
+  opacity: 1;
+}
+
+/* Resume field - same height and rounding as the text inputs so the grid
+   lines up. The instructions live under the field as a hint, not inside it. */
+.career_popup .resume_drop {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 42px;
+  padding: 0 10px 0 12px;
+  border-radius: 4px;
+  background: #f5f7fa;
+  border: 1px solid #d1d5db;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.career_popup .resume_drop:hover {
+  border-color: #0b63e5;
+}
+
+.career_popup .resume_drop.is-dragging {
+  background: #fff;
+  border-color: #0b63e5;
+  border-style: dashed;
+}
+
+.career_popup .resume_drop.has-file {
+  background: #fff;
+  border-color: #0b63e5;
+}
+
+.career_popup .resume_drop.has-error {
+  border-color: #f87171;
+  background: #fff5f5;
+}
+
+.career_popup .resume_input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.career_popup .resume_drop img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  flex: none;
+}
+
+.career_popup .resume_text {
+  min-width: 0;
+  flex: 1;
+}
+
+.career_popup .resume_name {
+  color: #101828;
+  font-family: "Plus Jakarta Sans";
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 42px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.career_popup .resume_drop:not(.has-file) .resume_name {
+  color: #9aa2b1;
+  font-weight: 400;
+}
+
+.career_popup .resume_browse {
+  flex: none;
+  color: #0b63e5;
+  font-family: "Plus Jakarta Sans";
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  padding: 6px 10px;
+  border-radius: 3px;
+  background: #e8f0fe;
+}
+
+.career_popup .resume_size {
+  flex: none;
+  color: #6b7280;
+  font-family: "Plus Jakarta Sans";
+  font-size: 11px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Sits above the invisible file input so it clears the file rather than
+   reopening the picker. */
+.career_popup .resume_remove {
+  position: relative;
+  z-index: 2;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #eef1f6;
+  color: #101828;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.career_popup .resume_remove:hover {
+  background: #101828;
+  color: #fff;
+}
+
+/* Small helper text under a field */
+.career_popup .field_hint {
+  display: block;
+  color: #fff;
+  opacity: 0.72;
+  font-family: "Plus Jakarta Sans";
+  font-size: 11px;
+  line-height: 16px;
+  margin-top: 5px;
+}
+
+/* Required marker on labels */
+.career_popup label i {
+  color: #ffd7d7;
+  font-style: normal;
+}
+
+.career_popup .btn {
+  border-radius: 5.528px;
+  background: #101828;
+  padding: 15px 20px;
+  color: #fff;
+  font-family: "Plus Jakarta Sans";
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 104%;
+  max-width: 215px;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.career_popup .btn:disabled {
+  background: #6b7280;
+  cursor: not-allowed;
+}
+
+/* react-phone-input-2 overrides so it matches the other fields */
+.career_popup .react-tel-input .form-control {
+  font-family: "Plus Jakarta Sans";
+  color: black;
+}
+
+.career_popup .react-tel-input .flag-dropdown {
+  border-radius: 4px 0 0 4px;
+  border-color: #d1d5db;
+  background: #eef1f6;
+}
+
+.career_popup .react-tel-input .selected-flag:hover,
+.career_popup .react-tel-input .selected-flag:focus,
+.career_popup .react-tel-input .flag-dropdown.open .selected-flag {
+  background: #e3e8f0;
+  border-radius: 4px 0 0 4px;
+}
+
+
+@media (max-width: 767px) {
+  .career_popup {
+    padding: 24px 16px;
+    max-width: 100%;
+    border-radius: 8px;
+  }
+
+  .career_popup h2 {
+    font-size: 22px;
+    line-height: 28px;
+    padding-right: 34px;
+  }
+
+  .career_popup label {
+    font-size: 13px;
+    line-height: 26px;
+  }
+
+  .career_popup input[type="text"],
+  .career_popup input[type="email"] {
+    height: 44px;
+    line-height: 42px;
+    font-size: 16px;
+    /* 16px stops iOS Safari zooming the page on focus */
+  }
+
+  .career_popup textarea {
+    font-size: 16px;
+    min-height: 78px;
+  }
+
+  .career_popup .resume_drop {
+    height: 44px;
+  }
+
+  .career_popup .resume_name {
+    line-height: 44px;
+    font-size: 12px;
+  }
+
+  /* Size is redundant next to a truncated name on a narrow screen */
+  .career_popup .resume_size {
+    display: none;
+  }
+
+  .career_popup .field_hint {
+    font-size: 10px;
+    line-height: 15px;
+  }
+
+  .career_popup .btn {
+    max-width: 100%;
+    padding: 14px 20px;
+  }
+
+  /* The country dropdown defaults to a fixed width that overflows a phone */
+  .career_popup .react-tel-input .country-list {
+    width: calc(100vw - 64px);
+    max-width: 300px;
+    max-height: 190px;
+  }
+
+  .career_popup .react-tel-input .form-control {
+    font-size: 16px !important;
+  }
+
+  /* On a phone the messages push the form taller than the viewport, so the
+     red border carries the error on its own. */
+  .career_popup .field_error {
+    display: none;
+  }
+
+  .career_popup input.has-error,
+  .career_popup textarea.has-error,
+  .career_popup .resume_drop.has-error,
+  .career_popup .react-tel-input .form-control.has-error {
+    border-color: #e5484d !important;
+    border-width: 1.5px !important;
+    background: #fff6f6 !important;
+  }
+
+  /* Flag button sits flush against the input, so it has to match */
+  .career_popup .react-tel-input .form-control.has-error+.flag-dropdown {
+    border-color: #e5484d;
+    border-width: 1.5px;
+  }
+
+  .career_popup .resume_drop.has-error .resume_browse {
+    background: #ffe3e3;
+    color: #e5484d;
   }
 }

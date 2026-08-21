@@ -8,10 +8,5 @@ export const WidgetApi = {
     faqrigthtext : (data) => get(`widget/need_expert_advice` , {params: data}),
     exceptionalclients : (data) => get(`widget/our_exceptional_clients` , {params: data}),
     testimonials : (data) => get(`/testimonials` , {params: data})   
-
-
- 
-
-    
 }
 

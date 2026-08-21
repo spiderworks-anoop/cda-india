@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
- 
+
 
 const Noise = ({
   patternSize = 250,
@@ -12,8 +12,17 @@ const Noise = ({
 
   useEffect(() => {
     const canvas = grainRef.current;
-    const ctx = canvas.getContext('2d');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d', { alpha: true });
     let frame = 0;
+    let rafId = null;
+    let visible = false;
+    let teardownObservers = null;
+
+    const reduceMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
 
     const patternCanvas = document.createElement('canvas');
     patternCanvas.width = patternSize;
@@ -23,9 +32,14 @@ const Noise = ({
     const patternPixelDataLength = patternSize * patternSize * 4;
 
     const resize = () => {
-      canvas.width = window.innerWidth * window.devicePixelRatio;
-      canvas.height = window.innerHeight * window.devicePixelRatio;
+      // The grain is random noise, so there is nothing to gain from rendering
+      // it at devicePixelRatio - on a 3x phone that was ~3 million pixels
+      // repainted every frame. Size to the element, not the viewport.
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = Math.max(1, Math.ceil(rect.width));
+      canvas.height = Math.max(1, Math.ceil(rect.height));
 
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(patternScaleX, patternScaleY);
     };
 
@@ -52,15 +66,56 @@ const Noise = ({
         drawGrain();
       }
       frame++;
-      window.requestAnimationFrame(loop);
+      rafId = window.requestAnimationFrame(loop);
     };
 
-    window.addEventListener('resize', resize);
+    const start = () => {
+      if (rafId === null) rafId = window.requestAnimationFrame(loop);
+    };
+
+    const stop = () => {
+      if (rafId !== null) {
+        window.cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+    };
+
     resize();
-    loop();
+
+    if (reduceMotion) {
+      // Draw a single static grain frame and leave it there.
+      updatePattern();
+      drawGrain();
+    } else {
+      // Only burn frames while the section is actually on screen.
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          visible = entry.isIntersecting;
+          if (visible) start();
+          else stop();
+        },
+        { rootMargin: '100px' }
+      );
+      observer.observe(canvas);
+
+      const onVisibilityChange = () => {
+        if (document.hidden) stop();
+        else if (visible) start();
+      };
+      document.addEventListener('visibilitychange', onVisibilityChange);
+
+      teardownObservers = () => {
+        observer.disconnect();
+        document.removeEventListener('visibilitychange', onVisibilityChange);
+      };
+    }
+
+    window.addEventListener('resize', resize);
 
     return () => {
+      stop();
       window.removeEventListener('resize', resize);
+      if (typeof teardownObservers === 'function') teardownObservers();
     };
   }, [patternSize, patternScaleX, patternScaleY, patternRefreshInterval, patternAlpha]);
 

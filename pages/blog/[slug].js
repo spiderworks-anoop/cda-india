@@ -11,7 +11,7 @@ import { GeneralApi } from '@/Datas/endpoints/general'
 import ContactForm from '@/components/contact/getform'
 import { ContactApi } from '@/Datas/endpoints/contact'
 
-export default function BlogDetails ({ general, blogDetail, process , data }) {
+export default function BlogDetails({ general, blogDetail, process, data }) {
 
   // console.log('dd', blogDetail)
 
@@ -27,38 +27,42 @@ export default function BlogDetails ({ general, blogDetail, process , data }) {
       <BlogDetailsitems title={blogDetail?.title} data={blogDetail} />
 
 
-        <ContactForm data={data} blog={blogDetail}/>
+      <ContactForm data={data} blog={blogDetail} />
 
-      <section className='pt-[50px] pb-[50px] recent_blogsec'>
-        <div className='container'>
-          <h3>Recent Posts</h3>
+      {
+        blogDetail?.recent_posts?.length > 0 &&
 
-          <div className='grid md:grid-cols-3 gap-[35px]'>
-            {blogDetail?.recent_posts?.map((item, index) => (
-              <BlogListitems
-                key={index}
-                title={item?.title}
-                time={item?.published_by?.name}
-                imgSrc={item?.featured_image?.file_path}
-                date={item?.published_on}
-                link={item?.slug}
-              />
-            ))}
+        <section className='pt-[50px] pb-[50px] recent_blogsec'>
+          <div className='container'>
+            <h3>Recent Posts</h3>
 
-            {/* <div><BlogListitems /></div>
+            <div className='grid md:grid-cols-3 gap-[35px]'>
+              {blogDetail?.recent_posts?.map((item, index) => (
+                <BlogListitems
+                  key={index}
+                  title={item?.title}
+                  time={item?.published_by?.name}
+                  imgSrc={item?.featured_image?.file_path}
+                  date={item?.published_on}
+                  link={item?.slug}
+                />
+              ))}
+
+              {/* <div><BlogListitems /></div>
             <div><BlogListitems /></div>
             <div><BlogListitems /></div> */}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+      }
 
 
-    
 
       <Process
         prosTitle={process?.content?.title_1}
         procesList={process?.content?.smart_accounting_listing_id}
-         ProsImg={process?.content?.media_id_3?.file_path}
+        ProsImg={process?.content?.media_id_3?.file_path}
       />
 
       <Footercontent />
@@ -88,13 +92,13 @@ export const getStaticProps = async ({ params }) => {
     const BlogPageData = await BlogApi.blogDetail({ slug: params.slug })
     const GeneralData = await GeneralApi.general()
     const ProcessData = await WidgetApi.process()
-     const ContactPageData = await ContactApi.page()  
+    const ContactPageData = await ContactApi.page()
     return {
       props: {
         blogDetail: BlogPageData?.data?.data,
         general: GeneralData?.data?.data,
         process: ProcessData?.data?.data,
-         data:ContactPageData?.data?.data,
+        data: ContactPageData?.data?.data,
       },
       revalidate: 60 // Optional: revalidate every 60 seconds
     }

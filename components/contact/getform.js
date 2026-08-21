@@ -35,14 +35,17 @@ const ContactForm = ({ data, contact, blog }) => {
     }
   };
 
-  const onSubmit = async (data) => {
+  // Also used as react-hook-form's invalid handler, so the phone field turns
+  // red even when another required field is what blocked the submit.
+  const validatePhone = () => {
     const phoneLength = phone.replace(/\D/g, "").length;
-    if (!phone || phoneLength < 5 || phoneLength > 13) {
-      setPhoneError(true);
-      return;
-    } else {
-      setPhoneError(false);
-    }
+    const invalid = !phone || phoneLength < 5 || phoneLength > 13;
+    setPhoneError(invalid);
+    return !invalid;
+  };
+
+  const onSubmit = async (data) => {
+    if (!validatePhone()) return;
 
     try {
       const payload = {
@@ -81,7 +84,7 @@ const ContactForm = ({ data, contact, blog }) => {
                 dangerouslySetInnerHTML={{ __html: data?.content?.title_7 }}
               />
               <p> {data?.content?.description}</p>
-              <form onSubmit={handleSubmit(onSubmit)}>
+              <form onSubmit={handleSubmit(onSubmit, validatePhone)}>
                 <div className="grid md:grid-cols-2 gap-[25px] mt-[15px]">
                   <div>
                     <label>Name</label>
@@ -123,9 +126,12 @@ const ContactForm = ({ data, contact, blog }) => {
                         width: "100%",
                         height: "54px",
                         paddingLeft: "48px",
-                        borderColor: phoneError ? "#f87171" : "#d1d5db",
+                        borderColor: phoneError ? "#ef4444" : "#d1d5db",
                         borderRadius: "8px",
                         fontSize: "14px",
+                      }}
+                      buttonStyle={{
+                        borderColor: phoneError ? "#ef4444" : "#cacaca",
                       }}
                     />
                   </div>

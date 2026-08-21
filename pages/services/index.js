@@ -22,7 +22,7 @@ import { WidgetApi } from "@/Datas/endpoints/widget";
 
 
 export default function Home({ data, listdata, general, financialSolutions, certifications, process, ourassociates, faqrigthtext }) {
-  
+
   // console.log(data)
 
   return (
@@ -35,7 +35,8 @@ export default function Home({ data, listdata, general, financialSolutions, cert
         bnrimg={data?.content?.media_id_1?.file_path}
       />
 
-      <SerOffer listdata={listdata} shorttitle={data?.content?.short_title_2}
+      <SerOffer
+        listdata={listdata} shorttitle={data?.content?.short_title_2}
         title={data?.content?.title_2}
         discription={data?.content?.description_2}
       />

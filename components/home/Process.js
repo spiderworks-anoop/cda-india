@@ -16,7 +16,7 @@ const Process = ({ prosTitle, procesList, ProsImg }) => {
             <h4> {prosTitle}</h4>
           </div>
 
-          <div className="flex items-center gap-[25px] flex-wrap">
+          <div className="pros_list_cntr">
             {procesList?.map((items, index) => (
               <Link key={index} href={`/${items?.url || "#"}`}>
                 <div className="pros_list img-zoom">
@@ -28,7 +28,7 @@ const Process = ({ prosTitle, procesList, ProsImg }) => {
                   />
                   <div className="flex items-center mt-[34px] gap-[15px]">
                     <h4> {items?.title} </h4>
-                    <div>
+                    <div className="shrink-0">
                       <LongArrowicon />
                     </div>
 

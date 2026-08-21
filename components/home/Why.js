@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import PixelTransition from "../common/PixelTransition";
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -152,18 +151,17 @@ const Why = ({ data }) => {
   return (
     <section ref={sectionRef} className="home-why overflow-hidden">
       <div className="container">
-        <div className="grid md:grid-cols-2 gap-[20px]">
+        <div className="grid lg:grid-cols-2 gap-[24px] lg:gap-[40px] lg:items-end">
           <div>
-            <div className="md:max-w-[520px] max-w-[300px]">
+            <div className="lg:max-w-[560px] why-head">
               <div
-                className="text-[#454d5c] "
                 dangerouslySetInnerHTML={{ __html: data?.content?.title_4 }}
               />
             </div>
           </div>
 
-          <div className="flex md:justify-end">
-            <div className="md:max-w-[560px] max-w-[330px]">
+          <div className="flex lg:justify-end">
+            <div className="lg:max-w-[560px]">
               <div
                 ref={textRef}
                 className="text-[#454d5c] "
@@ -173,73 +171,62 @@ const Why = ({ data }) => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-4 mt-[60px] md:mt-[80px] border border-[#E4E4E4] hm-why-list">
-          {data?.content?.balance_your_financial_future_listing_id?.map(
-            (item, index) => (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 mt-[60px] lg:mt-[80px] border border-[#E4E4E4] hm-why-list">
+          {data?.content?.balance_your_financial_future_listing_id?.map((item, index) => {
+            // Only the 4 up desktop grid runs the staggered layout, where every
+            // other card leads with a tall image. At 1 and 2 columns there is
+            // no zigzag to keep, so every card is number -> title -> image.
+            const isAlt = index % 2 === 1;
+
+            return (
               <div
                 key={index}
-                className={`${index !== 0 ? "border-t md:border-t-0" : ""} ${index < 3 ? "md:border-r" : ""
-                  } border-[#E4E4E4] px-[33px] pb-[40px] ${index % 2 == 1
-                    ? "md:pb-[20px] pt-[40px] md:pt-[60px]"
-                    : "md:pb-[90px] pt-[40px] md:pt-[20px]"
+                // Dividers between cells are drawn in CSS (.hm-why-list), so
+                // they follow the column count instead of assuming 4 across.
+                className={`px-[20px] sm:px-[26px] xl:px-[33px] pt-[40px] pb-[40px] ${isAlt
+                  ? "lg:pt-[60px] lg:pb-[20px]"
+                  : "lg:pt-[20px] lg:pb-[90px]"
                   }`}
               >
-                {/* Desktop Image if mobileImage true */}
-                {index % 2 == 1 && (
-                  <div className="hidden md:block w-[177px] h-[265px] custom-h m-auto mb-[25px] img-zoom">
-
+                {/* Tall lead image - only in the 4 up desktop grid */}
+                {isAlt && (
+                  <div className="hidden lg:block w-full max-w-[177px] h-[265px] m-auto mb-[25px] img-zoom">
                     <Image
                       src={item?.media_id?.file_path}
-                      alt={item?.media_id?.alt_text}
+                      alt={item?.media_id?.alt_text || ""}
                       width={177}
                       height={265}
-                      className="hidden md:block w-[177px] h-[265px] object-cover mx-auto"
+                      className="w-full h-full object-cover"
                     />
-
                   </div>
                 )}
 
                 {/* Tag number */}
-                <span className={item?.mobileImage ? "county-tag" : ""}>
-                  {index + 1 < 10 && 0} {index + 1}
-                </span>
+                <span>{String(index + 1).padStart(2, "0")}</span>
 
                 {/* Title */}
                 <h4
-                  className={`md:mb-[78px] mb-[30px] md:max-w-[200px] ${index % 2 == 1 ? "md:mb-[0]" : ""}`}
+                  className={`mb-[30px] lg:max-w-[200px] ${isAlt ? "lg:mb-0" : "lg:mb-[78px]"}`}
                 >
                   {item?.title}
                 </h4>
 
-                {/* Image (mobile or full width) */}
-                {index % 2 == 1 ? (
-                  <div className="md:hidden w-[177px] h-full custom-h m-auto img-zoom">
-
-                    <Image
-                      src={item?.media_id?.file_path}
-                      alt={item?.media_id?.alt_text}
-                      width={177}
-                      height={186}
-                      className="md:hidden w-full h-full object-cover mx-auto"
-                    />
-
-                  </div>
-                ) : (
-                  <div className="md:block block w-full h-[186px] overflow-hidden img-zoom">
-
-                    <Image
-                      src={item?.media_id?.file_path}
-                      alt={item?.media_id?.alt_text}
-                      width={280}
-                      height={186}
-                      className="w-full h-[186px] object-cover"
-                    />
-
-                  </div>
-                )}
+                {/* Bottom image - every card at 1 and 2 columns, and the
+                    non-alternating cards in the 4 up grid */}
+                <div
+                  className={`w-full h-[240px] sm:h-[200px] lg:h-[186px] img-zoom ${isAlt ? "lg:hidden" : ""}`}
+                >
+                  <Image
+                    src={item?.media_id?.file_path}
+                    alt={item?.media_id?.alt_text || ""}
+                    width={280}
+                    height={186}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
-            )
-          )}
+            );
+          })}
         </div>
       </div>
     </section>

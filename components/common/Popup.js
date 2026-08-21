@@ -137,7 +137,6 @@ const Popup = ({ isOpen, onClose, ifBrochure }) => {
   return (
     <div
       className='fixed inset-0 z-10 popup_bg overflow-y-auto overscroll-contain'
-      data-lenis-prevent
     >
       <div className='flex min-h-full items-center justify-center p-[12px] md:p-[20px]'>
         <div className='Enquiry_popup relative'>
