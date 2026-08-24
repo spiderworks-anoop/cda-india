@@ -8,6 +8,7 @@ import { ServicesApi } from '@/Datas/endpoints/services'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import { GeneralApi } from '@/Datas/endpoints/general'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 const Popup = ({ isOpen, onClose, ifBrochure }) => {
   // if (!isOpen) return null;
@@ -19,7 +20,10 @@ const Popup = ({ isOpen, onClose, ifBrochure }) => {
     formState: { errors, isSubmitting }
   } = useForm()
 
+  const { executeRecaptcha } = useGoogleReCaptcha()
+
   const [successMessage, setSuccessMessage] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
   const [serviceId, setServiceId] = useState(null)
   const [open, setOpen] = useState(false)
   const [list, setList] = useState(null)
@@ -94,6 +98,8 @@ const Popup = ({ isOpen, onClose, ifBrochure }) => {
     fetchGeneral()
   }, [])
   const onSubmit = async data => {
+    setErrorMessage('')
+
     const phoneLength = phone.replace(/\D/g, '').length
     if (!phone || phoneLength < 5 || phoneLength > 13) {
       setPhoneError(true)
@@ -101,11 +107,20 @@ const Popup = ({ isOpen, onClose, ifBrochure }) => {
     } else {
       setPhoneError(false)
     }
+
+    if (!executeRecaptcha) {
+      setErrorMessage('reCAPTCHA not ready')
+      return
+    }
+
+    const token = await executeRecaptcha('contact_form_submit')
+
     // console.log(data)
     let datatosubmit = {
       service_id: serviceId?.id,
       ...data,
       phone_number: `+${phone}`,
+      recaptcha_token: token,
       utm_source: sessionStorage.getItem('utmSource') || '',
       utm_medium: sessionStorage.getItem('utmMedium') || '',
       utm_campaign: sessionStorage.getItem('utmCampaign') || '',
@@ -130,6 +145,7 @@ const Popup = ({ isOpen, onClose, ifBrochure }) => {
       setTimeout(() => setSuccessMessage(''), 5000)
     } catch (err) {
       console.error('Submission error:', err)
+      setErrorMessage('Something went wrong. Please try again.')
     }
   }
   // Return null AFTER hooks
@@ -259,6 +275,12 @@ const Popup = ({ isOpen, onClose, ifBrochure }) => {
 
             {successMessage && (
               <div className='mt-4 text-green-600'>{successMessage}</div>
+            )}
+
+            {errorMessage && (
+              <p className='form_error mt-4' role='alert'>
+                {errorMessage}
+              </p>
             )}
 
             <div className='md:mt-6 mt-[20px]'>

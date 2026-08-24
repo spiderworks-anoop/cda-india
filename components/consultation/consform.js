@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 const ConsultationForm = ({ data, contact, blog }) => {
   const {
@@ -20,7 +21,10 @@ const ConsultationForm = ({ data, contact, blog }) => {
 
   const router = useRouter();
 
+  const { executeRecaptcha } = useGoogleReCaptcha();
+
   const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState(false);
 
@@ -36,6 +40,8 @@ const ConsultationForm = ({ data, contact, blog }) => {
   };
 
   const onSubmit = async (data) => {
+    setErrorMessage("");
+
     const phoneLength = phone.replace(/\D/g, "").length;
     if (!phone || phoneLength < 5 || phoneLength > 13) {
       setPhoneError(true);
@@ -44,10 +50,18 @@ const ConsultationForm = ({ data, contact, blog }) => {
       setPhoneError(false);
     }
 
+    if (!executeRecaptcha) {
+      setErrorMessage("reCAPTCHA not ready");
+      return;
+    }
+
+    const token = await executeRecaptcha("contact_form_submit");
+
     try {
       const payload = {
         ...data,
         phone_number: `+${phone}`,
+        recaptcha_token: token,
         utm_source: sessionStorage.getItem("utmSource") || "",
         utm_medium: sessionStorage.getItem("utmMedium") || "",
         utm_campaign: sessionStorage.getItem("utmCampaign") || "",
@@ -64,6 +78,7 @@ const ConsultationForm = ({ data, contact, blog }) => {
       setTimeout(() => setSuccessMessage(""), 5000);
     } catch (err) {
       console.error("Submission error:", err);
+      setErrorMessage("Something went wrong. Please try again.");
     }
   };
 
@@ -157,6 +172,12 @@ const ConsultationForm = ({ data, contact, blog }) => {
 
                 {successMessage && (
                   <div className="mb-4 text-green-600">{successMessage}</div>
+                )}
+
+                {errorMessage && (
+                  <p className="form_error" role="alert">
+                    {errorMessage}
+                  </p>
                 )}
 
                 <div className="flex items-center justify-end">

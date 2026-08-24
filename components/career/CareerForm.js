@@ -32,6 +32,7 @@ const CareerForm = ({ career, onClose }) => {
   } = useForm();
 
   const [isDragging, setIsDragging] = useState(false);
+  const [ErrorMessage, setErrorMessage] = useState(null);
 
 
   useEffect(() => {
@@ -64,8 +65,8 @@ const CareerForm = ({ career, onClose }) => {
   };
 
   const onSubmit = async (formData) => {
-    
     if (!executeRecaptcha) {
+      setErrorMessage("reCAPTCHA not ready");
       return;
     }
 
@@ -316,6 +317,13 @@ const CareerForm = ({ career, onClose }) => {
             </div>
 
             <div className="mt-[18px] md:mt-[26px]">
+
+              {ErrorMessage && (
+                <p className="form_error" role="alert">
+                  {ErrorMessage}
+                </p>
+              )}
+
               <button
                 type="submit"
                 disabled={isSubmitting}

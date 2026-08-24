@@ -37,8 +37,6 @@ export default function Contact({ general, process, data }) {
 }
 
 
-
-
 export async function getStaticProps() {
 
   try {

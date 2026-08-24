@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 const ContactForm = ({ data, contact, blog }) => {
   const {
@@ -20,7 +21,10 @@ const ContactForm = ({ data, contact, blog }) => {
 
   const router = useRouter();
 
+  const { executeRecaptcha } = useGoogleReCaptcha();
+
   const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState(false);
 
@@ -45,17 +49,27 @@ const ContactForm = ({ data, contact, blog }) => {
   };
 
   const onSubmit = async (data) => {
+    setErrorMessage("");
+
     if (!validatePhone()) return;
+
+    if (!executeRecaptcha) {
+      setErrorMessage("reCAPTCHA not ready");
+      return;
+    }
+
+    const token = await executeRecaptcha("contact_form_submit");
 
     try {
       const payload = {
         ...data,
         phone_number: `+${phone}`,
+        recaptcha_token: token,
         utm_source: sessionStorage.getItem("utmSource") || "",
         utm_medium: sessionStorage.getItem("utmMedium") || "",
         utm_campaign: sessionStorage.getItem("utmCampaign") || "",
         source_url: sessionStorage.getItem("source_url") || "",
-        ...(blog?{lead_type: `Blog Details`} :{}) 
+        ...(blog ? { lead_type: `Blog Details` } : {})
       };
       const response = await ContactApi.contact(payload); // Make sure ContactApi.career supports JSON
       // console.log("Submitted:", response);
@@ -67,6 +81,7 @@ const ContactForm = ({ data, contact, blog }) => {
       setTimeout(() => setSuccessMessage(""), 5000);
     } catch (err) {
       console.error("Submission error:", err);
+      setErrorMessage("Something went wrong. Please try again.");
     }
   };
 
@@ -119,9 +134,8 @@ const ContactForm = ({ data, contact, blog }) => {
                       value={phone}
                       onChange={onPhoneChange}
                       enableSearch
-                      inputClass={`w-full ${
-                        phoneError ? "border-red-500" : "border-gray-300"
-                      }`}
+                      inputClass={`w-full ${phoneError ? "border-red-500" : "border-gray-300"
+                        }`}
                       inputStyle={{
                         width: "100%",
                         height: "54px",
@@ -161,13 +175,18 @@ const ContactForm = ({ data, contact, blog }) => {
                   <div className="mb-4 text-green-600">{successMessage}</div>
                 )}
 
+                {errorMessage && (
+                  <p className="form_error" role="alert">
+                    {errorMessage}
+                  </p>
+                )}
+
                 <div className="flex items-center justify-end">
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className={`btn ripple-button z-0 ${
-                      isSubmitting ? "bg-gray-400" : "bg-black"
-                    }`}
+                    className={`btn ripple-button z-0 ${isSubmitting ? "bg-gray-400" : "bg-black"
+                      }`}
                   >
                     {isSubmitting ? "Submitting..." : "Submit Now"}
                   </button>

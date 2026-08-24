@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { ServicesApi } from '@/Datas/endpoints/services'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 const PackPopup = ({ isOpen, onClose, serData, packageData }) => {
   // if (!isOpen) return null;
@@ -18,7 +19,10 @@ const PackPopup = ({ isOpen, onClose, serData, packageData }) => {
     formState: { errors, isSubmitting }
   } = useForm()
 
+  const { executeRecaptcha } = useGoogleReCaptcha()
+
   const [successMessage, setSuccessMessage] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
   const [serviceId, setServiceId] = useState(null)
   const [open, setOpen] = useState(false)
   const [list, setList] = useState(null)
@@ -52,6 +56,8 @@ const PackPopup = ({ isOpen, onClose, serData, packageData }) => {
     fetchList()
   }, [])
   const onSubmit = async data => {
+    setErrorMessage('')
+
     const phoneLength = phone.replace(/\D/g, '').length
     if (!phone || phoneLength < 5 || phoneLength > 13) {
       setPhoneError(true)
@@ -59,11 +65,20 @@ const PackPopup = ({ isOpen, onClose, serData, packageData }) => {
     } else {
       setPhoneError(false)
     }
+
+    if (!executeRecaptcha) {
+      setErrorMessage('reCAPTCHA not ready')
+      return
+    }
+
+    const token = await executeRecaptcha('contact_form_submit')
+
     // console.log(data)
     let datatosubmit = {
       package_id: packageData?.id,
       ...data,
       phone_number: `+${phone}`,
+      recaptcha_token: token,
       utm_source: sessionStorage.getItem('utmSource') || '',
       utm_medium: sessionStorage.getItem('utmMedium') || '',
       utm_campaign: sessionStorage.getItem('utmCampaign') || '',
@@ -88,6 +103,7 @@ const PackPopup = ({ isOpen, onClose, serData, packageData }) => {
       setTimeout(() => setSuccessMessage(''), 5000)
     } catch (err) {
       console.error('Submission error:', err)
+      setErrorMessage('Something went wrong. Please try again.')
     }
   }
   // Return null AFTER hooks
@@ -175,6 +191,12 @@ const PackPopup = ({ isOpen, onClose, serData, packageData }) => {
 
               {successMessage && (
                 <div className='mt-4 text-green-600'>{successMessage}</div>
+              )}
+
+              {errorMessage && (
+                <p className='form_error mt-4' role='alert'>
+                  {errorMessage}
+                </p>
               )}
 
               <div className='mt-6'>
