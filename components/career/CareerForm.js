@@ -64,9 +64,8 @@ const CareerForm = ({ career, onClose }) => {
   };
 
   const onSubmit = async (formData) => {
+    
     if (!executeRecaptcha) {
-      setErrorMessage("reCAPTCHA not ready");
-      setLoading(false);
       return;
     }
 
