@@ -141,10 +141,10 @@ export const getStaticProps = async ({ params }) => {
         faqrigthtext: FaqrigthtextData?.data?.data,
         testimonials: TestimonialsData?.data?.data
       },
-      revalidate: 60 // Optional: revalidate every 60 seconds
+      revalidate: 10 // Optional: revalidate every 60 seconds
     }
   } catch (error) {
-    console.log(error)
+    console.log('servic detail page error',error)
     if (error?.error == 'Not found') {
       return {
         notFound: true
@@ -152,5 +152,4 @@ export const getStaticProps = async ({ params }) => {
     }
     throw error
   }
-
 }

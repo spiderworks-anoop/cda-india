@@ -65,7 +65,7 @@ export const getStaticProps = async ({ params }) => {
         general: GeneralData?.data?.data,
         process: ProcessData?.data?.data
       },
-      revalidate: 60 // Optional: revalidate every 60 seconds
+      revalidate: 10 // Optional: revalidate every 60 seconds
     }
   } catch (error) {
     console.log(error)
