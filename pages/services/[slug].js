@@ -141,7 +141,7 @@ export const getStaticProps = async ({ params }) => {
         faqrigthtext: FaqrigthtextData?.data?.data,
         testimonials: TestimonialsData?.data?.data
       },
-      revalidate: 10 // Optional: revalidate every 60 seconds
+      revalidate: 10 
     }
   } catch (error) {
     console.log('servic detail page error',error)

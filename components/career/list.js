@@ -5,7 +5,7 @@ import Accordion from "../common/Accordion";
 import CareerForm from "./CareerForm";
 
 const CareerList = ({ listdata, data }) => {
-  const [openIndex, setOpenIndex] = useState(null); // All closed initially
+  const [openIndex, setOpenIndex] = useState(0); // All closed initially
   const [selectedCareer, setSelectedCareer] = useState(null);
 
   const toggleAccordion = (index) => {

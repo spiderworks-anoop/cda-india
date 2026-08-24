@@ -1637,7 +1637,7 @@ section.Career_List_cntr p {
   min-width: 0;
 }
 
-.pros_list_cntr > a {
+.pros_list_cntr>a {
   display: block;
   flex: 1 1 0;
   min-width: 200px;
@@ -1656,7 +1656,7 @@ section.Career_List_cntr p {
     flex-wrap: wrap;
   }
 
-  .pros_list_cntr > a {
+  .pros_list_cntr>a {
     flex: 1 1 240px;
     max-width: none;
   }
@@ -1668,7 +1668,7 @@ section.Career_List_cntr p {
     justify-content: center;
   }
 
-  .pros_list_cntr > a {
+  .pros_list_cntr>a {
     flex: 1 1 100%;
     max-width: 440px;
   }
@@ -4896,8 +4896,7 @@ section#TermsCondition-section {
     padding: 10px 6px;
   }
 
-  .pros_list {
-  }
+  .pros_list {}
 
   .associates_count {
     padding: 25px;
@@ -5020,7 +5019,7 @@ section#TermsCondition-section {
     margin: 0;
   }
 
-  .home-about .about-head > *:not(.popover) {
+  .home-about .about-head>*:not(.popover) {
     width: 100%;
     text-align: center;
   }
@@ -5812,6 +5811,7 @@ section#TermsCondition-section {
     line-height: 55px;
   }
 }
+
 @media (max-width: 998px) {
 
   .home-why .why-head,
@@ -6116,8 +6116,17 @@ section#TermsCondition-section {
 .career_popup .react-tel-input .flag-dropdown {
   border-radius: 4px 0 0 4px;
   border-color: #d1d5db;
-  background: #eef1f6;
+  /* background: #eef1f6; */
+  background: rgb(245, 247, 250) !important; 
 }
+
+.react-tel-input .flag-dropdown {
+  border-radius: 4px 0 0 4px;
+  border-color: #d1d5db;
+  /* background: #eef1f6; */
+  background: #fff !important;
+}
+
 
 .career_popup .react-tel-input .selected-flag:hover,
 .career_popup .react-tel-input .selected-flag:focus,

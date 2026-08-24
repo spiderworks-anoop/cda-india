@@ -8,6 +8,7 @@ import "react-phone-input-2/lib/style.css";
 
 import PdfIcon from "../../public/images/pdf-icon.png";
 import { ContactApi } from "@/Datas/endpoints/contact";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 const MAX_RESUME_BYTES = 10 * 1024 * 1024;
 
@@ -20,7 +21,7 @@ const formatSize = (bytes) => {
 const CareerForm = ({ career, onClose }) => {
   const router = useRouter();
   const fileInputRef = useRef(null);
-
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const {
     register,
     control,
@@ -32,7 +33,7 @@ const CareerForm = ({ career, onClose }) => {
 
   const [isDragging, setIsDragging] = useState(false);
 
-  // Stop the page behind the popup from scrolling while it is open.
+
   useEffect(() => {
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -49,9 +50,6 @@ const CareerForm = ({ career, onClose }) => {
     return () => document.removeEventListener("keydown", handleKey);
   }, [onClose]);
 
-  // The file lives in form state, so RHF's required/validate rules own it the
-  // same way they own the phone. Validating straight after a pick means a bad
-  // file is called out immediately instead of at submit time.
   const setResume = (onChange, selectedFile) => {
     onChange(selectedFile ?? null);
     trigger("resume");
@@ -62,20 +60,31 @@ const CareerForm = ({ career, onClose }) => {
     e.stopPropagation();
     onChange(null);
     trigger("resume");
-    // Clearing the input lets the same file be picked again straight after.
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
   const onSubmit = async (formData) => {
+    if (!executeRecaptcha) {
+      setErrorMessage("reCAPTCHA not ready");
+      setLoading(false);
+      return;
+    }
+
+    const token = await executeRecaptcha("contact_form_submit");
+
     if (!career) return;
 
     const formDataToSend = new FormData();
+
     formDataToSend.append("resume", formData.resume);
     formDataToSend.append("name", formData.name.trim());
     formDataToSend.append("email", formData.email.trim());
-    formDataToSend.append("phone", formData.phone);
+    formDataToSend.append("phone_number", formData.phone);
     formDataToSend.append("message", formData.message || "");
     formDataToSend.append("careers_id", career.id);
+
+    // reCAPTCHA token
+    formDataToSend.append("recaptcha_token", token);
 
     formDataToSend.append("utm_source", sessionStorage.getItem("utmSource") || "");
     formDataToSend.append("utm_medium", sessionStorage.getItem("utmMedium") || "");
@@ -86,7 +95,10 @@ const CareerForm = ({ career, onClose }) => {
       const response = await ContactApi.career(formDataToSend);
 
       reset();
-      if (fileInputRef.current) fileInputRef.current.value = "";
+
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
 
       if (response?.status === 200) {
         router.push("/thank-you");
@@ -98,6 +110,7 @@ const CareerForm = ({ career, onClose }) => {
       console.log("career error", err);
     }
   };
+
 
   return (
     <div
@@ -191,6 +204,7 @@ const CareerForm = ({ career, onClose }) => {
                       onChange={field.onChange}
                       onBlur={field.onBlur}
                       enableSearch
+                      countryCodeEditable={false}
                       inputClass={errors.phone ? "has-error" : ""}
                       inputStyle={{
                         width: "100%",
@@ -229,9 +243,8 @@ const CareerForm = ({ career, onClose }) => {
                   }}
                   render={({ field }) => (
                     <div
-                      className={`resume_drop ${field.value ? "has-file" : ""} ${
-                        isDragging ? "is-dragging" : ""
-                      } ${errors.resume ? "has-error" : ""}`}
+                      className={`resume_drop ${field.value ? "has-file" : ""} ${isDragging ? "is-dragging" : ""
+                        } ${errors.resume ? "has-error" : ""}`}
                       onDragOver={(e) => {
                         e.preventDefault();
                         setIsDragging(true);
@@ -255,7 +268,7 @@ const CareerForm = ({ career, onClose }) => {
                         aria-label="Upload resume"
                       />
 
-                      <Image src={PdfIcon} alt="" width={22} height={22} />
+                      {/* <Image src={PdfIcon} alt="" width={22} height={22} /> */}
 
                       <div className="resume_text">
                         <p className="resume_name">
