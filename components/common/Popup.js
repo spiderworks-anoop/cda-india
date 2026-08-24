@@ -22,7 +22,6 @@ const Popup = ({ isOpen, onClose, ifBrochure }) => {
 
   const { executeRecaptcha } = useGoogleReCaptcha()
 
-  const [successMessage, setSuccessMessage] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
   const [serviceId, setServiceId] = useState(null)
   const [open, setOpen] = useState(false)
@@ -138,11 +137,9 @@ const Popup = ({ isOpen, onClose, ifBrochure }) => {
       if (response?.status === 200) {
         router.push('/thank-you')
       }
-      setSuccessMessage('Your message has been submitted successfully! ✅')
       if (ifBrochure) {
         window.open('/doc/COMPANY-PROFILE-CDA.pdf', '_blank')
       }
-      setTimeout(() => setSuccessMessage(''), 5000)
     } catch (err) {
       console.error('Submission error:', err)
       setErrorMessage('Something went wrong. Please try again.')
@@ -272,10 +269,6 @@ const Popup = ({ isOpen, onClose, ifBrochure }) => {
                 )}
               </div>
             </div>
-
-            {successMessage && (
-              <div className='mt-4 text-green-600'>{successMessage}</div>
-            )}
 
             {errorMessage && (
               <p className='form_error mt-4' role='alert'>

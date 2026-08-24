@@ -101,7 +101,7 @@ const CareerForm = ({ career, onClose }) => {
       }
 
       if (response?.status === 200) {
-        router.push("/thank-you");
+        router.push("/career/thank-you");
         return;
       }
 

@@ -8,6 +8,8 @@ import ContactList from "@/components/contact/list";
 import { ContactApi } from "@/Datas/endpoints/contact";
 import { GeneralApi } from "@/Datas/endpoints/general";
 import { WidgetApi } from "@/Datas/endpoints/widget";
+
+
 export default function Contact({ general, process, data }) {
 
 

@@ -1,0 +1,45 @@
+import Link from 'next/link'
+import Image from 'next/image'
+import { motion } from 'framer-motion'
+import { LongArrowicon } from '../common/svgicon'
+
+const LocCard = ({ item, index = 0, linktext = 'View Details' }) => {
+  if (!item?.slug) return null
+
+  const image = item?.featured_image?.file_path || item?.banner_image?.file_path
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: (index % 3) * 0.1, ease: 'easeOut' }}
+      viewport={{ once: true }}
+    >
+      <Link href={`/location/${item?.slug}`} className='location_card flex flex-col h-full'>
+        {image && (
+          <div className='location_card_img'>
+            <Image
+              src={image}
+              alt={item?.featured_image?.alt_text || item?.title || ''}
+              width={440}
+              height={240}
+              sizes='(max-width: 767px) 90vw, 33vw'
+            />
+          </div>
+        )}
+
+        <div className='location_card_cap flex flex-col h-full'>
+          <h4>{item?.title || item?.name}</h4>
+
+          {item?.short_description && <p>{item?.short_description}</p>}
+
+          <span className='btn flex items-center gap-[10px] mt-auto'>
+            {linktext} <LongArrowicon />
+          </span>
+        </div>
+      </Link>
+    </motion.div>
+  )
+}
+
+export default LocCard

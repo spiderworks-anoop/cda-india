@@ -1,0 +1,6 @@
+import { get } from "../config";
+
+export const LocationApi = {
+    listpage: (data) => get(`/location`, { params: data }),
+    locationDetail: (data) => get(`/location/${data.slug}`)
+}

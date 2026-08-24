@@ -23,7 +23,6 @@ const ContactForm = ({ data, contact, blog }) => {
 
   const { executeRecaptcha } = useGoogleReCaptcha();
 
-  const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState(false);
@@ -77,8 +76,6 @@ const ContactForm = ({ data, contact, blog }) => {
       if (response?.status === 200) {
         router.push("/thank-you");
       }
-      setSuccessMessage("Your message has been submitted successfully! ✅");
-      setTimeout(() => setSuccessMessage(""), 5000);
     } catch (err) {
       console.error("Submission error:", err);
       setErrorMessage("Something went wrong. Please try again.");
@@ -171,9 +168,6 @@ const ContactForm = ({ data, contact, blog }) => {
                   />
                 </div>
 
-                {successMessage && (
-                  <div className="mb-4 text-green-600">{successMessage}</div>
-                )}
 
                 {errorMessage && (
                   <p className="form_error" role="alert">
