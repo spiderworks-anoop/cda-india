@@ -7,14 +7,36 @@ import Footercontent from '@/components/common/Footercontent'
 import { LocationApi } from '@/Datas/endpoints/location'
 import { getLocationSharedProps } from '@/Datas/pageData/location'
 
-const pageData = {
-  title: 'Locations',
-  browser_title: 'Locations We Serve | CDA',
-  meta_description:
-    'CDA delivers accounting, auditing, tax and advisory services across the locations we operate in. Find the office and the services closest to your business.'
+
+
+
+
+export async function getStaticProps() {
+  try {
+    const [pageRes, LocationListData, sharedProps] = await Promise.all([
+      LocationApi.page(),
+      LocationApi.listpage(),
+      getLocationSharedProps()
+    ])
+
+    return {
+      props: {
+        ...sharedProps,
+        page: pageRes?.data?.data || [],
+        listdata: LocationListData?.data?.data || [],
+        metadata: LocationListData?.data?.meta || null
+      },
+      revalidate: 10
+    }
+  } catch (error) {
+    console.log('location listing page error', error)
+    throw error
+  }
 }
 
+
 export default function Location({
+  page,
   listdata,
   metadata,
   general,
@@ -24,25 +46,24 @@ export default function Location({
   ourassociates,
   testimonials
 }) {
+
+  console.log(page)
   return (
-    <Base general={general} data={pageData} bottomContent={pageData?.bottom_description}>
-      <div className='Small_banner'>
+    <Base general={general} data={page} bottomContent={page?.bottom_description}>
+      <div className='Small_banner h-[100dvh] bg-white '>
         <CommBanner
-          title={'Locations We Serve'}
-          short_description={
-            'From Dubai to Abu Dhabi, our teams work close to your business - pick a location to see the services we deliver there.'
-          }
+          title={page?.content?.title_1}
+          short_description={page?.content?.short_description_1}
+          bnrimg={page?.content?.media_id_1?.file_path}
         />
       </div>
 
       <LocList
         listdata={listdata}
         metadata={metadata}
-        shorttitle={'Our Presence'}
-        title={'Find CDA In Your City'}
-        description={
-          '<p>Every location has its own regulatory demands. Choose a city to explore the accounting, auditing and compliance services our specialists deliver on the ground.</p>'
-        }
+        shorttitle={page?.content?.tag_text_2}
+        title={page?.content?.title_2}
+        description={page?.content?.short_description_2}
       />
 
       <LocCommonSections
@@ -61,25 +82,4 @@ export default function Location({
       <Footercontent />
     </Base>
   )
-}
-
-export async function getStaticProps() {
-  try {
-    const [LocationListData, sharedProps] = await Promise.all([
-      LocationApi.listpage(),
-      getLocationSharedProps()
-    ])
-
-    return {
-      props: {
-        ...sharedProps,
-        listdata: LocationListData?.data?.data || [],
-        metadata: LocationListData?.data?.meta || null
-      },
-      revalidate: 10
-    }
-  } catch (error) {
-    console.log('location listing page error', error)
-    throw error
-  }
 }

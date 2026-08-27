@@ -55,7 +55,7 @@ const LocList = ({ shorttitle, title, description, listdata, metadata }) => {
   if (!list?.length) return null
 
   return (
-    <section className='ser-offer-sec location_list_sec pt-[20px] pb-[50px] md:pb-[100px]'>
+    <section className='ser-offer-sec location_list_sec pt-[60px] pb-[50px] md:pb-[100px]'>
       <div className='container'>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -129,7 +129,7 @@ const LocList = ({ shorttitle, title, description, listdata, metadata }) => {
             />
           </div>
         )}
-        
+
       </div>
     </section>
   )

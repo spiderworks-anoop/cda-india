@@ -25,7 +25,7 @@ const CommBanner = ({
 }) => {
   // console.log(data);
   return (
-    <section className="ser-det-banner  relative mb-[45px] inner-banner">
+    <section className="ser-det-banner h-full  relative mb-[45px] inner-banner">
       <Image src={bnrimg || Ser1} alt="" width={1920} height={773} />
 
       <div className="absolute top-0 left-0 w-full h-full z-[2] flex items-end pb-[60px] com_bnr_cap">
@@ -40,9 +40,9 @@ const CommBanner = ({
             >
               <div>
                 {Authimg &&
-                      <Image src={Authimg || AuthDef} alt="" width={150} height={150} className="author-img" />
+                  <Image src={Authimg || AuthDef} alt="" width={150} height={150} className="h-full object-cover author-img" />
                 }
-               
+
 
                 <h2>{title}</h2>
                 {/* <CurveLargeArrowicon /> */}
