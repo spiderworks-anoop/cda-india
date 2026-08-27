@@ -5,13 +5,18 @@ import { decodeHtml, hasHtmlContent } from '@/components/common/functions/htmlco
 
 const LocBody = ({ data }) => {
   const body = data?.content?.description_2
+  // Only a service has somewhere to go back to - its city. A city page is
+  // already the top of this branch, so it gets no back link.
+  const parent = data?.parent
 
   return (
     <section className='location_content pt-[20px] pb-[40px]'>
       <div className='container'>
-        <Link href='/location' className='back_btn flex items-center gap-[10px]'>
-          <Backicon /> All Locations
-        </Link>
+        {parent?.slug && (
+          <Link href={`/${parent?.slug}`} className='back_btn flex items-center gap-[10px]'>
+            <Backicon /> All Services In {parent?.title || parent?.name}
+          </Link>
+        )}
 
         {hasHtmlContent(body) && (
           <motion.div

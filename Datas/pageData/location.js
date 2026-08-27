@@ -72,12 +72,13 @@ export const buildLocationIndex = (locations = []) => {
   return index
 }
 
-//   city    -> /location/dubai
-//   service -> /location/dubai/accounting-services-in-dubai
+// Locations sit at the root of the site, not under a /location prefix:
+//   city    -> /dubai
+//   service -> /dubai/accounting-services-in-dubai
 export const locationUrl = (slug, citySlug) => {
-  if (!slug) return '/location'
+  if (!slug) return '/'
 
-  return citySlug && citySlug !== slug ? `/location/${citySlug}/${slug}` : `/location/${slug}`
+  return citySlug && citySlug !== slug ? `/${citySlug}/${slug}` : `/${slug}`
 }
 
 // `related_listing` mixes cities and services with nothing on the item saying

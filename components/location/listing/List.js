@@ -96,7 +96,7 @@ const LocList = ({ shorttitle, title, description, listdata, metadata }) => {
                 </div>
 
                 <Link
-                  href={`/location/${location?.slug}`}
+                  href={`/${location?.slug}`}
                   className='btn flex items-center gap-[10px] whitespace-nowrap'
                 >
                   Explore {location?.title || location?.name} <LongArrowicon />
@@ -109,7 +109,7 @@ const LocList = ({ shorttitle, title, description, listdata, metadata }) => {
                     <LocCard
                       key={service?.id || childIndex}
                       item={service}
-                      href={`/location/${location?.slug}/${service?.slug}`}
+                      href={`/${location?.slug}/${service?.slug}`}
                       index={childIndex}
                       linktext='View Service'
                     />

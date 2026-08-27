@@ -6,6 +6,7 @@ import { WhiteBtn } from '@/components/common/svgicon'
 import Popup from '@/components/common/Popup'
 
 const LocBanner = ({ data }) => {
+
   const [isPopupOpen, setPopupOpen] = useState(false)
 
   const title = data?.content?.title_1 || data?.title || data?.name
@@ -17,7 +18,7 @@ const LocBanner = ({ data }) => {
         <Popup isOpen={isPopupOpen} onClose={() => setPopupOpen(false)} />
       )}
 
-      <section className='ser-det-banner relative mb-[45px] location_banner'>
+      <section className='ser-det-banner relative  location_banner'>
         <Image
           src={data?.banner_image?.file_path || Loc1}
           alt={data?.banner_image?.alt_text || title || ''}
@@ -33,7 +34,7 @@ const LocBanner = ({ data }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: 'easeOut' }}
                 viewport={{ once: true }}
-                className='md:flex justify-center items-center'
+                className='md:flex  items-center'
               >
                 <div>
                   <h2>{title}</h2>

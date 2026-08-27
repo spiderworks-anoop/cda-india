@@ -4,15 +4,20 @@ import Logo from "../../public/images/logo.svg";
 import { MenuLineicon } from "../common/svgicon";
 
 const Navbar = ({ navmenu }) => {
-  const handleNavigate = (url) => {
+  // Menu urls come from the CMS and are stored either absolute ("/dubai/x") or
+  // relative to their parent ("x" under "services"). Prepending the parent to
+  // one that is already absolute is what turned a "/dubai/..." entry sitting
+  // under a "/" parent into "////dubai/...", which next/link rejects.
+  const handleNavigate = (url, parentUrl) => {
     if (!url) {
       return "#";
     }
-    if (url?.startsWith("/")) {
-      return url;
-    } else {
-      return "/" + url;
-    }
+
+    const path = url?.startsWith("/")
+      ? url
+      : [parentUrl, url].filter(Boolean).join("/");
+
+    return "/" + path.replace(/^\/+/, "").replace(/\/{2,}/g, "/");
   };
 
   return (
@@ -66,7 +71,7 @@ const Navbar = ({ navmenu }) => {
                         {child.children.map((innerChild, innerIndex) => (
                           <li key={innerIndex}>
                             <Link
-                              href={`/${item?.url}/${innerChild?.url}`}
+                              href={handleNavigate(innerChild?.url, item?.url)}
                               className="block px-4 py-2 hover:bg-gray-700"
                             >
                               {innerChild.title}

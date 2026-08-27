@@ -7,9 +7,12 @@ import {
   withLocationUrls
 } from '@/Datas/pageData/location'
 
-// /location/dubai/accounting-services-in-dubai - a service inside a city.
-// `params.slug` is the city, `params.child` is the service the page renders.
-export default function LocationService(props) {
+// /dubai - a city. `params.slug` is the city.
+//
+// This sits at the root of the site, so it is the last route tried: every
+// static page (/about-us, /blog, ...) is matched before it. Anything left over
+// is looked up as a location and 404s when the CMS does not know it.
+export default function LocationCity(props) {
   return <LocationDetailScreen {...props} />
 }
 
@@ -17,37 +20,42 @@ export const getStaticPaths = async () => {
   try {
     const locations = await getAllLocations()
 
-    const paths = locations.flatMap(city =>
-      (city?.children || [])
-        .map(service => service?.slug)
-        .filter(Boolean)
-        .map(child => ({ params: { slug: city?.slug, child } }))
-    )
+    const paths = locations
+      .map(city => city?.slug)
+      .filter(Boolean)
+      .map(slug => ({ params: { slug } }))
 
     return { paths, fallback: 'blocking' }
   } catch (error) {
-    console.log('location service paths error', error)
+    console.log('location city paths error', error)
     return { paths: [], fallback: 'blocking' }
   }
 }
 
 export const getStaticProps = async ({ params }) => {
   try {
-    // Every city segment matches this route, so /location/abu-dhabi/<a Dubai
-    // service> would otherwise serve the same page from a second address. The
-    // nested endpoint checks the pairing itself and 404s when the service does
-    // not sit under that city, which the catch below turns into a 404 page.
     const [LocationPageData, sharedProps, locations] = await Promise.all([
-      LocationApi.location_service_detail({ slug: params.slug, child: params.child }),
+      LocationApi.locationDetail({ slug: params.slug }),
       getLocationSharedProps(),
       getAllLocations()
     ])
 
-    const index = buildLocationIndex(locations)
     const locationDetail = LocationPageData?.data?.data
 
     if (!locationDetail) {
       return { notFound: true }
+    }
+
+    // A service answers on this route too, because /<service-slug> is a single
+    // segment like a city is. It belongs one level down, so send it there
+    // rather than serving the same page from two addresses.
+    if (locationDetail?.parent?.slug) {
+      return {
+        redirect: {
+          destination: `/${locationDetail?.parent?.slug}/${params.slug}`,
+          permanent: true
+        }
+      }
     }
 
     return {
@@ -55,13 +63,16 @@ export const getStaticProps = async ({ params }) => {
         ...sharedProps,
         locationDetail: {
           ...locationDetail,
-          related_listing: withLocationUrls(locationDetail?.related_listing, index)
+          related_listing: withLocationUrls(
+            locationDetail?.related_listing,
+            buildLocationIndex(locations)
+          )
         }
       },
       revalidate: 10
     }
   } catch (error) {
-    console.log('location service page error', error)
+    console.log('location city page error', error)
     if (error?.error == 'Not found' || error?.error == 'Page not Found!') {
       return {
         notFound: true

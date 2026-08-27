@@ -32,10 +32,10 @@ const LocationDetailScreen = ({
   testimonials
 }) => {
   return (
-    <Base general={general} data={locationDetail} bottomContent={'Bottom Content'}>
+    <Base general={general} data={locationDetail} bottomContent={locationDetail?.bottom_description}>
       <LocBanner data={locationDetail} />
 
-      <LocBody data={locationDetail} />
+      {/* <LocBody data={locationDetail} /> */}
 
       <LocServices data={locationDetail} />
 

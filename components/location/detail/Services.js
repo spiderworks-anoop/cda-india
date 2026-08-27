@@ -29,7 +29,7 @@ const LocServices = ({ data }) => {
             <LocCard
               key={service?.id || index}
               item={service}
-              href={`/location/${data?.slug}/${service?.slug}`}
+              href={`/${data?.slug}/${service?.slug}`}
               index={index}
               linktext='View Service'
             />
