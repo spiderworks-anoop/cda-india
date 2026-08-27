@@ -7,6 +7,7 @@ export const WidgetApi = {
     ourassociates : (data) => get(`widget/our_associates` , {params: data}),
     faqrigthtext : (data) => get(`widget/need_expert_advice` , {params: data}),
     exceptionalclients : (data) => get(`widget/our_exceptional_clients` , {params: data}),
+    servicesectors : (data) => get(`widget/service_sectors` , {params: data}),
     testimonials : (data) => get(`/testimonials` , {params: data})   
 }
 

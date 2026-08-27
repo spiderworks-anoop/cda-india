@@ -6549,7 +6549,76 @@ section#TermsCondition-section {
   color: #0b63e5;
 }
 
+/* Service sectors. LocHighlights sits directly above using .sector_bg cards,
+   so this one stays an open grid - a rule over each cell and the 01/02
+   numbering already used on the location listing, no boxes. The tint is a
+   neutral grey rather than the #f2f6ff blue of the panel above, so the two
+   sections still separate. */
+.location_sectors {
+  background: #f7f8fa;
+}
+
+.location_sectors_head h3 {
+  color: #101828;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 48px;
+}
+
+.location_sectors_item {
+  padding-top: 22px;
+  /* Darker than the #e6e9f0 used elsewhere - the rule has to stay readable now
+     that it sits on the tint rather than on white. */
+  border-top: 2px solid #dde2ea;
+  transition: border-color 0.3s;
+}
+
+.location_sectors_item:hover {
+  border-top-color: #0b63e5;
+}
+
+.location_sectors_item span {
+  color: #0b63e5;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 14px;
+  letter-spacing: 0.08em;
+}
+
+.location_sectors_item h4 {
+  color: #101828;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 30px;
+  margin: 14px 0 10px;
+  transition: color 0.3s;
+}
+
+.location_sectors_item:hover h4 {
+  color: #0b63e5;
+}
+
+.location_sectors_item p {
+  color: #475467;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22.32px;
+}
+
 @media (max-width: 767px) {
+  .location_sectors_head h3 {
+    font-size: 26px;
+    line-height: 36px;
+  }
+
+  .location_sectors_item h4 {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
   .location_group_head h5 {
     font-size: 48px;
     line-height: 48px;

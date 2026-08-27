@@ -2,6 +2,7 @@ import LocBanner from '@/components/location/detail/Banner'
 import LocBody from '@/components/location/detail/Body'
 import LocServices from '@/components/location/detail/Services'
 import LocHighlights from '@/components/location/detail/Highlights'
+import LocSectors from '@/components/location/detail/Sectors'
 import LocRelated from '@/components/location/detail/Related'
 import LocCommonSections from '@/components/location/shared/CommonSections'
 import Base from '@/components/layout/Base'
@@ -19,6 +20,7 @@ import { hasHtmlContent } from '@/components/common/functions/htmlcontent'
 //   Body        -> content.description_2   (the long editorial copy)
 //   Services    -> children                (cities only)
 //   Highlights  -> location_listing
+//   Sectors     -> the service_sectors widget (service pages only)
 //   Faq         -> faq + content.faq_heading
 //   Related     -> related_listing
 const LocationDetailScreen = ({
@@ -29,7 +31,8 @@ const LocationDetailScreen = ({
   certifications,
   ourassociates,
   faqrigthtext,
-  testimonials
+  testimonials,
+  serviceSectors
 }) => {
   return (
     <Base general={general} data={locationDetail} bottomContent={locationDetail?.bottom_description}>
@@ -40,6 +43,8 @@ const LocationDetailScreen = ({
       <LocServices data={locationDetail} />
 
       <LocHighlights data={locationDetail} />
+
+      <LocSectors data={serviceSectors} />
 
       <LocRelated data={locationDetail} />
 

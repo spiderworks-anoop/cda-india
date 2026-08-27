@@ -1,5 +1,6 @@
 import LocationDetailScreen from '@/components/location/detail/Screen'
 import { LocationApi } from '@/Datas/endpoints/location'
+import { WidgetApi } from '@/Datas/endpoints/widget'
 import {
   getLocationSharedProps,
   getAllLocations,
@@ -37,11 +38,20 @@ export const getStaticProps = async ({ params }) => {
     // service> would otherwise serve the same page from a second address. The
     // nested endpoint checks the pairing itself and 404s when the service does
     // not sit under that city, which the catch below turns into a 404 page.
-    const [LocationPageData, sharedProps, locations] = await Promise.all([
-      LocationApi.location_service_detail({ slug: params.slug, child: params.child }),
-      getLocationSharedProps(),
-      getAllLocations()
-    ])
+    const [LocationPageData, sharedProps, locations, ServiceSectorsData] =
+      await Promise.all([
+        LocationApi.location_service_detail({ slug: params.slug, child: params.child }),
+        getLocationSharedProps(),
+        getAllLocations(),
+        // Only the service pages carry the sectors block, so it is fetched here
+        // rather than in the props both location routes share. It is one
+        // optional section, so a failure here must not reject the Promise.all
+        // and take the whole page down with it - the section just drops out.
+        WidgetApi.servicesectors().catch(error => {
+          console.log('service sectors widget error', error)
+          return null
+        })
+      ])
 
     const index = buildLocationIndex(locations)
     const locationDetail = LocationPageData?.data?.data
@@ -53,6 +63,7 @@ export const getStaticProps = async ({ params }) => {
     return {
       props: {
         ...sharedProps,
+        serviceSectors: ServiceSectorsData?.data?.data || null,
         locationDetail: {
           ...locationDetail,
           related_listing: withLocationUrls(locationDetail?.related_listing, index)
