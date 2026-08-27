@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import LocCard from './card'
+import LocCard from '@/components/location/shared/Card'
 
 const LocServices = ({ data }) => {
   if (!data?.children?.length) return null
@@ -29,6 +29,7 @@ const LocServices = ({ data }) => {
             <LocCard
               key={service?.id || index}
               item={service}
+              href={`/location/${data?.slug}/${service?.slug}`}
               index={index}
               linktext='View Service'
             />

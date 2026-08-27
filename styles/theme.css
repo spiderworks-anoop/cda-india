@@ -2297,7 +2297,7 @@ footer {
   -webkit-text-fill-color: transparent;
   font-size: 92px;
   line-height: 99px;
-  width: 50px;
+  /* width: 50px; */
   font-weight: 900;
 }
 
@@ -6443,8 +6443,24 @@ section#TermsCondition-section {
   list-style: decimal;
 }
 
+/* The CMS emits bullet copy as an empty `<ul></ul>` followed by loose `<li>`
+   tags wrapped in their own `<div>`s, so the markers and indent have to be put
+   on the `li` itself instead of inheriting them from a list parent. */
 .location_content_body li {
   margin-bottom: 10px;
+  margin-left: 20px;
+  list-style: disc;
+}
+
+.location_content_body ul > li,
+.location_content_body ol > li {
+  margin-left: 0;
+}
+
+.location_content_body ul:empty,
+.location_content_body ol:empty {
+  display: none;
+  margin: 0;
 }
 
 .location_content_body table {

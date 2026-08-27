@@ -12,7 +12,7 @@ import {
 import Accordion from "../common/Accordion";
 import Popup from "../common/Popup";
 
-const Faq = ({ servfaqs, faqrighttitle, faqrightdiscription, faqrightbtn }) => {
+const Faq = ({ servfaqs, faqrighttitle, faqrightdiscription, faqrightbtn, heading }) => {
   const [isPopupOpen, setPopupOpen] = useState(false);
 
   const [openIndex, setOpenIndex] = useState(0); // <- this will open the first accordion by default
@@ -31,8 +31,14 @@ const Faq = ({ servfaqs, faqrighttitle, faqrightdiscription, faqrightbtn }) => {
         <div className="container">
           <div className="home-faq-cntr">
             <h3>
-              {" "}
-              Frequently Asked <b>Questions</b>
+              {heading ? (
+                heading
+              ) : (
+                <>
+                  {" "}
+                  Frequently Asked <b>Questions</b>
+                </>
+              )}
             </h3>
 
             <div className="flex flex-col md:flex-row gap-[50px] md:gap-[0] items-start">

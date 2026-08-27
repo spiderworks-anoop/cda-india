@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import Loc1 from '../../public/images/serdet1.png'
-import { WhiteBtn } from '../common/svgicon'
-import Popup from '../common/Popup'
+import Loc1 from '@/public/images/serdet1.png'
+import { WhiteBtn } from '@/components/common/svgicon'
+import Popup from '@/components/common/Popup'
 
 const LocBanner = ({ data }) => {
   const [isPopupOpen, setPopupOpen] = useState(false)

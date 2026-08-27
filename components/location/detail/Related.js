@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import LocCard from './card'
+import LocCard from '@/components/location/shared/Card'
 
 const LocRelated = ({ data }) => {
   if (!data?.related_listing?.length) return null

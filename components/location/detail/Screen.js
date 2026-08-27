@@ -1,0 +1,81 @@
+import LocBanner from '@/components/location/detail/Banner'
+import LocBody from '@/components/location/detail/Body'
+import LocServices from '@/components/location/detail/Services'
+import LocHighlights from '@/components/location/detail/Highlights'
+import LocRelated from '@/components/location/detail/Related'
+import LocCommonSections from '@/components/location/shared/CommonSections'
+import Base from '@/components/layout/Base'
+import Faq from '@/components/home/Faq'
+import Process from '@/components/home/Process'
+import Footercontent from '@/components/common/Footercontent'
+import { hasHtmlContent } from '@/components/common/functions/htmlcontent'
+
+// A city (/location/dubai) and a service inside a city
+// (/location/dubai/accounting-services-in-dubai) are the same record type in
+// the CMS and render the same way, so both routes mount this screen. Each
+// section hides itself when the field it renders is empty, which is what lets
+// one layout serve the two:
+//   Banner      -> content.title_1 / content.description_1 / banner_image
+//   Body        -> content.description_2   (the long editorial copy)
+//   Services    -> children                (cities only)
+//   Highlights  -> location_listing
+//   Faq         -> faq + content.faq_heading
+//   Related     -> related_listing
+const LocationDetailScreen = ({
+  locationDetail,
+  general,
+  process,
+  financialSolutions,
+  certifications,
+  ourassociates,
+  faqrigthtext,
+  testimonials
+}) => {
+  return (
+    <Base general={general} data={locationDetail} bottomContent={'Bottom Content'}>
+      <LocBanner data={locationDetail} />
+
+      <LocBody data={locationDetail} />
+
+      <LocServices data={locationDetail} />
+
+      <LocHighlights data={locationDetail} />
+
+      <LocRelated data={locationDetail} />
+
+      <LocCommonSections
+        financialSolutions={financialSolutions}
+        certifications={certifications}
+        testimonials={testimonials}
+        ourassociates={ourassociates}
+      />
+
+      {locationDetail?.faq?.length > 0 && (
+        <Faq
+          heading={locationDetail?.content?.faq_heading}
+          servfaqs={locationDetail?.faq}
+          faqrighttitle={faqrigthtext?.content?.title}
+          faqrightdiscription={faqrigthtext?.content?.text}
+          faqrightbtn={faqrigthtext?.content?.btn_text}
+        />
+      )}
+
+
+
+      <Process
+        prosTitle={process?.content?.title_1}
+        procesList={process?.content?.smart_accounting_listing_id}
+        ProsImg={process?.content?.media_id_3?.file_path}
+      />
+
+      {hasHtmlContent(locationDetail?.bottom_description) && (
+        <Footercontent
+          footerContentTitle={locationDetail?.bottom_text}
+          footerContentDiscription={locationDetail?.bottom_description}
+        />
+      )}
+    </Base>
+  )
+}
+
+export default LocationDetailScreen

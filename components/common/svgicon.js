@@ -372,9 +372,16 @@ export const WhiteBtn = ({ btn2text }) => {
 
 
 
-export const LoadBtn = ({ loadtext }) => {
+export const LoadBtn = ({ loadtext, onClick, disabled }) => {
   return (
-    <button className='cursor-pointer btn_blue flex items-center gap-[22px]'> {loadtext} <Loadicon /> </button>
+    <button
+      type='button'
+      onClick={onClick}
+      disabled={disabled}
+      className='cursor-pointer btn_blue flex items-center gap-[22px] disabled:opacity-60 disabled:cursor-not-allowed'
+    >
+      {loadtext} <Loadicon />
+    </button>
 
   )
 }

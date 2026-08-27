@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Backicon } from '../common/svgicon'
-import { decodeHtml, hasHtmlContent } from '../common/functions/htmlcontent'
+import { Backicon } from '@/components/common/svgicon'
+import { decodeHtml, hasHtmlContent } from '@/components/common/functions/htmlcontent'
 
-const LocContent = ({ data }) => {
+const LocBody = ({ data }) => {
   const body = data?.content?.description_2
 
   return (
@@ -28,4 +28,4 @@ const LocContent = ({ data }) => {
   )
 }
 
-export default LocContent
+export default LocBody

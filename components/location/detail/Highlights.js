@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import Sec1 from '../../public/images/sec1.svg'
-import { BlueBtn } from '../common/svgicon'
+import Sec1 from '@/public/images/sec1.svg'
+import { BlueBtn } from '@/components/common/svgicon'
 import { useState } from 'react'
-import Popup from '../common/Popup'
+import Popup from '@/components/common/Popup'
 
 const LocHighlights = ({ data }) => {
   const [isPopupOpen, setPopupOpen] = useState(false)
