@@ -20,15 +20,37 @@ const Navbar = ({ navmenu }) => {
     return "/" + path.replace(/^\/+/, "").replace(/\/{2,}/g, "/");
   };
 
+  // The third level opens to the right of its parent. For a menu item near the
+  // right edge of the window that puts it past the viewport, so it is measured
+  // on hover and opened to the left instead when it will not fit.
+  const positionFlyout = (event) => {
+    const parent = event.currentTarget;
+    const flyout = parent.querySelector(".drop_menu_level");
+
+    if (!flyout) return;
+
+    flyout.classList.remove("drop_menu_level--flip");
+
+    // The mobile drawer stacks the levels rather than flying out, so there is
+    // nothing to flip there.
+    if (window.getComputedStyle(flyout).position !== "absolute") return;
+
+    const width = flyout.offsetWidth || 250;
+    const gutter = 16;
+
+    if (parent.getBoundingClientRect().right + width > window.innerWidth - gutter) {
+      flyout.classList.add("drop_menu_level--flip");
+    }
+  };
+
   return (
     <nav className="hidden md:block">
       <ul className="flex flex-col md:flex-row items-center justify-center md:gap-[28px] gap-[15px]">
         {navmenu?.map((item, index) => (
           <li
             key={index}
-            className={`relative group nav-list-item ${
-              item?.children?.length > 0 ? "has_child" : ""
-            }`}
+            className={`relative group nav-list-item ${item?.children?.length > 0 ? "has_child" : ""
+              }`}
           >
             <Link
               href={handleNavigate(item?.url) || "#"}
@@ -54,9 +76,11 @@ const Navbar = ({ navmenu }) => {
                 {item.children.map((child, childIndex) => (
                   <li
                     key={childIndex}
-                    className={`relative group ${
-                      child?.children?.length > 0 ? "has_child" : ""
-                    }`}
+                    onMouseEnter={
+                      child?.children?.length > 0 ? positionFlyout : undefined
+                    }
+                    className={`relative group ${child?.children?.length > 0 ? "has_child" : ""
+                      }`}
                   >
                     <Link
                       href={handleNavigate(child?.url) || "#"}
@@ -74,7 +98,7 @@ const Navbar = ({ navmenu }) => {
                               href={handleNavigate(innerChild?.url, item?.url)}
                               className="block px-4 py-2 hover:bg-gray-700"
                             >
-                              {innerChild.title}
+                              {innerChild?.title}
                             </Link>
                           </li>
                         ))}

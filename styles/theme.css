@@ -96,6 +96,19 @@ a {
   background: rgba(18, 18, 18, 0.8);
   backdrop-filter: blur(7.5px);
   display: none;
+  /* A long third level would otherwise run past the bottom of the window. The
+     scroll belongs here and not on .drop_menu, which has to stay unclipped so
+     its own flyouts can escape it. */
+  max-height: calc(100vh - 160px);
+  overflow-y: auto;
+}
+
+/* Opened to the left of its parent instead, for a menu item close enough to
+   the right edge that the default direction would leave the viewport. Added by
+   positionFlyout() in components/common/Nav.js. */
+.drop_menu_level--flip {
+  left: auto;
+  right: 100%;
 }
 
 .drop_menu_level li {
@@ -104,6 +117,16 @@ a {
 
 .drop_menu li:hover .drop_menu_level {
   display: block;
+}
+
+/* Two 250px panels beside a nav item leave little room on a small laptop, so
+   the panels give some width back before the flip has to step in. */
+@media (max-width: 1199px) {
+
+  .drop_menu,
+  .drop_menu_level {
+    width: 200px;
+  }
 }
 
 .banner-sec {
@@ -5331,9 +5354,15 @@ section#TermsCondition-section {
 
   .nav2 nav .drop_menu_level {
     position: relative;
+    /* The drawer stacks the levels, so the flip and the scroll cap the desktop
+       flyout needs are undone here - including a --flip left over from a
+       resize that happened while the menu was open. */
     left: 0;
+    right: auto;
     margin-top: 0px;
     width: 100%;
+    max-height: none;
+    overflow: visible;
     border-radius: 0;
     background: transparent;
     backdrop-filter: unset;
