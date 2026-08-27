@@ -40,7 +40,7 @@ export default function Location({
         metadata={metadata}
         shorttitle={'Our Presence'}
         title={'Find CDA In Your City'}
-        discription={
+        description={
           '<p>Every location has its own regulatory demands. Choose a city to explore the accounting, auditing and compliance services our specialists deliver on the ground.</p>'
         }
       />

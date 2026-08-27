@@ -5,7 +5,7 @@ import { LoadBtn, LongArrowicon } from '@/components/common/svgicon'
 import LocCard from '@/components/location/shared/Card'
 import { LocationApi } from '@/Datas/endpoints/location'
 
-const LocList = ({ shorttitle, title, discription, listdata, metadata }) => {
+const LocList = ({ shorttitle, title, description, listdata, metadata }) => {
   const [list, setList] = useState(listdata || [])
   const [meta, setMeta] = useState(metadata || null)
   const [page, setPage] = useState(1)
@@ -55,7 +55,7 @@ const LocList = ({ shorttitle, title, discription, listdata, metadata }) => {
   if (!list?.length) return null
 
   return (
-    <section className='ser-offer-sec location_list_sec pt-[60px] md:pt-[100px] pb-[50px] md:pb-[100px]'>
+    <section className='ser-offer-sec location_list_sec pt-[20px] pb-[50px] md:pb-[100px]'>
       <div className='container'>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -71,10 +71,10 @@ const LocList = ({ shorttitle, title, discription, listdata, metadata }) => {
             </div>
           </div>
 
-          {discription && (
+          {description && (
             <div>
               <div className='max-w-[506px]'>
-                <div className='p' dangerouslySetInnerHTML={{ __html: discription }} />
+                <div className='p' dangerouslySetInnerHTML={{ __html: description }} />
               </div>
             </div>
           )}
@@ -129,6 +129,7 @@ const LocList = ({ shorttitle, title, discription, listdata, metadata }) => {
             />
           </div>
         )}
+        
       </div>
     </section>
   )
