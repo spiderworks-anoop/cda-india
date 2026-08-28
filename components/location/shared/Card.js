@@ -19,8 +19,11 @@ const LocCard = ({ item, href, index = 0, linktext = 'View Details' }) => {
       viewport={{ once: true }}
     >
       <Link href={href || item?.url || `/${item?.slug}`} className='location_card flex flex-col h-full'>
-        {image && (
-          <div className='location_card_img'>
+        {/* The media block is always rendered, image or not - the numbering and
+            the tinted panel are what give an image-less item something to look
+            at, and they keep every card in the row the same height. */}
+        <div className={`location_card_img ${image ? '' : 'location_card_img_empty'}`}>
+          {image && (
             <Image
               src={image}
               alt={item?.featured_image?.alt_text || item?.title || ''}
@@ -28,8 +31,10 @@ const LocCard = ({ item, href, index = 0, linktext = 'View Details' }) => {
               height={240}
               sizes='(max-width: 767px) 90vw, 33vw'
             />
-          </div>
-        )}
+          )}
+
+          <span className='location_card_no'>{String(index + 1).padStart(2, '0')}</span>
+        </div>
 
         <div className='location_card_cap flex flex-col h-full'>
           <h4>{item?.title || item?.name}</h4>

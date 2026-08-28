@@ -500,3 +500,21 @@ export const Envelopicon = ({ }) => {
 
   )
 }
+
+// currentColor so the location tiles can recolour them on hover from CSS.
+export const Pinicon = ({ }) => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <path d="M12 21s7-5.686 7-11a7 7 0 1 0-14 0c0 5.314 7 11 7 11Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+      <circle cx="12" cy="10" r="2.6" stroke="currentColor" strokeWidth="1.6" />
+    </svg>
+  )
+}
+
+export const ArrowSmicon = ({ }) => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 15 10" fill="none">
+      <path fillRule="evenodd" clipRule="evenodd" d="M9.6 0.2 14.3 4.6c.2.2.2.6 0 .8L9.6 9.8a.6.6 0 0 1-.8-.9L11.9 6H0.7V4h11.2L8.8 1.1a.6.6 0 0 1 .8-.9Z" fill="currentColor" />
+    </svg>
+  )
+}

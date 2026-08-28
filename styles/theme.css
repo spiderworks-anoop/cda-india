@@ -2838,7 +2838,7 @@ footer {
   font-weight: 400;
   line-height: 48px;
   /* 133.333% */
-  max-width: 300px;
+  max-width: 350px;
 }
 
 .more_list {
@@ -6397,6 +6397,7 @@ section#TermsCondition-section {
 }
 
 .location_card {
+  position: relative;
   height: 100%;
   border-radius: 12px;
   border: 1px solid #f5f5f5;
@@ -6407,15 +6408,88 @@ section#TermsCondition-section {
   transform: translateY(0);
 }
 
+/* Drawn on hover rather than always-on, so a grid of cards stays calm and the
+   one under the cursor is the only thing carrying colour. */
+.location_card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #0b63e5, #6aa8ff);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+  z-index: 2;
+}
+
 .location_card:hover {
   transform: translateY(-20px);
   border: 1px solid #0b63e5;
+  box-shadow: 0px 18px 40px 0px rgba(11, 99, 229, 0.16);
+}
+
+.location_card:hover::after {
+  transform: scaleX(1);
+}
+
+.location_card_img {
+  position: relative;
+  overflow: hidden;
 }
 
 .location_card_img img {
   width: 100%;
   height: 220px;
   object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.location_card:hover .location_card_img img {
+  transform: scale(1.07);
+}
+
+/* No featured image on the record - the tint plus the oversized number keep
+   the cell from reading as a blank rectangle. */
+.location_card_img_empty {
+  height: 220px;
+  background: linear-gradient(135deg, #eaf1ff 0%, #f7faff 60%, #ffffff 100%);
+}
+
+.location_card_img_empty::before {
+  content: '';
+  position: absolute;
+  right: -40px;
+  bottom: -60px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 1px solid rgba(11, 99, 229, 0.18);
+}
+
+.location_card_no {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  min-width: 42px;
+  padding: 5px 12px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #0b63e5;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  text-align: center;
+  letter-spacing: 0.5px;
+  box-shadow: 0px 4px 14px rgba(16, 24, 40, 0.12);
+  transition: all 0.3s;
+  z-index: 1;
+}
+
+.location_card:hover .location_card_no {
+  background: #0b63e5;
+  color: #fff;
 }
 
 .location_card_cap {
@@ -6429,8 +6503,15 @@ section#TermsCondition-section {
   font-weight: 500;
   line-height: 32px;
   margin-bottom: 12px;
+  transition: color 0.3s;
 }
 
+.location_card:hover .location_card_cap h4 {
+  color: #0b63e5;
+}
+
+/* The CMS copy runs to any length; three lines keeps the buttons on one line
+   across the row. */
 .location_card_cap p {
   color: #6a7796;
   font-size: 16px;
@@ -6438,6 +6519,10 @@ section#TermsCondition-section {
   font-weight: 400;
   line-height: 26px;
   margin-bottom: 25px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .location_card_cap .btn {
@@ -6452,6 +6537,11 @@ section#TermsCondition-section {
 .location_card_cap .btn svg {
   width: 52px;
   height: auto;
+  transition: transform 0.3s ease;
+}
+
+.location_card:hover .location_card_cap .btn svg {
+  transform: translateX(8px);
 }
 
 .location_card_cap .btn svg path,
@@ -6547,6 +6637,102 @@ section#TermsCondition-section {
 .location_related h3 b {
   font-weight: 600;
   color: #0b63e5;
+}
+
+/* Related locations are compact rows, not the picture cards LocServices uses
+   above - see the note at the top of Related.js. */
+.location_pin_card {
+  position: relative;
+  height: 100%;
+  padding: 14px 18px 14px 14px;
+  border-radius: 12px;
+  border: 1px solid #eaeef5;
+  background: #fafbfd;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.location_pin_card:hover {
+  background: #fff;
+  border-color: #0b63e5;
+  box-shadow: 0px 12px 30px 0px rgba(11, 99, 229, 0.12);
+}
+
+.location_pin_thumb {
+  flex: 0 0 auto;
+  width: 62px;
+  height: 62px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #e8f0ff;
+  color: #0b63e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.location_pin_thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.location_pin_card:hover .location_pin_thumb {
+  background: #0b63e5;
+  color: #fff;
+}
+
+.location_pin_txt {
+  min-width: 0;
+}
+
+.location_pin_txt h4 {
+  color: #101828;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+  transition: color 0.3s;
+}
+
+.location_pin_card:hover .location_pin_txt h4 {
+  color: #0b63e5;
+}
+
+/* One line only - the row is a signpost, the destination page carries the copy. */
+.location_pin_txt p {
+  color: #6a7796;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  margin-top: 3px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.location_pin_arrow {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid #dfe6f2;
+  background: #fff;
+  color: #0b63e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.location_pin_card:hover .location_pin_arrow {
+  background: #0b63e5;
+  border-color: #0b63e5;
+  color: #fff;
+  transform: translateX(4px);
 }
 
 /* Service sectors. LocHighlights sits directly above using .sector_bg cards,
@@ -6650,9 +6836,31 @@ section#TermsCondition-section {
     transform: translateY(0);
   }
 
+  .location_card_no {
+    top: 12px;
+    left: 12px;
+    font-size: 13px;
+    padding: 4px 10px;
+  }
+
   .location_related h3 {
     font-size: 26px;
     line-height: 36px;
+  }
+
+  .location_pin_card {
+    padding: 12px 14px 12px 12px;
+    gap: 13px;
+  }
+
+  .location_pin_thumb {
+    width: 54px;
+    height: 54px;
+  }
+
+  .location_pin_txt h4 {
+    font-size: 16px;
+    line-height: 24px;
   }
 }
 

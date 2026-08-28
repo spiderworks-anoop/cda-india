@@ -22,7 +22,8 @@ import { hasHtmlContent } from '@/components/common/functions/htmlcontent'
 //   Highlights  -> location_listing
 //   Sectors     -> the service_sectors widget (service pages only)
 //   Faq         -> faq + content.faq_heading
-//   Related     -> related_listing
+//   Related     -> related_listing (sibling services on a service page,
+//                  other cities on a city page - it renders each differently)
 const LocationDetailScreen = ({
   locationDetail,
   general,
