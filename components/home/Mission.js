@@ -98,13 +98,16 @@ const Mission = ({
                   }}
                 ></div>
               </div>
-              <Image
-                src={MisImg || Miss1}
-                alt=""
-                width={445}
-                height={350}
-                className="w-full max-w-[445px] h-auto object-contain mx-auto"
-              />
+              {
+                MisImg &&
+                <Image
+                  src={MisImg}
+                  alt=""
+                  width={445}
+                  height={350}
+                  className="w-full max-w-[445px] h-auto object-contain mx-auto"
+                />
+              }
             </div>
 
             <div className="absolute right-[30px] bottom-[30px] cursor-pointer z-[2] mission-arrow">

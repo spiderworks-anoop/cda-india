@@ -49,7 +49,7 @@ export default function Home({ data, listdata, general, financialSolutions, cert
 
         whyimg={data?.content?.media_id_3?.file_path}
         whyimgcap={data?.content?.image_title_3}
-        whyimgsubcap={"SAUDI"}
+        whyimgsubcap={"India"}
         whyimgbtntxt={data?.content?.image_button_text}
       />
 

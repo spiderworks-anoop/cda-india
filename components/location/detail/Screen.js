@@ -37,6 +37,7 @@ const LocationDetailScreen = ({
 }) => {
   return (
     <Base general={general} data={locationDetail} bottomContent={locationDetail?.bottom_description}>
+      
       <LocBanner data={locationDetail} />
 
       {/* <LocBody data={locationDetail} /> */}
