@@ -73,7 +73,7 @@ const Navbar = ({ navmenu }) => {
             {/* First Level Dropdown */}
             {item?.children?.length > 0 && (
               <ul className="drop_menu absolute left-0 top-full mt-2 hidden group-hover:block bg-black text-white p-2 z-10">
-                {item.children.map((child, childIndex) => (
+                {item?.children?.map((child, childIndex) => (
                   <li
                     key={childIndex}
                     onMouseEnter={
@@ -86,13 +86,13 @@ const Navbar = ({ navmenu }) => {
                       href={handleNavigate(child?.url) || "#"}
                       className="block px-4 py-2 hover:bg-gray-700"
                     >
-                      {child.title}
+                      {child?.title}
                     </Link>
 
                     {/* Second Level Dropdown */}
                     {child?.children?.length > 0 && (
                       <ul className="drop_menu_level absolute left-full top-0 mt-0 hidden group-hover:block bg-black text-white p-2 z-10">
-                        {child.children.map((innerChild, innerIndex) => (
+                        {child?.children?.map((innerChild, innerIndex) => (
                           <li key={innerIndex}>
                             <Link
                               href={handleNavigate(innerChild?.url, item?.url)}

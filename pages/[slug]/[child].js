@@ -18,7 +18,7 @@ export const getStaticPaths = async () => {
   try {
     const locations = await getAllLocations()
 
-    const paths = locations.flatMap(city =>
+    const paths = locations?.flatMap(city =>
       (city?.children || [])
         .map(service => service?.slug)
         .filter(Boolean)

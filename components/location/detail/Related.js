@@ -5,7 +5,7 @@ const LocRelated = ({ data }) => {
   if (!data?.related_listing?.length) return null
 
   return (
-    <section className='ser-det-more location_related pt-[10px] pb-[50px]'>
+    <section className='ser-det-more location_related pt-[50px] pb-[50px]'>
       <div className='container relative z-[1]'>
         <motion.h3
           initial={{ opacity: 0, y: 20 }}
