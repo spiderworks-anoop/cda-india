@@ -33,7 +33,7 @@ export default function Home({
   testimonials
 }) {
   return (
-    <Base data={industryDetail} general={general} bottomContent={'Bottom Content'}>
+    <Base data={industryDetail} general={general} bottomContent={industryDetail?.bottom_description}>
 
       <IndDetBnr data={industryDetail} />
 

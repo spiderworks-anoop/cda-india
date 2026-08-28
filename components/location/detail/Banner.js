@@ -15,7 +15,11 @@ const LocBanner = ({ data }) => {
   return (
     <>
       {isPopupOpen && (
-        <Popup isOpen={isPopupOpen} onClose={() => setPopupOpen(false)} />
+        <Popup
+          isOpen={isPopupOpen}
+          onClose={() => setPopupOpen(false)}
+          leadSource={`Location Banner : ${data?.title || data?.name || ''}`.trim()}
+        />
       )}
 
       <section className='ser-det-banner relative  location_banner'>

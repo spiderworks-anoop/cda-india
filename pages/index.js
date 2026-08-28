@@ -120,6 +120,7 @@ export default function Home({
       />
 
       <Faq
+        leadSource='Home - FAQ Section'
         servfaqs={data?.faq}
         faqrighttitle={faqrigthtext?.content?.title}
         faqrightdiscription={faqrigthtext?.content?.text}

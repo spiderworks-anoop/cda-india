@@ -59,6 +59,7 @@ const LocationDetailScreen = ({
 
       {locationDetail?.faq?.length > 0 && (
         <Faq
+          leadSource={`Location FAQ : ${locationDetail?.title || locationDetail?.name || ''}`.trim()}
           heading={locationDetail?.content?.faq_heading}
           servfaqs={locationDetail?.faq}
           faqrighttitle={faqrigthtext?.content?.title}

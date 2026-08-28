@@ -518,3 +518,15 @@ export const ArrowSmicon = ({ }) => {
     </svg>
   )
 }
+
+
+// currentColor, unlike Editicon which is hard-coded to the red error tint.
+export const Articleicon = ({ }) => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none">
+      <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      <path d="M14 3v5h5" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      <path d="M8.5 12.5h7M8.5 16h4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  )
+}

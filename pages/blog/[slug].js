@@ -16,7 +16,7 @@ export default function BlogDetails({ general, blogDetail, process, data }) {
   // console.log('dd', blogDetail)
 
   return (
-    <Base general={general} bottomContent={'Bottom Content'} data={blogDetail}>
+    <Base general={general} bottomContent={blogDetail?.bottom_description} data={blogDetail}>
       <div className='Small_banner details_blog'>
         <CommBanner
           title={blogDetail?.title}

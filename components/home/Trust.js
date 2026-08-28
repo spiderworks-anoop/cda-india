@@ -41,7 +41,11 @@ const Trust = ({ data }) => {
   return (
     <>
       {isPopupOpen && (
-        <Popup isOpen={isPopupOpen} onClose={() => setPopupOpen(false)} />
+        <Popup
+          isOpen={isPopupOpen}
+          onClose={() => setPopupOpen(false)}
+          leadSource='Home - Trust Section'
+        />
       )}
 
       <section

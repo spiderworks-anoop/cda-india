@@ -11,52 +11,53 @@ import Logo5 from '../../public/images/cl4.png'
 
 
 
-import { BlueBtn, LargeArrowicon, Lineicon, Medalicon } from '../common/svgicon'
+import { Articleicon, BlueBtn, LargeArrowicon, Lineicon, Medalicon } from '../common/svgicon'
 import Accordion from '../common/Accordion'
 import BlogListitems from './bloglist'
 
- 
-
-const BlogList = ({data}) => {
 
 
-  
+// The author page shares this list, so the empty copy is a prop - "no posts
+// yet" reads wrong under an author who simply has not written any.
+const BlogList = ({
+  data,
+  emptyTitle = 'No blog posts yet',
+  emptyText = 'There is nothing published here right now. Please check back soon.'
+}) => {
+
+  const hasPosts = data?.length > 0
+
   return (
-    <section className=' pt-[20px] md:pt-[80px] pb-[80px]'>
+    <section className=' pt-[20px] md:pt-[50px] pb-[50px]'>
       <div className='container  '>
 
+        {hasPosts ? (
+          <div className=' grid md:grid-cols-3 gap-[35px]'>
 
-        <div className=' grid md:grid-cols-3 gap-[35px]'>
+            {
+              data?.map((item, index) => (
+                <BlogListitems key={index}
+                  title={item?.title}
+                  time={item?.published_by?.name}
+                  imgSrc={item?.featured_image?.file_path}
+                  date={item?.published_on}
+                  link={item?.slug}
+                />
+              ))
+            }
 
-        
-          {
-            data?.map((item, index) =>(
-    <BlogListitems key={index} title={item?.title} time={item?.published_by?.name} imgSrc={item?.featured_image?.file_path} date={item?.published_on} link={item?.slug}/> 
-  
+          </div>
+        ) : (
+          <div className='blog_empty'>
+            <span className='blog_empty_icon'>
+              <Articleicon />
+            </span>
 
-              
-            )) }
-          
-        
- 
+            <h4>{emptyTitle}</h4>
+            {emptyText && <p>{emptyText}</p>}
+          </div>
+        )}
 
-
-
-   
-
-        </div>
-
- 
-       
-
-        
-
-
-        
-
-
- 
- 
 
       </div>
     </section>

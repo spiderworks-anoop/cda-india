@@ -15,7 +15,11 @@ const LocHighlights = ({ data }) => {
   return (
     <>
       {isPopupOpen && (
-        <Popup isOpen={isPopupOpen} onClose={() => setPopupOpen(false)} />
+        <Popup
+          isOpen={isPopupOpen}
+          onClose={() => setPopupOpen(false)}
+          leadSource={`Location Highlights : ${name}`}
+        />
       )}
 
       <section className='ser-det-sector pt-[50px] pb-[50px]'>

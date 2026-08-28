@@ -23,10 +23,9 @@ import { WidgetApi } from "@/Datas/endpoints/widget";
 
 export default function Home({ data, listdata, general, financialSolutions, certifications, process, ourassociates, faqrigthtext }) {
 
-  // console.log(data)
 
   return (
-    <Base general={general} data={data} bottomContent={'Bottom Content'}>
+    <Base general={general} data={data} bottomContent={data?.bottom_description}>
 
       <SerBanner
         title={data?.content?.title_1}
@@ -41,7 +40,8 @@ export default function Home({ data, listdata, general, financialSolutions, cert
         discription={data?.content?.description_2}
       />
 
-      <SerWhy shorttitle={data?.content?.short_title_3}
+      <SerWhy
+        shorttitle={data?.content?.short_title_3}
         title={data?.content?.title_3}
         discription={data?.content?.description_3}
         Whycdalist={data?.content?.why_cda_service_listing_id}
@@ -63,7 +63,6 @@ export default function Home({ data, listdata, general, financialSolutions, cert
         certificatSubHead={certifications?.content.sub_title}
         certificatLogo={certifications?.content.media_id_2.file_path}
         certificatLogoList={certifications?.content?.our_certifications_listing_id}
-
       />
 
       <Testimonials />
@@ -78,10 +77,10 @@ export default function Home({ data, listdata, general, financialSolutions, cert
         sectorCount={ourassociates?.content.industry_sectors_count}
         sectorText={ourassociates?.content.industry_sectors}
         associateLocations={ourassociates?.content?.our_associates_listing_id}
-
       />
 
       <Faq
+        leadSource='Services - FAQ Section'
         servfaqs={data?.faq}
         faqrighttitle={faqrigthtext?.content?.title}
         faqrightdiscription={faqrigthtext?.content?.text}

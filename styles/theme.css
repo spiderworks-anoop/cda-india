@@ -3728,6 +3728,65 @@ footer {
   /* 18.72px */
 }
 
+/* Shown in place of the three-column grid when the list comes back empty. */
+.blog_empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 24px;
+  border-radius: 12px;
+  border: 1px dashed #dfe6f2;
+  background: #fafbfd;
+}
+
+.blog_empty_icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  background: #e8f0ff;
+  color: #0b63e5;
+}
+
+.blog_empty h4 {
+  color: #101828;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+}
+
+.blog_empty p {
+  color: #6a7796;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  margin-top: 8px;
+  max-width: 460px;
+}
+
+@media (max-width: 767px) {
+  .blog_empty {
+    padding: 44px 20px;
+  }
+
+  .blog_empty h4 {
+    font-size: 19px;
+    line-height: 28px;
+  }
+
+  .blog_empty p {
+    font-size: 15px;
+    line-height: 24px;
+  }
+}
+
 .details_blog .ser-det-banner h2 {
   font-size: 36px;
   line-height: 50px;

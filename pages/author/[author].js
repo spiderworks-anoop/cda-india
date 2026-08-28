@@ -27,7 +27,11 @@ export default function AuthorDetails({ general, athorDetail }) {
 
       </div>
 
-      <BlogList data={athorDetail?.blogs} />
+      <BlogList
+        data={athorDetail?.blogs}
+        emptyTitle='No posts from this author yet'
+        emptyText='This author has not published anything so far. Please check back soon.'
+      />
 
 
 

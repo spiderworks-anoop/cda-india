@@ -12,7 +12,7 @@ import {
 import Accordion from "../common/Accordion";
 import Popup from "../common/Popup";
 
-const Faq = ({ servfaqs, faqrighttitle, faqrightdiscription, faqrightbtn, heading }) => {
+const Faq = ({ servfaqs, faqrighttitle, faqrightdiscription, faqrightbtn, heading, service, leadSource = 'FAQ Section' }) => {
   const [isPopupOpen, setPopupOpen] = useState(false);
 
   const [openIndex, setOpenIndex] = useState(0); // <- this will open the first accordion by default
@@ -24,7 +24,12 @@ const Faq = ({ servfaqs, faqrighttitle, faqrightdiscription, faqrightbtn, headin
   return (
     <>
       {isPopupOpen && (
-        <Popup isOpen={isPopupOpen} onClose={() => setPopupOpen(false)} />
+        <Popup
+          isOpen={isPopupOpen}
+          onClose={() => setPopupOpen(false)}
+          service={service}
+          leadSource={leadSource}
+        />
       )}
 
       <section className="home-faq">

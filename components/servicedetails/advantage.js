@@ -53,7 +53,12 @@ const SerDetAdvantage = ({ data }) => {
     data?.services_key_advantages?.length > 0 && (
       <>
         {isPopupOpen && (
-          <Popup isOpen={isPopupOpen} onClose={() => setPopupOpen(false)} />
+          <Popup
+            isOpen={isPopupOpen}
+            onClose={() => setPopupOpen(false)}
+            service={{ id: data?.id, title: data?.title }}
+            leadSource='Service Detail - Key Advantages'
+          />
         )}
 
         <section className="ser-det-advantage pt-[50px]">

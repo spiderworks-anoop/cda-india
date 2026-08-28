@@ -28,7 +28,12 @@ const SerDetSectors = ({ data }) => {
 
           {
             isPopupOpen &&
-            <Popup isOpen={isPopupOpen} onClose={() => setPopupOpen(false)} />
+            <Popup
+              isOpen={isPopupOpen}
+              onClose={() => setPopupOpen(false)}
+              service={{ id: data?.id, title: data?.title }}
+              leadSource='Service Detail - Explore Sectors'
+            />
           }
 
           <section className='ser-det-sector pt-[50px] pb-[50px] '>

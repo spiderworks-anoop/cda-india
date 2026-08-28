@@ -32,7 +32,7 @@ export default function Home({
 }) {
   // console.log(serviceDetail)
   return (
-    <Base general={general} data={serviceDetail} bottomContent={'Bottom Content'}>
+    <Base general={general} data={serviceDetail} bottomContent={serviceDetail?.bottom_description}>
       <SerDetHead data={serviceDetail} />
       <SerDetFinance data={serviceDetail} />
       <SerDetAdvantage data={serviceDetail} />
@@ -74,6 +74,8 @@ export default function Home({
       />
 
       <Faq
+        service={{ id: serviceDetail?.id, title: serviceDetail?.title }}
+        leadSource='Service Detail - FAQ Section'
         servfaqs={serviceDetail?.faq}
         faqrighttitle={faqrigthtext?.content?.title}
         faqrightdiscription={faqrigthtext?.content?.text}
@@ -141,10 +143,10 @@ export const getStaticProps = async ({ params }) => {
         faqrigthtext: FaqrigthtextData?.data?.data,
         testimonials: TestimonialsData?.data?.data
       },
-      revalidate: 10 
+      revalidate: 10
     }
   } catch (error) {
-    console.log('servic detail page error',error)
+    console.log('servic detail page error', error)
     if (error?.error == 'Not found') {
       return {
         notFound: true

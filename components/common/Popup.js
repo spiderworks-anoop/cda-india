@@ -10,7 +10,12 @@ import 'react-phone-input-2/lib/style.css'
 import { GeneralApi } from '@/Datas/endpoints/general'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
-const Popup = ({ isOpen, onClose, ifBrochure }) => {
+// `service`    - the record of the service the page is about, when the page
+//                knows one. Preselects the dropdown so the lead is attributed
+//                even if the visitor never opens it.
+// `leadSource` - names the button/section that opened this popup, for the
+//                placements that are not tied to a single service.
+const Popup = ({ isOpen, onClose, ifBrochure, service, leadSource }) => {
   // if (!isOpen) return null;
   const router = useRouter()
   const {
@@ -30,6 +35,18 @@ const Popup = ({ isOpen, onClose, ifBrochure }) => {
   const [phoneError, setPhoneError] = useState(false)
   const [general, setGeneral] = useState()
   const serviceRef = useRef(null)
+
+  const [utmSource, setUtmSource] = useState("")
+  const [utmCamp, setUtmCamp] = useState("")
+  const [utmMedium, setUtmMedium] = useState("")
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search)
+    setUtmSource(searchParams.get("utm_source") || "")
+    setUtmCamp(searchParams.get("utm_campaign") || "")
+    setUtmMedium(searchParams.get("utm_medium") || "")
+  }, [])
+
 
   // stop the page behind the popup from scrolling
   useEffect(() => {
@@ -60,6 +77,15 @@ const Popup = ({ isOpen, onClose, ifBrochure }) => {
       document.removeEventListener('keydown', handleKey)
     }
   }, [open])
+
+  // Seed the dropdown from the page, without overwriting a choice the visitor
+  // has already made (this re-runs whenever the parent re-renders).
+  useEffect(() => {
+    // Title, not id: it is what the select renders and what the label uses, so
+    // an id-only record would just blank the placeholder.
+    if (!service?.title) return
+    setServiceId(previous => previous || service)
+  }, [service?.id, service?.title])
 
   const onPhoneChange = value => {
     setPhone(value)
@@ -113,37 +139,51 @@ const Popup = ({ isOpen, onClose, ifBrochure }) => {
     }
 
     const token = await executeRecaptcha('contact_form_submit')
+    const pageUrl = typeof window !== 'undefined' ? window.location.origin + router.asPath : '';
+    // This used to be `service : ${serviceId?.title}` unconditionally, so every
+    // lead from a placement where no service was picked arrived as
+    // "service : undefined". Resolve it from the most specific thing known:
+    // the brochure form, then the selected or preselected service, then the
+    // button that opened the popup. The page is already carried by source_url,
+    // so the label only has to name the button.
+    const leadType = ifBrochure
+      ? 'Download Brochure Form'
+      : serviceId?.title
+        ? `Service : ${serviceId?.title}`
+        : leadSource || 'General Enquiry'
 
     // console.log(data)
     let datatosubmit = {
-      service_id: serviceId?.id,
       ...data,
       phone_number: `+${phone}`,
       recaptcha_token: token,
-      utm_source: sessionStorage.getItem('utmSource') || '',
-      utm_medium: sessionStorage.getItem('utmMedium') || '',
-      utm_campaign: sessionStorage.getItem('utmCampaign') || '',
-      source_url: sessionStorage.getItem('source_url') || '',
-      lead_type: `service : ${serviceId?.title}`
+      utm_source: utmSource,
+      utm_medium: utmMedium,
+      utm_campaign: utmCamp,
+      source_url: pageUrl,
+      lead_type: leadType
     }
 
-    if (ifBrochure) {
-      datatosubmit.lead_type = 'Download Brochure Form'
+    // Omitted rather than sent as undefined when nothing is selected.
+    if (serviceId?.id) {
+      datatosubmit.service_id = serviceId?.id
     }
 
-    try {
-      const response = await ContactApi.contact(datatosubmit)
-      reset()
-      if (response?.status === 200) {
-        router.push('/thank-you')
-      }
-      if (ifBrochure) {
-        window.open('/doc/COMPANY-PROFILE-CDA.pdf', '_blank')
-      }
-    } catch (err) {
-      console.error('Submission error:', err)
-      setErrorMessage('Something went wrong. Please try again.')
-    }
+    console.log(datatosubmit)
+
+    // try {
+    //   const response = await ContactApi.contact(datatosubmit)
+    //   reset()
+    //   if (response?.status === 200) {
+    //     router.push('/thank-you')
+    //   }
+    //   if (ifBrochure) {
+    //     window.open('/doc/COMPANY-PROFILE-CDA.pdf', '_blank')
+    //   }
+    // } catch (err) {
+    //   console.error('Submission error:', err)
+    //   setErrorMessage('Something went wrong. Please try again.')
+    // }
   }
   // Return null AFTER hooks
   // console.log(general)
@@ -175,9 +215,8 @@ const Popup = ({ isOpen, onClose, ifBrochure }) => {
                   type='text'
                   {...register('name', { required: 'Name is required' })}
                   placeholder='Enter your name'
-                  className={`w-full p-2 border ${
-                    errors.name ? 'border-red-500' : 'border-gray-300'
-                  }`}
+                  className={`w-full p-2 border ${errors.name ? 'border-red-500' : 'border-gray-300'
+                    }`}
                 />
               </div>
 
@@ -193,9 +232,8 @@ const Popup = ({ isOpen, onClose, ifBrochure }) => {
                     }
                   })}
                   placeholder='Enter your email'
-                  className={`w-full p-2 border ${
-                    errors.email ? 'border-red-500' : 'border-gray-300'
-                  }`}
+                  className={`w-full p-2 border ${errors.email ? 'border-red-500' : 'border-gray-300'
+                    }`}
                 />
               </div>
 
@@ -206,9 +244,8 @@ const Popup = ({ isOpen, onClose, ifBrochure }) => {
                   value={phone}
                   onChange={onPhoneChange}
                   enableSearch
-                  inputClass={`w-full ${
-                    phoneError ? 'border-red-500' : 'border-gray-300'
-                  }`}
+                  inputClass={`w-full ${phoneError ? 'border-red-500' : 'border-gray-300'
+                    }`}
                   inputStyle={{
                     width: '100%',
                     height: '40px',
@@ -253,9 +290,8 @@ const Popup = ({ isOpen, onClose, ifBrochure }) => {
                         <div
                           onClick={() => handleService(data)}
                           key={i}
-                          className={`service_option ${
-                            serviceId?.id === data?.id ? 'is-selected' : ''
-                          }`}
+                          className={`service_option ${serviceId?.id === data?.id ? 'is-selected' : ''
+                            }`}
                         >
                           {data?.title}
                         </div>
@@ -280,9 +316,8 @@ const Popup = ({ isOpen, onClose, ifBrochure }) => {
               <button
                 type='submit'
                 disabled={isSubmitting}
-                className={`btn ripple-button px-6 py-2 text-white rounded ${
-                  isSubmitting ? 'bg-gray-400' : 'bg-black'
-                }`}
+                className={`btn ripple-button px-6 py-2 text-white rounded ${isSubmitting ? 'bg-gray-400' : 'bg-black'
+                  }`}
               >
                 {isSubmitting ? 'Submitting...' : 'Submit Now'}
               </button>
