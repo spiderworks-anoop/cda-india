@@ -286,7 +286,7 @@ const Footer = ({ general }) => {
               </p>
               <div className='flex justify-center md:justify-end items-center'>
                 <Link
-                  href={`https://www.spiderworks.ae/`}
+                  href={`https://www.spiderworks.in`}
                   target='_blank'
                   rel='nofollow'
                 >

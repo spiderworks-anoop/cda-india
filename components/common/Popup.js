@@ -169,21 +169,20 @@ const Popup = ({ isOpen, onClose, ifBrochure, service, leadSource }) => {
       datatosubmit.service_id = serviceId?.id
     }
 
-    console.log(datatosubmit)
 
-    // try {
-    //   const response = await ContactApi.contact(datatosubmit)
-    //   reset()
-    //   if (response?.status === 200) {
-    //     router.push('/thank-you')
-    //   }
-    //   if (ifBrochure) {
-    //     window.open('/doc/COMPANY-PROFILE-CDA.pdf', '_blank')
-    //   }
-    // } catch (err) {
-    //   console.error('Submission error:', err)
-    //   setErrorMessage('Something went wrong. Please try again.')
-    // }
+    try {
+      const response = await ContactApi.contact(datatosubmit)
+      reset()
+      if (response?.status === 200) {
+        router.push('/thank-you')
+      }
+      if (ifBrochure) {
+        window.open('/doc/COMPANY-PROFILE-CDA.pdf', '_blank')
+      }
+    } catch (err) {
+      console.error('Submission error:', err)
+      setErrorMessage('Something went wrong. Please try again.')
+    }
   }
   // Return null AFTER hooks
   // console.log(general)
