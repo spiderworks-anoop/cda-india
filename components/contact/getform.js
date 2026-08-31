@@ -27,6 +27,18 @@ const ContactForm = ({ data, contact, blog }) => {
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState(false);
 
+  const [utmSource, setUtmSource] = useState("")
+  const [utmCamp, setUtmCamp] = useState("")
+  const [utmMedium, setUtmMedium] = useState("")
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search)
+    setUtmSource(searchParams.get("utm_source") || "")
+    setUtmCamp(searchParams.get("utm_campaign") || "")
+    setUtmMedium(searchParams.get("utm_medium") || "")
+  }, [])
+
+
   const onPhoneChange = (value) => {
     setPhone(value);
     const numericLength = value.replace(/\D/g, "").length;
@@ -58,16 +70,16 @@ const ContactForm = ({ data, contact, blog }) => {
     }
 
     const token = await executeRecaptcha("contact_form_submit");
-
+    const pageUrl = typeof window !== 'undefined' ? window.location.origin + router.asPath : '';
     try {
       const payload = {
         ...data,
         phone_number: `+${phone}`,
         recaptcha_token: token,
-        utm_source: sessionStorage.getItem("utmSource") || "",
-        utm_medium: sessionStorage.getItem("utmMedium") || "",
-        utm_campaign: sessionStorage.getItem("utmCampaign") || "",
-        source_url: sessionStorage.getItem("source_url") || "",
+        utm_source: utmSource,
+        utm_medium: utmMedium,
+        utm_campaign: utmCamp,
+        source_url: pageUrl,
         ...(blog ? { lead_type: `Blog Details` } : {})
       };
       const response = await ContactApi.contact(payload); // Make sure ContactApi.career supports JSON

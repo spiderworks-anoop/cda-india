@@ -34,6 +34,16 @@ const CareerForm = ({ career, onClose }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [ErrorMessage, setErrorMessage] = useState(null);
 
+  const [utmSource, setUtmSource] = useState("")
+  const [utmCamp, setUtmCamp] = useState("")
+  const [utmMedium, setUtmMedium] = useState("")
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search)
+    setUtmSource(searchParams.get("utm_source") || "")
+    setUtmCamp(searchParams.get("utm_campaign") || "")
+    setUtmMedium(searchParams.get("utm_medium") || "")
+  }, [])
 
   useEffect(() => {
     const previous = document.body.style.overflow;
@@ -64,6 +74,8 @@ const CareerForm = ({ career, onClose }) => {
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
+  const pageUrl = typeof window !== 'undefined' ? window.location.origin + router.asPath : '';
+
   const onSubmit = async (formData) => {
     if (!executeRecaptcha) {
       setErrorMessage("reCAPTCHA not ready");
@@ -86,10 +98,10 @@ const CareerForm = ({ career, onClose }) => {
     // reCAPTCHA token
     formDataToSend.append("recaptcha_token", token);
 
-    formDataToSend.append("utm_source", sessionStorage.getItem("utmSource") || "");
-    formDataToSend.append("utm_medium", sessionStorage.getItem("utmMedium") || "");
-    formDataToSend.append("utm_campaign", sessionStorage.getItem("utmCampaign") || "");
-    formDataToSend.append("source_url", sessionStorage.getItem("source_url") || "");
+    formDataToSend.append("utm_source", utmSource);
+    formDataToSend.append("utm_medium", utmMedium);
+    formDataToSend.append("utm_campaign", utmCamp);
+    formDataToSend.append("source_url", pageUrl);
 
     try {
       const response = await ContactApi.career(formDataToSend);
