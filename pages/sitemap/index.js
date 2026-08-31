@@ -1,10 +1,27 @@
 import { SlugList } from "@/Datas/endpoints/SlugList";
+import { LOCATION_PAGES_INDEXABLE } from "@/Datas/seo";
 
 //pages/sitemap.xml.js
 const EXTERNAL_DATA_URL = "https://jsonplaceholder.typicode.com/posts";
 
 const today = new Date();
 const formattedDate = `${today.toISOString().slice(0, 19)}+00:00`;
+
+// The location module is listed only once its pages are indexable - while the
+// switch is off they carry a robots noindex, and submitting those would be
+// reported as an error. See Datas/seo.js.
+const locationSitemaps = (baseUrl) =>
+  LOCATION_PAGES_INDEXABLE
+    ? `  <sitemap>
+      <loc>${baseUrl}/sitemap/locations</loc>
+      <lastmod>${formattedDate}</lastmod>
+  </sitemap>
+  <sitemap>
+      <loc>${baseUrl}/sitemap/location-pages</loc>
+      <lastmod>${formattedDate}</lastmod>
+  </sitemap>
+`
+    : "";
 
 function generateSiteMap(baseUrl, posts) {
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -22,7 +39,11 @@ function generateSiteMap(baseUrl, posts) {
       <loc>${baseUrl}/sitemap/services</loc>
       <lastmod>${formattedDate}</lastmod>
   </sitemap>
-</sitemapindex>
+  <sitemap>
+      <loc>${baseUrl}/sitemap/company-pages</loc>
+      <lastmod>${formattedDate}</lastmod>
+  </sitemap>
+${locationSitemaps(baseUrl)}</sitemapindex>
  `;
 }
 

@@ -104,6 +104,11 @@ const FooterColumn = ({ title, items }) => {
 
 const Footer = ({ general }) => {
 
+  // Only offer the brochure when the CMS actually has one. Without it the same
+  // button still opens the popup, just as a plain enquiry rather than promising
+  // a download that would never arrive.
+  const brochure = general?.all_settings?.brochure
+
   const [isPopupOpen, setPopupOpen] = useState(false)
 
   const [show, setShow] = useState(false)
@@ -140,7 +145,9 @@ const Footer = ({ general }) => {
         <Popup
           isOpen={isPopupOpen}
           onClose={() => setPopupOpen(false)}
-          ifBrochure={true}
+          ifBrochure={Boolean(brochure)}
+          brochureUrl={brochure}
+          leadSource='Footer - Enquiry'
         />
       )}
 
@@ -272,7 +279,8 @@ const Footer = ({ general }) => {
                     className='btn flex items-center justify-between gap-[20px]'
                   >
                     {' '}
-                    Download Brochure <CircleArrowicon />{' '}
+                    {brochure ? 'Download Brochure' : 'Enquire Now'}{' '}
+                    <CircleArrowicon />{' '}
                   </a>
                 </div>
               </div>
@@ -289,6 +297,7 @@ const Footer = ({ general }) => {
                   href={`https://www.spiderworks.in`}
                   target='_blank'
                   rel='nofollow'
+                  className='built_for_growth'
                 >
                   {' '}
                   <p className='flex items-center gap-[10px]'>

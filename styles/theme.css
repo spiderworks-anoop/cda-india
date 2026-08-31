@@ -1947,6 +1947,25 @@ footer {
   transform: rotate(-45deg);
 }
 
+/* The Spiderworks credit. Same hover vocabulary as the rest of the footer -
+   the blue from .footer2 ul li:hover a, and the small lift .footer2 .btn uses,
+   scaled down to suit a line of fine print. */
+.footer2 .built_for_growth p {
+  transition: color 0.25s ease;
+}
+
+.footer2 .built_for_growth img {
+  transition: transform 0.25s ease;
+}
+
+.footer2 .built_for_growth:hover p {
+  color: #007bff;
+}
+
+.footer2 .built_for_growth:hover img {
+  transform: translateY(-3px) scale(1.08);
+}
+
 .has_child {
   position: relative;
   /* padding-right: 15px; */
@@ -5947,6 +5966,10 @@ section#TermsCondition-section {
 
   .main-contact-icon-right-sd .slide-left {
     display: none;
+  }
+
+  .img-zoom img {
+    object-position: top;
   }
 
 

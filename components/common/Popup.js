@@ -15,7 +15,10 @@ import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 //                even if the visitor never opens it.
 // `leadSource` - names the button/section that opened this popup, for the
 //                placements that are not tied to a single service.
-const Popup = ({ isOpen, onClose, ifBrochure, service, leadSource }) => {
+// `brochureUrl` - the file a brochure submission should open. Passed in by
+//                callers that already hold general settings; otherwise it is
+//                read from this component's own fetch below.
+const Popup = ({ isOpen, onClose, ifBrochure, service, leadSource, brochureUrl }) => {
   // if (!isOpen) return null;
   const router = useRouter()
   const {
@@ -171,8 +174,11 @@ const Popup = ({ isOpen, onClose, ifBrochure, service, leadSource }) => {
       if (response?.status === 200) {
         router.push('/thank-you')
       }
-      if (ifBrochure) {
-        window.open('/doc/COMPANY-PROFILE-CDA.pdf', '_blank')
+      // The brochure is a CMS setting now rather than a file checked into
+      // /public, so a submission only opens one when the setting is filled in.
+      const brochure = brochureUrl || general?.all_settings?.brochure
+      if (ifBrochure && brochure) {
+        window.open(brochure, '_blank')
       }
     } catch (err) {
       console.error('Submission error:', err)
