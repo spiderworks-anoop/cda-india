@@ -1,5 +1,6 @@
 import LocBanner from '@/components/location/detail/Banner'
 import LocBody from '@/components/location/detail/Body'
+import LocContent from '@/components/location/detail/Content'
 import LocServices from '@/components/location/detail/Services'
 import LocHighlights from '@/components/location/detail/Highlights'
 import LocSectors from '@/components/location/detail/Sectors'
@@ -20,6 +21,7 @@ import { hasHtmlContent } from '@/components/common/functions/htmlcontent'
 //   Body        -> content.description_2   (the long editorial copy)
 //   Services    -> children                (cities only)
 //   Highlights  -> location_listing
+//   Content     -> content.title_2 + content.description_2
 //   Sectors     -> the service_sectors widget (service pages only)
 //   Faq         -> faq + content.faq_heading
 //   Related     -> related_listing (sibling services on a service page,
@@ -45,6 +47,8 @@ const LocationDetailScreen = ({
       <LocServices data={locationDetail} />
 
       <LocHighlights data={locationDetail} />
+      
+      <LocContent data={locationDetail} />
 
       <LocSectors data={serviceSectors} />
 
