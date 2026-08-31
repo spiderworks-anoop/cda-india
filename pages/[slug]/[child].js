@@ -24,7 +24,7 @@ export default function LocationService(props) {
         </Head>
       )}
 
-      <LocationDetailScreen {...props} />
+      <LocationDetailScreen {...props} isServicePage />
     </>
   )
 }

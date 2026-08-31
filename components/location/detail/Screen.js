@@ -21,13 +21,15 @@ import { hasHtmlContent } from '@/components/common/functions/htmlcontent'
 //   Body        -> content.description_2   (the long editorial copy)
 //   Services    -> children                (cities only)
 //   Highlights  -> location_listing
-//   Content     -> content.title_2 + content.description_2
+//   Content     -> content.title_2 + content.description_2 (service pages
+//                  only - /[slug]/[child] passes isServicePage)
 //   Sectors     -> the service_sectors widget (service pages only)
 //   Faq         -> faq + content.faq_heading
 //   Related     -> related_listing (sibling services on a service page,
 //                  other cities on a city page - it renders each differently)
 const LocationDetailScreen = ({
   locationDetail,
+  isServicePage,
   general,
   process,
   financialSolutions,
@@ -48,7 +50,7 @@ const LocationDetailScreen = ({
 
       <LocHighlights data={locationDetail} />
       
-      <LocContent data={locationDetail} />
+      {isServicePage && <LocContent data={locationDetail} />}
 
       <LocSectors data={serviceSectors} />
 

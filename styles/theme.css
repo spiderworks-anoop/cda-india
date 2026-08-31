@@ -6703,7 +6703,7 @@ section#TermsCondition-section {
 }
 
 /* Flex handles the alignment, so the tick never drifts against the text. */
-::before {
+.location_content_points li::before {
   content: '';
   flex: 0 0 20px;
   height: 20px;
