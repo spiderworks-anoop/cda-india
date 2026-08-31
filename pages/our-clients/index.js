@@ -23,7 +23,7 @@ export default function Why({ data, general, process, exceptionalclients }) {
 
       <ClientsList data={data} />
 
-      <OurValue data={exceptionalclients} />
+      {/* <OurValue data={exceptionalclients} /> */}
 
       <Process
         prosTitle={process?.content?.title_1}

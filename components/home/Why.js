@@ -214,7 +214,7 @@ const Why = ({ data }) => {
                 {/* Bottom image - every card at 1 and 2 columns, and the
                     non-alternating cards in the 4 up grid */}
                 <div
-                  className={`w-full h-[240px] sm:h-[200px] lg:h-[186px] img-zoom ${isAlt ? "lg:hidden" : ""}`}
+                  className={`w-full h-[339px] sm:h-[200px] lg:h-[186px] img-zoom ${isAlt ? "lg:hidden" : ""}`}
                 >
                   <Image
                     src={item?.media_id?.file_path}

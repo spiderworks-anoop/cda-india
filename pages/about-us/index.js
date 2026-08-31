@@ -45,10 +45,13 @@ export default function Home({ data, general, process, testimonials }) {
 
       <div className="about-miss pb-[80px]">
         <Mission
+          maintitle={data?.content?.title_7}
+          shorttitle={data?.content?.tag_line_7}
           misstitle_1={data?.content?.title_3}
           missdescription_1={data?.content?.description_3}
           misstitle_2={data?.content?.title_4}
           missdescription_2={data?.content?.description_4}
+          MisImg={data?.content?.media_id_7?.file_path}
         />
       </div>
 
@@ -57,7 +60,7 @@ export default function Home({ data, general, process, testimonials }) {
       <Process
         prosTitle={process?.content?.title_1}
         procesList={process?.content?.smart_accounting_listing_id}
-         ProsImg={process?.content?.media_id_3?.file_path}
+        ProsImg={process?.content?.media_id_3?.file_path}
       />
       {/* <Footercontent /> */}
     </Base>

@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import LocationDetailScreen from '@/components/location/detail/Screen'
 import { LocationApi } from '@/Datas/endpoints/location'
 import {
@@ -13,7 +14,17 @@ import {
 // static page (/about-us, /blog, ...) is matched before it. Anything left over
 // is looked up as a location and 404s when the CMS does not know it.
 export default function LocationCity(props) {
-  return <LocationDetailScreen {...props} />
+  return (
+    <>
+      {/* Kept out of the index. The shared <SEO> emits the rest of the head
+          for every route, so the directive lives here rather than there. */}
+      <Head>
+        <meta name='robots' content='noindex, nofollow' key='robots' />
+      </Head>
+
+      <LocationDetailScreen {...props} />
+    </>
+  )
 }
 
 export const getStaticPaths = async () => {

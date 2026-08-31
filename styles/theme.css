@@ -673,17 +673,16 @@ section.Career_List_cntr p {
 
 .home-about h2 {
   color: #e1e1e1;
-  font-size: 90px;
+  font-size: 68px;
   font-style: normal;
   font-weight: 600;
   line-height: 105%;
-  /* 94.5px */
-  letter-spacing: -1.8px;
+  letter-spacing: -1.36px;
 }
 
 .home-about h4 {
   color: #101828;
-  font-size: 24px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: 123%;
@@ -697,12 +696,12 @@ section.Career_List_cntr p {
   background: -webkit-linear-gradient(#0b63e5, #fff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 80px;
-  line-height: 80px;
+  font-size: clamp(38px, 3.4vw, 54px);
+  line-height: 1.1;
   font-weight: 600;
   position: absolute;
-  right: -30px;
-  top: 23px;
+  right: -40px;
+  top: 16px;
 }
 
 .home-about p {
@@ -4758,11 +4757,17 @@ section#TermsCondition-section {
     font-weight: 500;
   }
 
-  .home-about span.county-tag {
+  .home-about h2 {
     font-size: 60px;
-    line-height: 80px;
-    right: 10px;
-    top: 19px;
+  }
+
+  .home-about h4 {
+    font-size: 16px;
+  }
+
+  .home-about span.county-tag {
+    right: -40px;
+    top: 14px;
   }
 
   .home-testimonials .swiper-slide.swiper-slide-active video {
@@ -5884,8 +5889,7 @@ section#TermsCondition-section {
 
   /* keep the portrait crop the section had on phones */
   .home-about .about-media {
-    max-width: 250px;
-    aspect-ratio: 250 / 350;
+    max-width: 100%;
   }
 
   .home-about .gap-\[45px\] {
@@ -6083,11 +6087,26 @@ section#TermsCondition-section {
 
 .career_popup .field_error {
   display: block;
-  color: #ffe0e0;
+  color: #9c0000;
   font-family: "Plus Jakarta Sans";
   font-size: 12px;
   line-height: 18px;
   margin-top: 4px;
+}
+
+/* per-field validation messages in the enquiry popup. The popup body
+   scrolls, so unlike .career_popup these stay visible on mobile. */
+.Enquiry_popup .field_error {
+  display: block;
+  color: #ff6a6a;
+  font-family: "Plus Jakarta Sans";
+  font-size: 12px;
+  line-height: 18px;
+  margin-top: 4px;
+}
+
+.service_select.has-error {
+  border-color: #ef4444;
 }
 
 .form_error,

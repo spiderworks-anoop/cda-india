@@ -22,7 +22,8 @@ const Popup = ({ isOpen, onClose, ifBrochure, service, leadSource }) => {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting }
+    setValue,
+    formState: { errors, isSubmitting, isSubmitted }
   } = useForm()
 
   const { executeRecaptcha } = useGoogleReCaptcha()
@@ -32,7 +33,6 @@ const Popup = ({ isOpen, onClose, ifBrochure, service, leadSource }) => {
   const [open, setOpen] = useState(false)
   const [list, setList] = useState(null)
   const [phone, setPhone] = useState('')
-  const [phoneError, setPhoneError] = useState(false)
   const [general, setGeneral] = useState()
   const serviceRef = useRef(null)
 
@@ -84,22 +84,21 @@ const Popup = ({ isOpen, onClose, ifBrochure, service, leadSource }) => {
     // Title, not id: it is what the select renders and what the label uses, so
     // an id-only record would just blank the placeholder.
     if (!service?.title) return
-    setServiceId(previous => previous || service)
-  }, [service?.id, service?.title])
+    if (serviceId) return
+    setServiceId(service)
+    setValue('service', service.title)
+  }, [service?.id, service?.title, serviceId, setValue])
 
   const onPhoneChange = value => {
     setPhone(value)
-    const numericLength = value.replace(/\D/g, '').length
-
-    if (numericLength >= 5 && numericLength <= 13) {
-      setPhoneError(false)
-    } else {
-      setPhoneError(true)
-    }
+    // Only re-validate once a submit has already flagged it, so the error
+    // does not appear while the visitor is still typing the number.
+    setValue('phone_number', value, { shouldValidate: isSubmitted })
   }
 
   const handleService = data => {
     setServiceId(data)
+    setValue('service', data?.title, { shouldValidate: isSubmitted })
     setOpen(false)
   }
   const fetchList = async () => {
@@ -122,16 +121,12 @@ const Popup = ({ isOpen, onClose, ifBrochure, service, leadSource }) => {
     fetchList()
     fetchGeneral()
   }, [])
-  const onSubmit = async data => {
+  const onSubmit = async formValues => {
     setErrorMessage('')
 
-    const phoneLength = phone.replace(/\D/g, '').length
-    if (!phone || phoneLength < 5 || phoneLength > 13) {
-      setPhoneError(true)
-      return
-    } else {
-      setPhoneError(false)
-    }
+    // `service` only backs the dropdown's required rule; the API takes the
+    // service as `service_id` and as part of `lead_type`, so drop it here.
+    const { service: selectedService, ...data } = formValues
 
     if (!executeRecaptcha) {
       setErrorMessage('reCAPTCHA not ready')
@@ -214,9 +209,16 @@ const Popup = ({ isOpen, onClose, ifBrochure, service, leadSource }) => {
                   type='text'
                   {...register('name', { required: 'Name is required' })}
                   placeholder='Enter your name'
-                  className={`w-full p-2 border ${errors.name ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                  className={`w-full p-2 border ${
+                    errors.name ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                  aria-invalid={errors.name ? 'true' : 'false'}
                 />
+                {errors.name && (
+                  <span className='field_error' role='alert'>
+                    {errors.name.message}
+                  </span>
+                )}
               </div>
 
               <div>
@@ -226,47 +228,87 @@ const Popup = ({ isOpen, onClose, ifBrochure, service, leadSource }) => {
                   {...register('email', {
                     required: 'Email is required',
                     pattern: {
-                      value: /^\S+@\S+$/i,
+                      value: /^[^@\s]+@[^@\s]+[.][^@\s]+$/,
                       message: 'Enter a valid email'
                     }
                   })}
                   placeholder='Enter your email'
-                  className={`w-full p-2 border ${errors.email ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                  className={`w-full p-2 border ${
+                    errors.email ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                  aria-invalid={errors.email ? 'true' : 'false'}
                 />
+                {errors.email && (
+                  <span className='field_error' role='alert'>
+                    {errors.email.message}
+                  </span>
+                )}
               </div>
 
               <div>
                 <label>Number</label>
+                {/* The visible control is PhoneInput, which is not a native
+                    input react-hook-form can register. This hidden field mirrors
+                    its value so the number is validated in the same submit pass
+                    as the rest and reports its message the same way. */}
+                <input
+                  type='hidden'
+                  {...register('phone_number', {
+                    required: 'Phone number is required',
+                    validate: value => {
+                      const digits = String(value || '').replace(/[^0-9]/g, '').length
+                      return (
+                        (digits >= 5 && digits <= 13) ||
+                        'Enter a valid phone number'
+                      )
+                    }
+                  })}
+                />
                 <PhoneInput
                   country={'in'}
                   value={phone}
                   onChange={onPhoneChange}
                   enableSearch
-                  inputClass={`w-full ${phoneError ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                  inputClass={`w-full ${
+                    errors.phone_number ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                  inputProps={{ 'aria-invalid': errors.phone_number ? 'true' : 'false' }}
                   inputStyle={{
                     width: '100%',
                     height: '40px',
                     paddingLeft: '48px',
-                    borderColor: phoneError ? '#f87171' : '#d1d5db',
+                    borderColor: errors.phone_number ? '#f87171' : '#d1d5db',
                     borderRadius: '4px',
                     fontSize: '16px'
                   }}
+                  buttonStyle={{
+                    borderColor: errors.phone_number ? '#f87171' : '#cacaca'
+                  }}
                 />
+                {errors.phone_number && (
+                  <span className='field_error' role='alert'>
+                    {errors.phone_number.message}
+                  </span>
+                )}
               </div>
 
               <div className='relative' ref={serviceRef}>
                 <label>Service</label>
-                {/* <input
-                type="text"
-                {...register("subject")}
-                placeholder="Select the Service"
-                className="w-full p-2 border border-gray-300"
-              /> */}
+                {/* Same trick as the phone field: the dropdown is a div, so the
+                    selected title is mirrored into a registered hidden input.
+                    On a service detail page it is already seeded from the
+                    `service` prop, so the field starts valid. */}
+                <input
+                  type='hidden'
+                  {...register('service', {
+                    required: 'Please select a service'
+                  })}
+                />
                 <div
                   onClick={() => setOpen(!open)}
-                  className={`service_select ${open ? 'is-open' : ''}`}
+                  className={`service_select ${open ? 'is-open' : ''} ${
+                    errors.service ? 'has-error' : ''
+                  }`}
                 >
                   <span className={serviceId ? '' : 'placeholder'}>
                     {serviceId ? serviceId?.title : 'Select Service'}
@@ -289,8 +331,9 @@ const Popup = ({ isOpen, onClose, ifBrochure, service, leadSource }) => {
                         <div
                           onClick={() => handleService(data)}
                           key={i}
-                          className={`service_option ${serviceId?.id === data?.id ? 'is-selected' : ''
-                            }`}
+                          className={`service_option ${
+                            serviceId?.id === data?.id ? 'is-selected' : ''
+                          }`}
                         >
                           {data?.title}
                         </div>
@@ -301,6 +344,11 @@ const Popup = ({ isOpen, onClose, ifBrochure, service, leadSource }) => {
                       </div>
                     )}
                   </div>
+                )}
+                {errors.service && (
+                  <span className='field_error' role='alert'>
+                    {errors.service.message}
+                  </span>
                 )}
               </div>
             </div>
