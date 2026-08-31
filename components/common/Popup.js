@@ -138,16 +138,20 @@ const Popup = ({ isOpen, onClose, ifBrochure, service, leadSource, brochureUrl }
 
     const token = await executeRecaptcha('contact_form_submit')
     const pageUrl = typeof window !== 'undefined' ? window.location.origin + router.asPath : '';
-    // This used to be `service : ${serviceId?.title}` unconditionally, so every
-    // lead from a placement where no service was picked arrived as
-    // "service : undefined". Resolve it from the most specific thing known:
-    // the brochure form, then the selected or preselected service, then the
-    // button that opened the popup. The page is already carried by source_url,
-    // so the label only has to name the button.
+    // Resolve the label from the most specific thing known: the brochure form,
+    // then the service the PAGE is about, then the button that opened the
+    // popup. The page itself is already carried by source_url, so the label
+    // only has to name the button.
+    //
+    // The gate is the `service` prop, not the dropdown. The dropdown is on
+    // every placement, so keying off it turned a home page enquiry into
+    // "Service : X" the moment a visitor picked something from it. Only the
+    // service detail placements pass `service`, so only they produce a service
+    // lead - and there the visitor's own choice still wins over the preselect.
     const leadType = ifBrochure
       ? 'Download Brochure Form'
-      : serviceId?.title
-        ? `Service : ${serviceId?.title}`
+      : service?.title
+        ? `Service : ${serviceId?.title || service?.title}`
         : leadSource || 'General Enquiry'
 
     // console.log(data)
@@ -166,6 +170,8 @@ const Popup = ({ isOpen, onClose, ifBrochure, service, leadSource, brochureUrl }
     if (serviceId?.id) {
       datatosubmit.service_id = serviceId?.id
     }
+
+    console.log(datatosubmit)
 
 
     try {
@@ -215,9 +221,8 @@ const Popup = ({ isOpen, onClose, ifBrochure, service, leadSource, brochureUrl }
                   type='text'
                   {...register('name', { required: 'Name is required' })}
                   placeholder='Enter your name'
-                  className={`w-full p-2 border ${
-                    errors.name ? 'border-red-500' : 'border-gray-300'
-                  }`}
+                  className={`w-full p-2 border ${errors.name ? 'border-red-500' : 'border-gray-300'
+                    }`}
                   aria-invalid={errors.name ? 'true' : 'false'}
                 />
                 {errors.name && (
@@ -239,9 +244,8 @@ const Popup = ({ isOpen, onClose, ifBrochure, service, leadSource, brochureUrl }
                     }
                   })}
                   placeholder='Enter your email'
-                  className={`w-full p-2 border ${
-                    errors.email ? 'border-red-500' : 'border-gray-300'
-                  }`}
+                  className={`w-full p-2 border ${errors.email ? 'border-red-500' : 'border-gray-300'
+                    }`}
                   aria-invalid={errors.email ? 'true' : 'false'}
                 />
                 {errors.email && (
@@ -275,9 +279,8 @@ const Popup = ({ isOpen, onClose, ifBrochure, service, leadSource, brochureUrl }
                   value={phone}
                   onChange={onPhoneChange}
                   enableSearch
-                  inputClass={`w-full ${
-                    errors.phone_number ? 'border-red-500' : 'border-gray-300'
-                  }`}
+                  inputClass={`w-full ${errors.phone_number ? 'border-red-500' : 'border-gray-300'
+                    }`}
                   inputProps={{ 'aria-invalid': errors.phone_number ? 'true' : 'false' }}
                   inputStyle={{
                     width: '100%',
@@ -312,9 +315,8 @@ const Popup = ({ isOpen, onClose, ifBrochure, service, leadSource, brochureUrl }
                 />
                 <div
                   onClick={() => setOpen(!open)}
-                  className={`service_select ${open ? 'is-open' : ''} ${
-                    errors.service ? 'has-error' : ''
-                  }`}
+                  className={`service_select ${open ? 'is-open' : ''} ${errors.service ? 'has-error' : ''
+                    }`}
                 >
                   <span className={serviceId ? '' : 'placeholder'}>
                     {serviceId ? serviceId?.title : 'Select Service'}
@@ -337,9 +339,8 @@ const Popup = ({ isOpen, onClose, ifBrochure, service, leadSource, brochureUrl }
                         <div
                           onClick={() => handleService(data)}
                           key={i}
-                          className={`service_option ${
-                            serviceId?.id === data?.id ? 'is-selected' : ''
-                          }`}
+                          className={`service_option ${serviceId?.id === data?.id ? 'is-selected' : ''
+                            }`}
                         >
                           {data?.title}
                         </div>
