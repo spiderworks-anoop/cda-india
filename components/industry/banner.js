@@ -26,7 +26,7 @@ const IndDetHead = ({ data }) => {
               className='md:flex justify-center items-center'
             >
               <div>
-                <h2> {data?.content?.title_1} </h2>
+                <h1> {data?.content?.title_1} </h1>
                 <CurveLargeArrowicon />
                 
                 <div className='p'

@@ -18,7 +18,7 @@ export default function Contact({ general, process, data }) {
   return (
     <Base data={data} general={general} bottomContent={"Bottom Content"}>
 
-      <div className="Small_banner  ">
+      <div className="Small_banner h-[100dvh]  ">
         <CommBanner title={data?.title}
           discription={data?.content?.description_1}
         />

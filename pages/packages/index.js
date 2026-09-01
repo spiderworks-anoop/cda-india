@@ -24,7 +24,7 @@ export default function Home({ general, data, process, packageList }) {
 
       <Base data={data} general={general} bottomContent={"Bottom Content"}>
 
-        <div className="Small_banner">
+        <div className="Small_banner h-screen ">
           <CommBanner
             title={data?.title}
             discription={data?.content?.description_1}

@@ -29,7 +29,7 @@ const SerBanner = ({subtitle, title, discription, bnrimg}) => {
                 <h5 className='flex items-center gap-[10px]'>
                   <Bluecircleicon />  {subtitle}
                 </h5>
-                <h2> {title}</h2>
+                <h1> {title}</h1>
                 <CurveLargeArrowicon />
                 <div dangerouslySetInnerHTML={{__html:discription} }/>  
               </div>

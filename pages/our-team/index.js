@@ -20,7 +20,7 @@ export default function Team({ data, members, general, process }) {
   return (
     <Base general={general} data={data} bottomContent={"Bottom Content"}>
 
-      <div className="Small_banner">
+      <div className="Small_banner h-screen ">
 
         <CommBanner
           title={data?.title}

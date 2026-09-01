@@ -17,7 +17,7 @@ import { WidgetApi } from "@/Datas/endpoints/widget";
 export default function Why({ data, general, process }) {
   return (
     <Base data={data} general={general} bottomContent={"Bottom Content"}>
-      <div className="Small_banner">
+      <div className="Small_banner h-screen">
         <CommBanner
           title={data?.content?.short_title_1}
           discription={data?.content?.description_1}

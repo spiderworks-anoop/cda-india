@@ -202,6 +202,20 @@ a {
   z-index: 3;
 }
 
+.banner-cap h1 {
+  color: #fff;
+  text-align: center;
+  font-family: "Plus Jakarta Sans";
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 106%;
+  /* 67.84px */
+  opacity: 0;
+  transform: translateY(100px);
+  transition: all 0.6s;
+}
+
 .banner-cap h2 {
   color: #fff;
   text-align: center;
@@ -214,6 +228,11 @@ a {
   opacity: 0;
   transform: translateY(100px);
   transition: all 0.6s;
+}
+
+.banner-sec.ready .banner-cap h1 {
+  opacity: 1;
+  transform: translateY(0px);
 }
 
 .banner-sec.ready .banner-cap h2 {
@@ -2255,6 +2274,18 @@ footer {
   line-height: normal;
 }
 
+.ser-banner-sec h1 {
+  color: #fff;
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 106%;
+  /* 67.84px */
+  text-transform: capitalize;
+  margin-top: 37px;
+  margin-bottom: 15px;
+}
+
 .ser-banner-sec h2 {
   color: #fff;
   font-size: 64px;
@@ -2586,6 +2617,17 @@ footer {
   min-height: 770px;
   object-fit: cover;
   border-radius: 12px;
+}
+
+.ser-det-banner h1 {
+  color: #fff;
+  font-size: 60px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 106%;
+  /* 67.84px */
+  text-transform: capitalize;
+  margin-bottom: 25px;
 }
 
 .ser-det-banner h2 {
@@ -3329,6 +3371,19 @@ footer {
   padding: 150px 0;
 }
 
+.director-messages h1 {
+  color: #fff;
+  text-align: center;
+  font-family: "Plus Jakarta Sans";
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 106%;
+  /* 67.84px */
+  text-transform: capitalize;
+  margin-bottom: 65px;
+}
+
 .director-messages h2 {
   color: #fff;
   text-align: center;
@@ -3803,6 +3858,11 @@ footer {
     font-size: 15px;
     line-height: 24px;
   }
+}
+
+.details_blog .ser-det-banner h1 {
+  font-size: 36px;
+  line-height: 50px;
 }
 
 .details_blog .ser-det-banner h2 {
@@ -4756,6 +4816,10 @@ section#TermsCondition-section {
 
 
 @media (max-width: 1280px) {
+  .banner-cap h1 {
+    font-size: 55px;
+  }
+
   .banner-cap h2 {
     font-size: 55px;
   }
@@ -4837,6 +4901,10 @@ section#TermsCondition-section {
     line-height: 40px;
   }
 
+  .ser-banner-sec h1 {
+    font-size: 44px;
+  }
+
   .ser-banner-sec h2 {
     font-size: 44px;
   }
@@ -4870,6 +4938,10 @@ section#TermsCondition-section {
 
   .ser-solution video {
     height: 510px;
+  }
+
+  .ser-det-banner h1 {
+    font-size: 55px;
   }
 
   .ser-det-banner h2 {
@@ -5102,6 +5174,10 @@ section#TermsCondition-section {
 
   .clients_list img {
     margin: 0 auto;
+  }
+
+  .banner-cap h1 {
+    font-size: 36px;
   }
 
   .banner-cap h2 {
@@ -5512,6 +5588,10 @@ section#TermsCondition-section {
     font-size: 11px;
   }
 
+  .ser-banner-sec h1 {
+    font-size: 40px;
+  }
+
   .ser-banner-sec h2 {
     font-size: 40px;
   }
@@ -5641,6 +5721,10 @@ section#TermsCondition-section {
     min-height: 800px;
   }
 
+  .ser-det-banner h1 {
+    font-size: 40px;
+  }
+
   .ser-det-banner h2 {
     font-size: 40px;
   }
@@ -5759,6 +5843,10 @@ section#TermsCondition-section {
   .team_gallery .h4 {
     font-size: 20px;
     line-height: 36px;
+  }
+
+  .director-messages h1 {
+    font-size: 30px;
   }
 
   .director-messages h2 {
@@ -6678,7 +6766,7 @@ section#TermsCondition-section {
   color: #475467;
 }
 
-.location_content .location_content_body > p:first-child {
+.location_content .location_content_body>p:first-child {
   color: #101828;
   font-size: 20px;
   line-height: 32px;
@@ -6996,7 +7084,7 @@ section#TermsCondition-section {
     margin-top: 16px;
   }
 
-  .location_content .location_content_body > p:first-child {
+  .location_content .location_content_body>p:first-child {
     font-size: 17px;
     line-height: 28px;
   }

@@ -16,10 +16,7 @@ export default function Team({ data, general, process }) {
   return (
     <Base data={data} general={general} bottomContent={"Bottom Content"}>
 
-
       <DMessage data={data} />
-
-
 
       <Process
         prosTitle={process?.content?.title_1}
