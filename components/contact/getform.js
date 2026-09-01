@@ -12,6 +12,7 @@ import "react-phone-input-2/lib/style.css";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 const ContactForm = ({ data, contact, blog }) => {
+
   const {
     register,
     handleSubmit,
@@ -70,18 +71,21 @@ const ContactForm = ({ data, contact, blog }) => {
     }
 
     const token = await executeRecaptcha("contact_form_submit");
+
     const pageUrl = typeof window !== 'undefined' ? window.location.origin + router.asPath : '';
+
+    const payload = {
+      ...data,
+      phone_number: `+${phone}`,
+      recaptcha_token: token,
+      utm_source: utmSource,
+      utm_medium: utmMedium,
+      utm_campaign: utmCamp,
+      source_url: pageUrl,
+      ...(blog ? { lead_type: `Blog Details` } : {})
+    };
+
     try {
-      const payload = {
-        ...data,
-        phone_number: `+${phone}`,
-        recaptcha_token: token,
-        utm_source: utmSource,
-        utm_medium: utmMedium,
-        utm_campaign: utmCamp,
-        source_url: pageUrl,
-        ...(blog ? { lead_type: `Blog Details` } : {})
-      };
       const response = await ContactApi.contact(payload); // Make sure ContactApi.career supports JSON
       // console.log("Submitted:", response);
       reset();
