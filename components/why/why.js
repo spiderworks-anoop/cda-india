@@ -3,6 +3,7 @@ import { BlueBtn, Quateicon } from '../common/svgicon';
 import Accordion from '../common/Accordion';
 import Why1 from '../../public/images/why.jpg' 
 import Image from 'next/image';
+import { HTMLParser } from '@/utils/HTMLParser';
 
 const Whycda = ({data}) => {
  
@@ -28,7 +29,7 @@ const Whycda = ({data}) => {
 
             <div className=' md:w-[70%]  '>
 
-                <div dangerouslySetInnerHTML={{__html:data?.content?.description_1}}/>
+                <div>{HTMLParser(data?.content?.description_1)}</div>
                  
                 
             </div>

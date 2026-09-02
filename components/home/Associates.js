@@ -8,6 +8,7 @@ import { MapDot1icon } from '../common/svgicon';
 
 
 import CountUp from '../../components/common/Count'
+import { HTMLParser } from '@/utils/HTMLParser'
 
 
 // Transform-only scroll reveal. Nothing here animates opacity on purpose: if
@@ -105,7 +106,7 @@ const Associates = ({ associateTitle, associateSubTitle, satisfiedClientsCount, 
                   loc?.media_id?.file_path && <Image src={loc?.media_id?.file_path} alt='' width={910} height={315} />
                 }
 
-                <div className='h4' dangerouslySetInnerHTML={{ __html: loc?.title }} />
+                <div className='h4'>{HTMLParser(loc?.title)}</div>
               </div>
             </motion.div>
           ))}

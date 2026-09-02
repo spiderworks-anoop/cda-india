@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Abt2 from '../../public/images/ab2.webp';
 import { BlueBtn, Bluecircleicon, CircleArrowicon, CurveLargeArrowicon, WhiteBtn } from '../common/svgicon';
 import Noise from '../common/Noise';
+import { HTMLParser } from '@/utils/HTMLParser';
 
 const Aboutabout = ({data}) => {
   return (
@@ -32,7 +33,7 @@ const Aboutabout = ({data}) => {
             <Image src={Abt2} alt='' width={500} height={500} />
             </div>
 
-            <div className='p' dangerouslySetInnerHTML={{__html:data?.content?.description_1}} />
+            <div className='p'>{HTMLParser(data?.content?.description_1)}</div>
                 
                
                 

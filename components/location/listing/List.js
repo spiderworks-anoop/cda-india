@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { LoadBtn, LongArrowicon } from '@/components/common/svgicon'
 import LocCard from '@/components/location/shared/Card'
 import { LocationApi } from '@/Datas/endpoints/location'
+import { HTMLParser } from '@/utils/HTMLParser'
 
 const LocList = ({ shorttitle, title, description, listdata, metadata }) => {
   const [list, setList] = useState(listdata || [])
@@ -74,7 +75,7 @@ const LocList = ({ shorttitle, title, description, listdata, metadata }) => {
           {description && (
             <div>
               <div className='max-w-[506px]'>
-                <div className='p' dangerouslySetInnerHTML={{ __html: description }} />
+                <div className='p'>{HTMLParser(description)}</div>
               </div>
             </div>
           )}

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { decodeHtml, hasHtmlContent } from '@/components/common/functions/htmlcontent'
+import { HTMLParser } from '@/utils/HTMLParser'
 
 
 
@@ -23,9 +24,7 @@ const LocContent = ({ title, description }) => {
               }
 
               <div
-                className='location_content_body location_content_points mt-[20px]'
-                dangerouslySetInnerHTML={{ __html: description }}
-              />
+                className='location_content_body location_content_points mt-[20px]'>{HTMLParser(description)}</div>
             </motion.div>
           </div>
         </section >

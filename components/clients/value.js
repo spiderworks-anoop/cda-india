@@ -23,6 +23,7 @@ import Client11 from '../../public/images/cl14.png'
 
 import { CircleArrowicon } from '../common/svgicon'
 import Link from 'next/link'
+import { HTMLParser } from '@/utils/HTMLParser'
 
 const clientImages = [Client2, Client3, Client4, Client5, Client6, Client7, Client8, Client9, Client10, Client11];
 
@@ -34,7 +35,7 @@ const OurValue = ({data}) => {
     <section className='home-clients'>
       <div className='container'>
 
-        <div className='h3' dangerouslySetInnerHTML={{__html:data?.content?.title}}/>
+        <div className='h3'>{HTMLParser(data?.content?.title)}</div>
 
           <div className='flex flex-col md:flex-row items-center gap-[30px] rounded-[12px] overflow-hidden border border-[#E5E5E5] mt-[27px]'> 
 

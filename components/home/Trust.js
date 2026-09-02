@@ -5,6 +5,7 @@ import { CircleArrow2icon } from "../common/svgicon";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Popup from "../common/Popup";
+import { HTMLParser } from "@/utils/HTMLParser";
 
 const Trust = ({ data }) => {
   const [isPopupOpen, setPopupOpen] = useState(false);
@@ -60,17 +61,9 @@ const Trust = ({ data }) => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
-                  viewport={{ once: true }}
-                  dangerouslySetInnerHTML={{
-                    __html: data?.content?.title_2,
-                  }}
-                />
+                  viewport={{ once: true }}>{HTMLParser(data?.content?.title_2)}</motion.div>
 
-                <div className='p'
-                  dangerouslySetInnerHTML={{
-                    __html: data?.content?.description_2,
-                  }}
-                />
+                <div className='p'>{HTMLParser(data?.content?.description_2)}</div>
 
                 <a
                   onClick={() => setPopupOpen(true)}
@@ -98,16 +91,8 @@ const Trust = ({ data }) => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
-                  viewport={{ once: true }}
-                  dangerouslySetInnerHTML={{
-                    __html: data?.content?.title_2,
-                  }}
-                />
-                <div className='p'
-                  dangerouslySetInnerHTML={{
-                    __html: data?.content?.description_2,
-                  }}
-                />
+                  viewport={{ once: true }}>{HTMLParser(data?.content?.title_2)}</motion.div>
+                <div className='p'>{HTMLParser(data?.content?.description_2)}</div>
                 <a
                   onClick={() => setPopupOpen(true)}
                   className="btn flex items-center gap-[12px]"

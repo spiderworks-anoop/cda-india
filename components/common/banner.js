@@ -11,6 +11,7 @@ import {
 } from "../common/svgicon";
 import Noise from "../common/Noise";
 import Link from "next/link";
+import { HTMLParser } from "@/utils/HTMLParser";
 
 const CommBanner = ({
   data,
@@ -47,12 +48,7 @@ const CommBanner = ({
                 <h1>{title}</h1>
                 {/* <CurveLargeArrowicon /> */}
 
-                <div className="max-w-[800px] p"
-                  dangerouslySetInnerHTML={{
-                    __html: (short_description || "")
-                      .substring(0, 200),
-                  }}
-                />
+                <div className="max-w-[800px] p">{HTMLParser((short_description || "").substring(0, 200))}</div>
 
                 {/* {
                   btntext &&

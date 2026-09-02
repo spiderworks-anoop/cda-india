@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import Loc1 from '@/public/images/serdet1.png'
 import { WhiteBtn } from '@/components/common/svgicon'
 import Popup from '@/components/common/Popup'
+import { HTMLParser } from '@/utils/HTMLParser'
 
 const LocBanner = ({ data }) => {
 
@@ -45,9 +46,7 @@ const LocBanner = ({ data }) => {
 
                   {description && (
                     <div
-                      className='p'
-                      dangerouslySetInnerHTML={{ __html: description }}
-                    />
+                      className='p'>{HTMLParser(description)}</div>
                   )}
 
                   {data?.content?.button_text_1 && (

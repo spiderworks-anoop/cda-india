@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { LoadBtn, LongArrowicon } from './svgicon'
 import Link from 'next/link'
+import { HTMLParser } from '@/utils/HTMLParser'
 
 
 
@@ -30,7 +31,7 @@ const SerOffer = ({ IsServiceDetails, shorttitle, title, discription, listdata }
 
               <div>
                 <div className='max-w-[506px]'>
-                  <div className='p' dangerouslySetInnerHTML={{ __html: discription }} />
+                  <div className='p'>{HTMLParser(discription)}</div>
                 </div>
               </div>
             </motion.div>

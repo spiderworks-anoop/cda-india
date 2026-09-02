@@ -5,6 +5,7 @@ import Ser1 from '../../public/images/ser6.png'
 import { BlueBtn, CircleArrow2icon, CircleArrowicon, CurveLargeArrowicon, LargeArrowicon, LongArrowicon, UpArrowicon, WideCircle1icon, WideCircle2icon, WideCircle3icon } from '../common/svgicon'
 import Popup from '../common/Popup'
 import Link from 'next/link'
+import { HTMLParser } from '@/utils/HTMLParser'
 
 const SerWhy = ({ shorttitle, title, Whycdalist, discription, btntext, whyimgtext, whyimg, whyimgcap, whyimgsubcap, whyimgbtntxt }) => {
 
@@ -43,7 +44,7 @@ const SerWhy = ({ shorttitle, title, Whycdalist, discription, btntext, whyimgtex
               <h5> {shorttitle}</h5>
               <h3>  {title}</h3>
 
-              <div className='p' dangerouslySetInnerHTML={{ __html: discription }} />
+              <div className='p'>{HTMLParser(discription)}</div>
 
               <ul className='why-cda-list'>
 

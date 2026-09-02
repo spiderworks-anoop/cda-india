@@ -8,6 +8,7 @@ import Logo5 from "../../public/images/cl4.png";
 
 import { LargeArrowicon, Lineicon, Medalicon } from "../common/svgicon";
 import { motion } from "framer-motion";
+import { HTMLParser } from "@/utils/HTMLParser";
 
 const Certificate = ({
   certificatHead,
@@ -37,7 +38,7 @@ const Certificate = ({
     >
       <div className="container">
         <div className='h3'>
-          <div className='span' dangerouslySetInnerHTML={{ __html: certificatHead }} />{" "}
+          <div className='span'>{HTMLParser(certificatHead)}</div>{" "}
           <Medalicon />
         </div>
         <h5>{certificatSubHead}</h5>

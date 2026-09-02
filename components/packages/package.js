@@ -4,6 +4,7 @@ import Accordion from '../common/Accordion'
 import Popup from '../common/Popup'
 import parse from 'html-react-parser'
 import PackPopup from '../common/PackPopup'
+import { HTMLParser } from '@/utils/HTMLParser'
 
 const PackageListing = ({ listing, data }) => {
   const [popUp, setPopUp] = useState(false)
@@ -37,12 +38,10 @@ const PackageListing = ({ listing, data }) => {
         <div className='container relative z-[1]'>
           <div className='grid md:grid-cols-2 gap-[20px] pack-listing_head mt-[80px] mb-[25px]'>
             <div className='max-w-[500px]'>
-              <div className='h3' dangerouslySetInnerHTML={{ __html: data?.title }} />
+              <div className='h3'>{HTMLParser(data?.title)}</div>
             </div>
             <div className='flex md:justify-end max-w-[560px]'>
-              <div className='p'
-                dangerouslySetInnerHTML={{ __html: data?.short_description }}
-              />
+              <div className='p'>{HTMLParser(data?.short_description)}</div>
             </div>
           </div>
 
@@ -56,11 +55,7 @@ const PackageListing = ({ listing, data }) => {
                   <h3>{Pakdata.title}</h3>
                   <div className='package-list-titile'>
                     <h5>Starting from</h5>
-                    <div className='h2'
-                      dangerouslySetInnerHTML={{
-                        __html: Pakdata?.content?.value_per_month_1
-                      }}
-                    />
+                    <div className='h2'>{HTMLParser(Pakdata?.content?.value_per_month_1)}</div>
                     <h5>{Pakdata?.content?.transactions}</h5>
                   </div>
 
@@ -72,11 +67,7 @@ const PackageListing = ({ listing, data }) => {
                     )}
 
                     {Pakdata?.content?.points_2 && (
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: Pakdata?.content?.points_2
-                        }}
-                      />
+                      <div>{HTMLParser(Pakdata?.content?.points_2)}</div>
                     )}
 
                     {Pakdata?.addons?.map((addOn, j) => (
@@ -109,19 +100,11 @@ const PackageListing = ({ listing, data }) => {
                     )}
 
                     {Pakdata?.content?.points_5 && (
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: Pakdata?.content?.points_5
-                        }}
-                      />
+                      <div>{HTMLParser(Pakdata?.content?.points_5)}</div>
                     )}
 
                     {Pakdata?.content?.discount && (
-                      <div className='p'
-                        dangerouslySetInnerHTML={{
-                          __html: Pakdata?.content?.discount
-                        }}
-                      />
+                      <div className='p'>{HTMLParser(Pakdata?.content?.discount)}</div>
                     )}
 
                     <div className='activities-section mt-[20px] mb-[20px]'>

@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Backicon } from '@/components/common/svgicon'
 import { decodeHtml, hasHtmlContent } from '@/components/common/functions/htmlcontent'
+import { HTMLParser } from '@/utils/HTMLParser'
 
 const LocBody = ({ data }) => {
   const body = data?.content?.description_2
@@ -24,9 +25,7 @@ const LocBody = ({ data }) => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
             viewport={{ once: true }}
-            className='location_content_body mt-[30px]'
-            dangerouslySetInnerHTML={{ __html: decodeHtml(body) }}
-          />
+            className='location_content_body mt-[30px]'>{HTMLParser(decodeHtml(body))}</motion.div>
         )}
       </div>
     </section>

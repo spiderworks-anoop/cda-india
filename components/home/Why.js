@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { HTMLParser } from "@/utils/HTMLParser";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -154,9 +155,7 @@ const Why = ({ data }) => {
         <div className="grid lg:grid-cols-2 gap-[24px] lg:gap-[40px] lg:items-end">
           <div>
             <div className="lg:max-w-[560px] why-head">
-              <div
-                dangerouslySetInnerHTML={{ __html: data?.content?.title_4 }}
-              />
+              <div>{HTMLParser(data?.content?.title_4)}</div>
             </div>
           </div>
 
@@ -164,9 +163,7 @@ const Why = ({ data }) => {
             <div className="lg:max-w-[560px]">
               <div
                 ref={textRef}
-                className="text-[#454d5c] "
-                dangerouslySetInnerHTML={{ __html: data?.content?.content_4 }}
-              />
+                className="text-[#454d5c] ">{HTMLParser(data?.content?.content_4)}</div>
             </div>
           </div>
         </div>

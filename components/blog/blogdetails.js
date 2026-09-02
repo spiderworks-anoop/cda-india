@@ -5,6 +5,7 @@ import Blog1 from '../../public/images/pros3.png'
 import { Backicon, Faceicon, Instaicon, Linkicon, Shareicon, Xicon, Youicon } from '../common/svgicon'
 import moment from 'moment';
 import Link from 'next/link';
+import { HTMLParser } from '@/utils/HTMLParser';
 
 
 
@@ -91,7 +92,7 @@ const BlogDetailsitems = ({ data }) => {
 
             <div key={index}>
               <h2>{items?.title} </h2>
-              <div className='text-[#222]' dangerouslySetInnerHTML={{ __html: items?.description }} />
+              <div className='text-[#222]'>{HTMLParser(items?.description)}</div>
             </div>
 
           ))}

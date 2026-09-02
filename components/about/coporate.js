@@ -10,6 +10,7 @@ import {
   WhiteBtn,
 } from "../common/svgicon";
 import Noise from "../common/Noise";
+import { HTMLParser } from "@/utils/HTMLParser";
 
 const AboutCoporate = ({ data }) => {
   return (
@@ -35,20 +36,14 @@ const AboutCoporate = ({ data }) => {
             className="md:flex justify-center items-center"
           >
             <div className="max-w-[610px]">
-              <div className='h4'
-                dangerouslySetInnerHTML={{ __html: data?.content?.title_5 }}
-              />
+              <div className='h4'>{HTMLParser(data?.content?.title_5)}</div>
 
               <div className=" pt-[25] pb-[55px] md:hidden">
                 <Image src={Abt2} alt="" width={500} height={500} />
               </div>
 
               <div
-                className="prose prose-gray max-w-none"
-                dangerouslySetInnerHTML={{
-                  __html: data?.content?.description_5,
-                }}
-              />
+                className="prose prose-gray max-w-none">{HTMLParser(data?.content?.description_5)}</div>
             </div>
           </motion.div>
         </div>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { BlueBtn } from '../common/svgicon';
 import Accordion from '../common/Accordion';
 import Teamlist from './teamlist';
+import { HTMLParser } from '@/utils/HTMLParser';
 
  
 
@@ -21,7 +22,7 @@ const TeamMeat = ({data}) => {
             <div className='sticky top-[100px]'> 
                 <h3 className='mb-[20px]'> {data?.content?.title_3}  </h3> 
 
-                <div className='p' dangerouslySetInnerHTML={{__html:data?.content?.description_3}}/>  
+                <div className='p'>{HTMLParser(data?.content?.description_3)}</div>  
             </div>
            
           </div> 

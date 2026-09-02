@@ -9,6 +9,7 @@ import {
   WhiteBtn
 } from '../common/svgicon'
 import Noise from '../common/Noise'
+import { HTMLParser } from '@/utils/HTMLParser'
 
 const IndDetHead = ({ data }) => {
   return (
@@ -29,11 +30,7 @@ const IndDetHead = ({ data }) => {
                 <h1> {data?.content?.title_1} </h1>
                 <CurveLargeArrowicon />
                 
-                <div className='p'
-                  dangerouslySetInnerHTML={{
-                    __html: data?.content?.description_1
-                  }}
-                />
+                <div className='p'>{HTMLParser(data?.content?.description_1)}</div>
 
                 {data?.content?.button_text_1 && (
                   <a>

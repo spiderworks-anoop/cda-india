@@ -3,6 +3,7 @@ import { useState } from "react";
 import { CircleArrow2icon } from "../common/svgicon";
 import Accordion from "../common/Accordion";
 import CareerForm from "./CareerForm";
+import { HTMLParser } from "@/utils/HTMLParser";
 
 const CareerList = ({ listdata, data }) => {
   const [openIndex, setOpenIndex] = useState(0); // All closed initially
@@ -28,9 +29,7 @@ const CareerList = ({ listdata, data }) => {
             <h3>{data?.content?.title_1}</h3>
           </div>
           <div className="max-w-[650px] mt-[15px] md:mt-[0]">
-            <div
-              dangerouslySetInnerHTML={{ __html: data?.content?.description_1 }}
-            />
+            <div>{HTMLParser(data?.content?.description_1)}</div>
           </div>
         </div>
 
@@ -43,41 +42,19 @@ const CareerList = ({ listdata, data }) => {
               title={item?.title}
               content={
                 <div className="relative">
-                  <div className='h5'
-                    dangerouslySetInnerHTML={{
-                      __html: item?.short_description,
-                    }}
-                  />
-                  <div className='h5'
-                    dangerouslySetInnerHTML={{
-                      __html: item?.last_application_date,
-                    }}
-                  />
-                  <div className='h5'
-                    dangerouslySetInnerHTML={{
-                      __html: item?.department,
-                    }}
-                  />
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: item?.responsibilities,
-                    }}
-                  />
-                  <div
-                    dangerouslySetInnerHTML={{ __html: item?.eligibility }}
-                  />
-                  <div dangerouslySetInnerHTML={{ __html: item?.skills }} />
+                  <div className='h5'>{HTMLParser(item?.short_description)}</div>
+                  <div className='h5'>{HTMLParser(item?.last_application_date)}</div>
+                  <div className='h5'>{HTMLParser(item?.department)}</div>
+                  <div>{HTMLParser(item?.responsibilities)}</div>
+                  <div>{HTMLParser(item?.eligibility)}</div>
+                  <div>{HTMLParser(item?.skills)}</div>
                   <div className="flex items-center gap-[15px]">
                     <h5>No: of Vacancies:</h5>
-                    <div className='h5' dangerouslySetInnerHTML={{ __html: item?.vacancies }} />
+                    <div className='h5'>{HTMLParser(item?.vacancies)}</div>
                   </div>
                   <div className="flex items-center gap-[15px]">
                     <h5>Job Locations:</h5>
-                    <div className='h5'
-                      dangerouslySetInnerHTML={{
-                        __html: item?.job_location,
-                      }}
-                    />
+                    <div className='h5'>{HTMLParser(item?.job_location)}</div>
                   </div>
                   <div className="relative mt-4 md:absolute md:bottom-[20px] md:right-0 md:mt-0">
                     <button

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Ser1 from '../../public/images/ser1.png';
 import { Bluecircleicon, CircleArrowicon, CurveLargeArrowicon } from '../common/svgicon';
 import Noise from '../common/Noise';
+import { HTMLParser } from '@/utils/HTMLParser';
 
 const SerBanner = ({subtitle, title, discription, bnrimg}) => {
   return (
@@ -31,7 +32,7 @@ const SerBanner = ({subtitle, title, discription, bnrimg}) => {
                 </h5>
                 <h1> {title}</h1>
                 <CurveLargeArrowicon />
-                <div dangerouslySetInnerHTML={{__html:discription} }/>  
+                <div>{HTMLParser(discription)}</div>  
               </div>
           
          

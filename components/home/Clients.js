@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { CircleArrowicon } from "../common/svgicon";
+import { HTMLParser } from "@/utils/HTMLParser";
 
 
 const Ourclients = ({ data }) => {
@@ -13,7 +14,7 @@ const Ourclients = ({ data }) => {
 
         <section className="home-clients" data-aos="fade-up">
           <div className="container">
-            <div className='h3' dangerouslySetInnerHTML={{ __html: data?.content?.title }} />
+            <div className='h3'>{HTMLParser(data?.content?.title)}</div>
 
             <div className="flex flex-col md:flex-row items-center gap-[30px] rounded-[12px] overflow-hidden border border-[#E5E5E5] mt-[27px]">
               <div className="clients_left">

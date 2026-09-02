@@ -13,6 +13,7 @@ import 'swiper/css/pagination';
 
 // import required modules
 import { Pagination } from 'swiper/modules';
+import { HTMLParser } from '@/utils/HTMLParser';
 
 const Whychoose = ({ data }) => {
 
@@ -55,7 +56,7 @@ const Whychoose = ({ data }) => {
               }`}
           >
 
-            <div dangerouslySetInnerHTML={{ __html: data?.content?.description_2 }} />
+            <div>{HTMLParser(data?.content?.description_2)}</div>
 
             {hasTestimonials && listMarkup}
 

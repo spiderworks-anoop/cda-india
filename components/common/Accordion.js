@@ -1,6 +1,7 @@
 // components/Accordion.js
 import { useRef, useEffect, useState } from "react";
 import { Editicon } from "./svgicon";
+import { HTMLParser } from "@/utils/HTMLParser";
 
 export default function Accordion({
   title,
@@ -43,7 +44,7 @@ export default function Accordion({
         className="accordion_data"
       >
         {typeof content === "string" ? (
-          <div className="mt-2" dangerouslySetInnerHTML={{ __html: content }} />
+          <div className="mt-2">{HTMLParser(content)}</div>
         ) : (
           <div className="mt-2">{content}</div>
         )}

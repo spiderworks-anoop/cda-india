@@ -10,6 +10,7 @@ import {
 } from '../common/svgicon'
 import Noise from '../common/Noise'
 import Popup from '../common/Popup'
+import { HTMLParser } from '@/utils/HTMLParser'
 
 const SerDetHead = ({ data }) => {
   const [isPopupOpen, setPopupOpen] = useState(false);
@@ -44,11 +45,7 @@ const SerDetHead = ({ data }) => {
                   <h1> {data?.content?.title_1} </h1>
                   {/* <CurveLargeArrowicon /> */}
 
-                  <div className='p'
-                    dangerouslySetInnerHTML={{
-                      __html: data?.content?.description_1
-                    }}
-                  />
+                  <div className='p'>{HTMLParser(data?.content?.description_1)}</div>
 
                   {data?.content?.button_text_1 && (
                     <a onClick={() => setPopupOpen(true)}>

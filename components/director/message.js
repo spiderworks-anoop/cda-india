@@ -3,6 +3,7 @@ import { BlueBtn, Quateicon } from '../common/svgicon';
 import Accordion from '../common/Accordion';
 import Dir1 from '../../public/images/dir.jpg'
 import Image from 'next/image';
+import { HTMLParser } from '@/utils/HTMLParser';
 
 const DMessage = ({ data }) => {
 
@@ -32,7 +33,7 @@ const DMessage = ({ data }) => {
 
                     <div className='mt-[25px] md:mt-[0] md:w-[80%]'>
 
-                        <div className='p' dangerouslySetInnerHTML={{ __html: data?.content?.description_2 }} />
+                        <div className='p'>{HTMLParser(data?.content?.description_2)}</div>
 
                     </div>
 

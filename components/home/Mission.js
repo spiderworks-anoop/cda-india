@@ -8,6 +8,7 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 import Squares from "../common/square";
 import Link from "next/link";
+import { HTMLParser } from "@/utils/HTMLParser";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -91,12 +92,7 @@ const Mission = ({
             <div className="relative z-[1] flex flex-col justify-between h-full">
               <div>
                 <h4> {maintitle || "Why CDA"} </h4>
-                <div className='span'
-                  dangerouslySetInnerHTML={{
-                    __html:
-                      shorttitle || "<b>100%</b> Corporate Finance Solutions",
-                  }}
-                ></div>
+                <div className='span'>{HTMLParser(shorttitle || "<b>100%</b> Corporate Finance Solutions")}</div>
               </div>
               {
                 MisImg &&

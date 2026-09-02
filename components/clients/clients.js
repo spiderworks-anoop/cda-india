@@ -12,6 +12,7 @@ import Logo5 from '../../public/images/cl4.png'
 
 
 import { LargeArrowicon, Lineicon, Medalicon } from '../common/svgicon'
+import { HTMLParser } from '@/utils/HTMLParser'
 
  
 
@@ -29,13 +30,13 @@ const ClientsList = ({data}) => {
       <div className="grid md:grid-cols-2 gap-[20px] mb-[40px] md:mb-[80px]"> 
                 <div>
                     <div className='max-w-[520px]'>
-                        <div className='h3' dangerouslySetInnerHTML={{__html:data?.content?.title_1}}/>  
+                        <div className='h3'>{HTMLParser(data?.content?.title_1)}</div>  
                     </div> 
                 </div>
 
                 <div className='flex md:justify-end'>
                      <div className='max-w-[560px]'>
-                        <div className='p' dangerouslySetInnerHTML={{__html:data?.content?.description_1}}/>  
+                        <div className='p'>{HTMLParser(data?.content?.description_1)}</div>  
                     </div>
                 </div> 
             </div>

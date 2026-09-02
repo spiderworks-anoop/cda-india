@@ -11,6 +11,7 @@ import {
 } from "../common/svgicon";
 import Accordion from "../common/Accordion";
 import Popup from "../common/Popup";
+import { HTMLParser } from "@/utils/HTMLParser";
 
 const Faq = ({ servfaqs, faqrighttitle, faqrightdiscription, faqrightbtn, heading, service, leadSource = 'FAQ Section' }) => {
   const [isPopupOpen, setPopupOpen] = useState(false);
@@ -66,9 +67,7 @@ const Faq = ({ servfaqs, faqrighttitle, faqrightdiscription, faqrightbtn, headin
               <div className="min-w-[360px] xl:min-w-[460px] flex md:justify-end pr-[40px]">
                 <div className="px-[15px] md:px-0  max-w-[270px]">
                   <h4> {faqrighttitle}</h4>
-                  <div className='p'
-                    dangerouslySetInnerHTML={{ __html: faqrightdiscription }}
-                  />
+                  <div className='p'>{HTMLParser(faqrightdiscription)}</div>
 
                   <a
                     onClick={() => setPopupOpen(true)}

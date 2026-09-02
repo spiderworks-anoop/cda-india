@@ -12,6 +12,7 @@ import {
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Link from "next/link";
+import { HTMLParser } from "@/utils/HTMLParser";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -78,9 +79,7 @@ const Service = ({ data }) => {
         <div className="home-service-cntr">
           <div className="max-w-[1005px] mx-auto">
             <div className='h4'
-              ref={textRef}
-              dangerouslySetInnerHTML={{ __html: data?.content?.description_3 }}
-            />
+              ref={textRef}>{HTMLParser(data?.content?.description_3)}</div>
 
             <div className="grid md:grid-cols-3 gap-[50px] md:gap-[45px] xl:gap-[98px] mt-[50px] mb-[38px] md:mb-[97px] md:px-[45px]">
               {data?.content?.index_service_listing_id.map((item, index) => (

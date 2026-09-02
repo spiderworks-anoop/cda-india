@@ -8,6 +8,7 @@ import { ServicesApi } from '@/Datas/endpoints/services'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
+import { HTMLParser } from '@/utils/HTMLParser'
 
 const PackPopup = ({ isOpen, onClose, serData, packageData }) => {
   // if (!isOpen) return null;
@@ -123,11 +124,7 @@ const PackPopup = ({ isOpen, onClose, serData, packageData }) => {
             <h4>{packageData?.title}</h4>
             <div className='flex items-center gap-[15px]'>
               <h6>Starting from</h6>
-              <div className='h3'
-                dangerouslySetInnerHTML={{
-                  __html: packageData?.content?.value_per_month_1
-                }}
-              />
+              <div className='h3'>{HTMLParser(packageData?.content?.value_per_month_1)}</div>
             </div>
           </div>
 

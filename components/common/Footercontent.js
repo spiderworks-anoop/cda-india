@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { HTMLParser } from "@/utils/HTMLParser";
 
 const Footercontent = ({ footerContentTitle, footerContentDiscription }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -71,11 +72,7 @@ const Footercontent = ({ footerContentTitle, footerContentDiscription }) => {
     <section className="footer-content">
       <div className="container">
         {footerContentTitle && <h1>{footerContentTitle}</h1>}
-        <div
-          dangerouslySetInnerHTML={{
-            __html: isExpanded ? footerContentDiscription : truncatedHTML,
-          }}
-        />
+        <div>{HTMLParser(isExpanded ? footerContentDiscription : truncatedHTML)}</div>
         {shouldShowToggle && (
           <div>
             <a

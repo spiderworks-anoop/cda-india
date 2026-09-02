@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { HTMLParser } from "@/utils/HTMLParser";
 
 const ContactForm = ({ data, contact, blog }) => {
 
@@ -108,9 +109,7 @@ const ContactForm = ({ data, contact, blog }) => {
             </div>
 
             <div>
-              <div className='h4'
-                dangerouslySetInnerHTML={{ __html: data?.content?.title_7 }}
-              />
+              <div className='h4'>{HTMLParser(data?.content?.title_7)}</div>
               <p> {data?.content?.description}</p>
               <form onSubmit={handleSubmit(onSubmit, validatePhone)}>
                 <div className="grid md:grid-cols-2 gap-[25px] mt-[15px]">

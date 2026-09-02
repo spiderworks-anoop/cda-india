@@ -4,6 +4,7 @@ import Image from "next/image";
 import BannerIcon from "../../public/images/bannericon.png";
 import { CircleArrowicon } from "../common/svgicon";
 import Link from "next/link";
+import { HTMLParser } from "@/utils/HTMLParser";
 
 // Updated GradualSpacing: full line fade-in
 const GradualSpacing = ({ text }) => {
@@ -47,9 +48,7 @@ const Banner = ({ data }) => {
           <div className="max-w-[672px] mx-auto flex flex-col items-center justify-center gap-[15px]">
             <GradualSpacing text={data?.content?.title_1 || ""} />
 
-            <div
-              dangerouslySetInnerHTML={{ __html: data?.content?.description_1 }}
-            />
+            <div>{HTMLParser(data?.content?.description_1)}</div>
 
             <Link
               href={`/contact-us`}
@@ -81,11 +80,7 @@ const Banner = ({ data }) => {
             </div>
 
             <div
-              className="hidden md:block"
-              dangerouslySetInnerHTML={{
-                __html: data?.content?.short_description,
-              }}
-            />
+              className="hidden md:block">{HTMLParser(data?.content?.short_description)}</div>
           </div>
         </div>
       </div>

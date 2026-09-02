@@ -17,6 +17,7 @@ import 'swiper/css/pagination';
 
 // import required modules
 import { Pagination, Autoplay } from 'swiper/modules';
+import { HTMLParser } from '@/utils/HTMLParser';
 
 const TeamGallery = ({ data }) => {
 
@@ -30,7 +31,7 @@ const TeamGallery = ({ data }) => {
         <div className="flex  gap-[80px] pack-listing_head mb-[55px]">
 
           <div className='max-w-[750px]'>
-            <div className='h4' dangerouslySetInnerHTML={{ __html: data?.content?.description_4 }} />
+            <div className='h4'>{HTMLParser(data?.content?.description_4)}</div>
 
           </div>
 

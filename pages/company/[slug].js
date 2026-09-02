@@ -3,6 +3,7 @@ import Footercontent from "@/components/common/Footercontent";
 import { hasHtmlContent } from "@/components/common/functions/htmlcontent";
 import { GeneralApi } from "@/Datas/endpoints/general";
 import { CompanyApi } from "@/Datas/endpoints/company";
+import { HTMLParser } from "@/utils/HTMLParser";
 
 // /company/privacy-policy, /company/terms-and-conditions - every page the CMS
 // lists under company-page-list. They are all title + body, so one template
@@ -34,9 +35,7 @@ export default function CompanyPage({ companyPage, general }) {
           <div className="flex justify-center">
             <div className="md:w-10/12 w-full">
               <div
-                className="TermsCondition-content-block"
-                dangerouslySetInnerHTML={{ __html: companyPage?.content }}
-              />
+                className="TermsCondition-content-block">{HTMLParser(companyPage?.content)}</div>
             </div>
           </div>
         </div>

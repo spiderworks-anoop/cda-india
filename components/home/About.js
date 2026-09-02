@@ -9,6 +9,7 @@ import {
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Link from "next/link";
+import { HTMLParser } from "@/utils/HTMLParser";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -135,7 +136,7 @@ const About = ({ data }) => {
             Innovate
           </div>
 
-          <div className="text-black" dangerouslySetInnerHTML={{ __html: data?.content?.title_3 }} />
+          <div className="text-black">{HTMLParser(data?.content?.title_3)}</div>
           <h5> {data?.content?.short_title_3} </h5>
 
           <div className="animate-bounce popover text-[#fff] rounded-tl-[24px] rounded-tr-[2px] rounded-bl-[24px] rounded-br-[24px] absolute left-0 bottom-[30px] md:bottom-0 bg-[#6A7796]">
@@ -180,9 +181,7 @@ const About = ({ data }) => {
           <div className="order-1 md:order-3 min-w-0">
             <div
               ref={textRef}
-              className="about-desc"
-              dangerouslySetInnerHTML={{ __html: data?.content?.description_4 }}
-            />
+              className="about-desc">{HTMLParser(data?.content?.description_4)}</div>
           </div>
         </div>
 
