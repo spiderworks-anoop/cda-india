@@ -3921,8 +3921,10 @@ footer {
   /* 18.72px */
 }
 
-/* Shown in place of the three-column grid when the list comes back empty. */
-.blog_empty {
+/* Shown in place of the list when it comes back empty - the blog/author
+   grid and the career accordion share one look. */
+.blog_empty,
+.career_empty {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -3934,7 +3936,8 @@ footer {
   background: #fafbfd;
 }
 
-.blog_empty_icon {
+.blog_empty_icon,
+.career_empty_icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3946,7 +3949,8 @@ footer {
   color: #0b63e5;
 }
 
-.blog_empty h4 {
+.blog_empty h4,
+.career_empty h4 {
   color: #101828;
   font-size: 22px;
   font-style: normal;
@@ -3954,7 +3958,8 @@ footer {
   line-height: 32px;
 }
 
-.blog_empty p {
+.blog_empty p,
+.career_empty p {
   color: #6a7796;
   font-size: 16px;
   font-style: normal;
@@ -3965,16 +3970,19 @@ footer {
 }
 
 @media (max-width: 767px) {
-  .blog_empty {
+  .blog_empty,
+  .career_empty {
     padding: 44px 20px;
   }
 
-  .blog_empty h4 {
+  .blog_empty h4,
+  .career_empty h4 {
     font-size: 19px;
     line-height: 28px;
   }
 
-  .blog_empty p {
+  .blog_empty p,
+  .career_empty p {
     font-size: 15px;
     line-height: 24px;
   }
