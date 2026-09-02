@@ -39,7 +39,7 @@ const FooterSection = ({ items }) => {
         onClick={() => setIsActive(!isActive)}
         className='flex items-center justify-between'
       >
-        <h3>{items?.title}</h3>
+        <p className='link-title'>{items?.title}</p>
         <div className='block md:hidden'>
           <Downicon />
         </div>
@@ -189,7 +189,7 @@ const Footer = ({ general }) => {
 
                 <p>{general?.all_settings?.footer_content}</p>
 
-                <h5>Follow us</h5>
+                <p className='follow'>Follow us</p>
 
                 <div className='flex items-center gap-[24px] mt-[22px]'>
                   {general?.all_settings?.['twitter-link'] && (
