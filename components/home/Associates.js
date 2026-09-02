@@ -123,7 +123,7 @@ const Associates = ({ associateTitle, associateSubTitle, satisfiedClientsCount, 
               className='border-r-0 md:border-r-1 border-dashed border-[#fff] flex items-center justify-center gap-[35px] pr-[10px]'
               variants={countItem}
             >
-              <h4><CountUp
+              <span className='count-num'><CountUp
                 from={0}
                 to={satisfiedClientsCount}
                 separator=","
@@ -131,7 +131,7 @@ const Associates = ({ associateTitle, associateSubTitle, satisfiedClientsCount, 
                 duration={1}
                 className="count-up-text"
               />
-                +</h4>
+                +</span>
               <p>{satisfiedClients}</p>
             </motion.div>
 
@@ -139,14 +139,14 @@ const Associates = ({ associateTitle, associateSubTitle, satisfiedClientsCount, 
               className='px-[10px] py-[25px] border-b md:border-b-0 border-t md:border-t-0 border-r-0 md:border-r border-dashed border-[#fff] flex items-center justify-center gap-[35px]'
               variants={countItem}
             >
-              <h4><CountUp
+              <span className='count-num'><CountUp
                 from={0}
                 to={experienceCount}
                 separator=","
                 direction="up"
                 duration={1}
                 className="count-up-text"
-              /> </h4>
+              /> </span>
               <p>{experienceText}</p>
             </motion.div>
 
@@ -155,14 +155,15 @@ const Associates = ({ associateTitle, associateSubTitle, satisfiedClientsCount, 
               className='flex items-center justify-center gap-[35px]  pl-[10px]'
               variants={countItem}
             >
-              <h4><CountUp
-                from={0}
-                to={sectorCount}
-                separator=","
-                direction="up"
-                duration={1}
-                className="count-up-text"
-              />+ </h4>
+              <span className='count-num'>
+                <CountUp
+                  from={0}
+                  to={sectorCount}
+                  separator=","
+                  direction="up"
+                  duration={1}
+                  className="count-up-text"
+                />+ </span>
               <p> {sectorText}</p>
             </motion.div>
 

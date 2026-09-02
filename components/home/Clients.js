@@ -6,10 +6,6 @@ import { CircleArrowicon } from "../common/svgicon";
 
 const Ourclients = ({ data }) => {
 
-
-
-  console.log('our_exceptional_clients_listing_id', data?.content?.our_exceptional_clients_listing_id)
-
   return (
     <>
       {

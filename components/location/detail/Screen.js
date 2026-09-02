@@ -57,7 +57,6 @@ const LocationDetailScreen = ({
         <LocContent
           title={locationDetail?.content?.title_2}
           description={locationDetail?.content?.description_2}
-          data={locationDetail}
         />
       }
 
