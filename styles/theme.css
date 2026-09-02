@@ -1872,6 +1872,17 @@ footer {
   /* 157.143% */
 }
 
+.footer2 p {
+  color: #fff;
+  font-family: "Plus Jakarta Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 22px;
+  /* 157.143% */
+  margin-bottom: 37px;
+  margin-top: 22px;
+}
 .footer2 h4 {
   color: #fff;
   font-family: "Plus Jakarta Sans";

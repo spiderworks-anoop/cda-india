@@ -187,7 +187,7 @@ const Footer = ({ general }) => {
                   height={84}
                 />
 
-                <h4> {general?.all_settings?.footer_content}</h4>
+                <p>{general?.all_settings?.footer_content}</p>
 
                 <h5>Follow us</h5>
 
