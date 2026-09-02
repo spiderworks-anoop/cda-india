@@ -2876,6 +2876,16 @@ footer {
   /* 67.84px */
 }
 
+.advantage_left h3 {
+  color: #101828;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 30px;
+  /* 125% */
+  max-width: 250px;
+}
+
 .advantage_left h4 {
   color: #101828;
   font-size: 24px;
@@ -5191,6 +5201,11 @@ section#TermsCondition-section {
   .ser-det-banner img {
     height: auto;
     min-height: 600px;
+  }
+
+  .advantage_left h3 {
+    font-size: 18px;
+    line-height: 24px;
   }
 
   .advantage_left h4 {

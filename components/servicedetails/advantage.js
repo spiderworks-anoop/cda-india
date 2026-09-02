@@ -3,6 +3,8 @@ import { useState } from "react";
 import Image from "next/image";
 import { BlueBtn, Eye2icon, Eyeicon } from "../common/svgicon";
 import Popup from "../common/Popup";
+import { HTMLParser } from "@/utils/HTMLParser";
+
 
 const ToggleItem = ({ capt, title, text, isOpen, onClick }) => {
   return (
@@ -20,7 +22,7 @@ const ToggleItem = ({ capt, title, text, isOpen, onClick }) => {
             className="flex items-center justify-between cursor-pointer"
             onClick={onClick}
           >
-            <h4>{title}</h4>
+            <h3>{title}</h3>
             {isOpen ? <Eye2icon /> : <Eyeicon />}
           </div>
 
@@ -45,7 +47,7 @@ const ToggleItem = ({ capt, title, text, isOpen, onClick }) => {
 };
 
 const SerDetAdvantage = ({ data }) => {
-  
+
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [openIndex, setOpenIndex] = useState(null);
 
@@ -63,11 +65,9 @@ const SerDetAdvantage = ({ data }) => {
 
         <section className="ser-det-advantage pt-[50px]">
           <div className="container relative z-[1]">
-            <div className="max-w-[425px]">
-              <div className='h2'
-                dangerouslySetInnerHTML={{ __html: data?.content?.title_3 }}
-              />
-            </div>
+            <h2 className="h2 max-w-[425px]">
+              {HTMLParser(data?.content?.title_3)}
+            </h2>
 
             <div className="advantage_bg">
               <div className="md:flex">
