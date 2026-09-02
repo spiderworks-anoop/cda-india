@@ -39,9 +39,11 @@ const LocationDetailScreen = ({
   testimonials,
   serviceSectors
 }) => {
+
+
   return (
     <Base general={general} data={locationDetail} bottomContent={locationDetail?.bottom_description}>
-      
+
       <LocBanner data={locationDetail} />
 
       {/* <LocBody data={locationDetail} /> */}
@@ -49,8 +51,15 @@ const LocationDetailScreen = ({
       <LocServices data={locationDetail} />
 
       <LocHighlights data={locationDetail} />
-      
-      {isServicePage && <LocContent data={locationDetail} />}
+
+
+      {isServicePage &&
+        <LocContent
+          title={locationDetail?.content?.title_2}
+          description={locationDetail?.content?.description_2}
+          data={locationDetail}
+        />
+      }
 
       <LocSectors data={serviceSectors} />
 

@@ -45,7 +45,7 @@ const SerOffer = ({ IsServiceDetails, shorttitle, title, discription, listdata }
                     } gap-[18px] md:gap-[20px] lg:gap-[40px]`}
                 >
                   <div className='w-full md:w-auto flex items-center gap-[18px] md:gap-[20px] lg:gap-[40px]'>
-                    <h5>{index + 1}</h5>
+                    <span className='item-index'>{index + 1}</span>
                     <Image
                       src={service?.featured_image?.file_path}
                       alt=''

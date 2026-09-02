@@ -29,51 +29,35 @@ const STATIC_POINTS = [
   'A named point of contact who knows your file'
 ]
 
-const LocContent = ({ data }) => {
-  // On a service page the parent is the city, so the heading can name both.
-  const name = data?.title || data?.name
-  const city = data?.parent?.title || data?.parent?.name
-
-  const title =
-    data?.content?.title_2 ||
-    [name, city && `in ${city}`].filter(Boolean).join(' ') ||
-    'How We Work'
-
-  const body = data?.content?.description_2
-  const hasCmsBody = hasHtmlContent(body)
+const LocContent = ({ title, description, data }) => {
 
   return (
-    <section className='location_content pt-[40px] pb-[40px]'>
-      <div className='container'>
-        <motion.div
-          initial={{ y: 30 }}
-          whileInView={{ y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true, amount: 0.15 }}
-        >
-          <h2 className='location_content_head'>{title}</h2>
+    <>
+      {
+        (title || description) &&
+        <section section className='location_content pt-[40px] pb-[40px]'>
+          <div className='container'>
+            <motion.div
+              initial={{ y: 30 }}
+              whileInView={{ y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true, amount: 0.15 }}
+            >
+              {
+                title &&
+                <h2 className='location_content_head'>{title}</h2>
+              }
 
-          {hasCmsBody ? (
-            <div
-              className='location_content_body mt-[20px]'
-              dangerouslySetInnerHTML={{ __html: decodeHtml(body) }}
-            />
-          ) : (
-            <div className='location_content_body mt-[20px]'>
-              {STATIC_BODY.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
+              <div
+                className='location_content_body location_content_points mt-[20px]'
+                dangerouslySetInnerHTML={{ __html: description }}
+              />
+            </motion.div>
+          </div>
+        </section >
+      }
+    </>
 
-              <ul className='location_content_points'>
-                {STATIC_POINTS.map((point, index) => (
-                  <li key={index}>{point}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </motion.div>
-      </div>
-    </section>
   )
 }
 

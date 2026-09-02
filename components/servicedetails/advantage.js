@@ -14,7 +14,7 @@ const ToggleItem = ({ capt, title, text, isOpen, onClick }) => {
       className="account_list"
     >
       <div className="flex items-center gap-[30px] w-full">
-        <h5>{capt}</h5>
+        <span className="avd-item-index" >{capt}</span>
         <div className="w-full">
           <div
             className="flex items-center justify-between cursor-pointer"

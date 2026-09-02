@@ -1883,6 +1883,7 @@ footer {
   margin-bottom: 37px;
   margin-top: 22px;
 }
+
 .footer2 h4 {
   color: #fff;
   font-family: "Plus Jakarta Sans";
@@ -2385,6 +2386,17 @@ footer {
   transition: background-color 0.35s ease, border-radius 0.35s ease;
 }
 
+.ser-offer-list .item-index {
+  color: #0b63e5;
+  background: -webkit-linear-gradient(#0b63e5, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 92px;
+  line-height: 99px;
+  /* width: 50px; */
+  font-weight: 900;
+}
+
 .ser-offer-list h5 {
   color: #0b63e5;
   background: -webkit-linear-gradient(#0b63e5, #fff);
@@ -2763,6 +2775,18 @@ footer {
 .advantage_left_scroll * {
   scrollbar-width: thin;
   scrollbar-color: #888 #f1f1f1;
+}
+
+.advantage_left .avd-item-index {
+  color: #0b63e5;
+  background: -webkit-linear-gradient(#0b63e5, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 106%;
+  /* 67.84px */
 }
 
 .advantage_left h5 {
@@ -5631,6 +5655,13 @@ section#TermsCondition-section {
   }
 
   /* 92px in a 50px box overflowed its own column at every width. */
+  .ser-offer-list .item-index {
+    font-size: 54px;
+    line-height: 1;
+    width: auto;
+    flex: none;
+  }
+
   .ser-offer-list h5 {
     font-size: 54px;
     line-height: 1;
@@ -5779,6 +5810,10 @@ section#TermsCondition-section {
     position: relative;
     right: 0;
     margin-right: 0;
+  }
+
+  .advantage_left .avd-item-index {
+    font-size: 40px;
   }
 
   .advantage_left h5 {
