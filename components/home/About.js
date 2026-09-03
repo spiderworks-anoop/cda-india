@@ -156,9 +156,9 @@ const About = ({ data }) => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-[45px] lg:gap-[60px] xl:gap-[98px] mt-[50px]">
           <div className="flex gap-[20px] order-3 md:order-1 min-w-0">
-            <h2>#1</h2>
+            <span className="num-txt">#1</span>
             <div className="relative min-w-0">
-              <h4>{data?.content?.text_1}</h4>
+              <h4 className="tagline-txt ">{data?.content?.text_1}</h4>
               <span className="county-tag">{data?.content?.text_2}</span>
             </div>
           </div>

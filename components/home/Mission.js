@@ -91,7 +91,7 @@ const Mission = ({
             />
             <div className="relative z-[1] flex flex-col justify-between h-full">
               <div>
-                <h4> {maintitle || "Why CDA"} </h4>
+                <h6> {maintitle || "Why CDA"} </h6>
                 <div className='span'>{HTMLParser(shorttitle || "<b>100%</b> Corporate Finance Solutions")}</div>
               </div>
               {

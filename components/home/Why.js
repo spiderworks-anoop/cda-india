@@ -155,7 +155,7 @@ const Why = ({ data }) => {
         <div className="grid lg:grid-cols-2 gap-[24px] lg:gap-[40px] lg:items-end">
           <div>
             <div className="lg:max-w-[560px] why-head">
-              <div>{HTMLParser(data?.content?.title_4)}</div>
+              <h2>{HTMLParser(data?.content?.title_4)}</h2>
             </div>
           </div>
 
@@ -202,11 +202,11 @@ const Why = ({ data }) => {
                 <span>{String(index + 1).padStart(2, "0")}</span>
 
                 {/* Title */}
-                <h4
+                <p
                   className={`mb-[30px] lg:max-w-[200px] ${isAlt ? "lg:mb-0" : "lg:mb-[78px]"}`}
                 >
                   {item?.title}
-                </h4>
+                </p>
 
                 {/* Bottom image - every card at 1 and 2 columns, and the
                     non-alternating cards in the 4 up grid */}

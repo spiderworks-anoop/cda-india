@@ -117,7 +117,7 @@ const Trust = ({ data }) => {
                           index == 2 ? "md:mt-[160px]" : ""
                         } trust_item flex flex-col items-center justify-center`}
                       >
-                        <h5>{item?.title}</h5>
+                        <p className="trust-item-txt">{item?.title}</p>
                       </div>
                     </div>
                   </motion.div>

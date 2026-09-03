@@ -12,4 +12,4 @@
 //   pages/sitemap/locations.js       the city URLs
 //   pages/sitemap/location-pages.js  index of the per-city sitemaps
 //   pages/sitemap/[city].js          one city's service URLs
-export const LOCATION_PAGES_INDEXABLE = false
+export const LOCATION_PAGES_INDEXABLE = true
