@@ -70,6 +70,7 @@ const LocRelated = ({ data }) => {
                 >
                   <Link
                     href={item?.url || `/${item?.slug}`}
+                    rel='nofollow'
                     className='location_pin_card flex items-center gap-[16px] h-full'
                   >
                     <div className='location_pin_thumb'>

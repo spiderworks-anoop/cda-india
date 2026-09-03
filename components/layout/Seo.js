@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router';
 import React from 'react'
-import parse from 'html-react-parser';
+import { HTMLParser } from '@/utils/HTMLParser';
 
 function SEO({ data, settings }) {
 
@@ -13,14 +13,25 @@ function SEO({ data, settings }) {
 
     const canonicalPathname = router?.asPath.split('?')[0];
 
-    const extrajs = parse(typeof data?.extra_js === 'string'
+    const extrajs = HTMLParser(typeof data?.extra_js === 'string'
         ? data?.extra_js
+        : '');
+
+    // The CMS holds the tag manager snippet as markup - the <script> wrapper
+    // included, the way Google hands it over - so it is parsed rather than
+    // injected into a <script> of our own, which would nest one inside the
+    // other. html-react-parser renders script bodies through
+    // dangerouslySetInnerHTML, so the JS is not entity-escaped on the way out.
+    const gtmHead = HTMLParser(typeof settings?.google_tag_manager_head === 'string'
+        ? settings?.google_tag_manager_head
         : '');
 
     return (
         <Head>
-            <script dangerouslySetInnerHTML={{ __html: settings?.google_tag_manager_head }}>
-            </script>
+
+            <meta name="robots" content="noindex, nofollow" key="robots" />
+
+            {gtmHead}
             <meta name="google-site-verification" content="dghu7IaS1_edNpNrqGVUwJKvGzPld5lFGJG5JD0y_QE" />
             <link rel="canonical" href={`${domain}${canonicalPathname == '/index' ? '' : canonicalPathname == '/' ? '' : canonicalPathname}`} />
             <link rel="icon" href={settings?.fav_icon} />

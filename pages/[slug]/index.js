@@ -9,23 +9,9 @@ import {
   withLocationUrls
 } from '@/Datas/pageData/location'
 
-// /dubai - a city. `params.slug` is the city.
-//
-// This sits at the root of the site, so it is the last route tried: every
-// static page (/about-us, /blog, ...) is matched before it. Anything left over
-// is looked up as a location and 404s when the CMS does not know it.
 export default function LocationCity(props) {
   return (
     <>
-      {/* Kept out of the index while the module is switched off. The shared
-          <SEO> emits the rest of the head for every route, so the directive
-          lives here rather than there. */}
-      {!LOCATION_PAGES_INDEXABLE && (
-        <Head>
-          <meta name='robots' content='noindex, nofollow' key='robots' />
-        </Head>
-      )}
-
       <LocationDetailScreen {...props} />
     </>
   )

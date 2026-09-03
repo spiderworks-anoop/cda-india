@@ -9,8 +9,6 @@ import LocCommonSections from '@/components/location/shared/CommonSections'
 import Base from '@/components/layout/Base'
 import Faq from '@/components/home/Faq'
 import Process from '@/components/home/Process'
-import Footercontent from '@/components/common/Footercontent'
-import { hasHtmlContent } from '@/components/common/functions/htmlcontent'
 
 // A city (/location/dubai) and a service inside a city
 // (/location/dubai/accounting-services-in-dubai) are the same record type in
@@ -42,7 +40,11 @@ const LocationDetailScreen = ({
 
 
   return (
-    <Base general={general} data={locationDetail} bottomContent={locationDetail?.bottom_description}>
+    <Base
+      general={general}
+      data={locationDetail}
+      footerContentTitle={locationDetail?.bottom_text}
+    >
 
       <LocBanner data={locationDetail} />
 
@@ -90,12 +92,6 @@ const LocationDetailScreen = ({
         ProsImg={process?.content?.media_id_3?.file_path}
       />
 
-      {hasHtmlContent(locationDetail?.bottom_description) && (
-        <Footercontent
-          footerContentTitle={locationDetail?.bottom_text}
-          footerContentDiscription={locationDetail?.bottom_description}
-        />
-      )}
     </Base>
   )
 }

@@ -98,6 +98,7 @@ const LocList = ({ shorttitle, title, description, listdata, metadata }) => {
 
                 <Link
                   href={`/${location?.slug}`}
+                  rel='nofollow'
                   className='btn flex items-center gap-[10px] whitespace-nowrap'
                 >
                   Explore {location?.title || location?.name} <LongArrowicon />

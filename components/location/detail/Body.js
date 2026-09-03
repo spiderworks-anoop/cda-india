@@ -14,7 +14,11 @@ const LocBody = ({ data }) => {
     <section className='location_content pt-[20px] pb-[40px]'>
       <div className='container'>
         {parent?.slug && (
-          <Link href={`/${parent?.slug}`} className='back_btn flex items-center gap-[10px]'>
+          <Link
+            href={`/${parent?.slug}`}
+            rel='nofollow'
+            className='back_btn flex items-center gap-[10px]'
+          >
             <Backicon /> All Services In {parent?.title || parent?.name}
           </Link>
         )}

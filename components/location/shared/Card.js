@@ -18,7 +18,11 @@ const LocCard = ({ item, href, index = 0, linktext = 'View Details' }) => {
       transition={{ duration: 0.6, delay: (index % 3) * 0.1, ease: 'easeOut' }}
       viewport={{ once: true }}
     >
-      <Link href={href || item?.url || `/${item?.slug}`} className='location_card flex flex-col h-full'>
+      <Link
+        href={href || item?.url || `/${item?.slug}`}
+        rel='nofollow'
+        className='location_card flex flex-col h-full'
+      >
         {/* The media block is always rendered, image or not - the numbering and
             the tinted panel are what give an image-less item something to look
             at, and they keep every card in the row the same height. */}

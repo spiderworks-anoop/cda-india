@@ -7,7 +7,7 @@ import { Bluecircleicon, CircleArrowicon, CurveLargeArrowicon } from '../common/
 import Noise from '../common/Noise';
 import { HTMLParser } from '@/utils/HTMLParser';
 
-const SerBanner = ({subtitle, title, discription, bnrimg}) => {
+const SerBanner = ({ subtitle, title, discription, bnrimg }) => {
   return (
     <>
       <section className='ser-banner-sec min-h-screen flex items-end'>
@@ -20,23 +20,23 @@ const SerBanner = ({subtitle, title, discription, bnrimg}) => {
         />
         <div className='container relative z-[1]'>
           <div className='grid md:grid-cols-2 gap-[15px]'>
-          <motion.div
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: 'easeOut' }}
               viewport={{ once: true }}
-            className='md:flex justify-center items-center'>
+              className='md:flex justify-center items-center'>
               <div>
                 <h5 className='flex items-center gap-[10px]'>
                   <Bluecircleicon />  {subtitle}
                 </h5>
                 <h1> {title}</h1>
                 <CurveLargeArrowicon />
-                <div>{HTMLParser(discription)}</div>  
+                <div className='text-[#ffffffcf]'>{HTMLParser(discription)}</div>
               </div>
-          
-         
-              
+
+
+
             </motion.div>
 
             <div className='flex flex-col items-end justify-end'>
