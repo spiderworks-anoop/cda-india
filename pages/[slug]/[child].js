@@ -1,5 +1,3 @@
-import Head from 'next/head'
-import { LOCATION_PAGES_INDEXABLE } from '@/Datas/seo'
 import LocationDetailScreen from '@/components/location/detail/Screen'
 import { LocationApi } from '@/Datas/endpoints/location'
 import { WidgetApi } from '@/Datas/endpoints/widget'
