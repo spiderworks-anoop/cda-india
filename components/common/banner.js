@@ -45,10 +45,10 @@ const CommBanner = ({
                 }
 
 
-                <h1>{title}</h1>
+                <h1 className="max-w-[770px] ">{title}</h1>
                 {/* <CurveLargeArrowicon /> */}
 
-                <div className="max-w-[800px] p">{HTMLParser((short_description || "").substring(0, 200))}</div>
+                <div className="max-w-[800px] p">{HTMLParser((short_description || ""))}</div>
 
                 {/* {
                   btntext &&

@@ -18,6 +18,7 @@ import { GeneralApi } from "@/Datas/endpoints/general";
 import { WidgetApi } from "@/Datas/endpoints/widget";
 
 export default function Home({ data, general, process, testimonials }) {
+  
   const aboutRef = useRef(null); // Create ref for About section
 
   const scrollToSection = () => {
@@ -29,7 +30,7 @@ export default function Home({ data, general, process, testimonials }) {
   return (
     <Base general={general} data={data} bottomContent={"Bottom Content"}>
       <CommBanner
-        title={data?.title}
+        title={data?.content?.title_1}
         discription={data?.content?.description_1}
         short_description={data?.content?.short_description_1}
         bnrimg={data?.content?.media_id_1?.file_path}
