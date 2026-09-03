@@ -13,7 +13,7 @@ const Process = ({ prosTitle, procesList, ProsImg }) => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-[76px] md:gap-[20px] xl:gap-[76px]">
           <div className="pros_left">
             <Image src={ProsImg || Pros1} alt="" width={250} height={250} />
-            <h4> {prosTitle}</h4>
+            <p> {prosTitle}</p>
           </div>
 
           <div className="pros_list_cntr">
@@ -27,7 +27,7 @@ const Process = ({ prosTitle, procesList, ProsImg }) => {
                     height={101}
                   />
                   <div className="flex items-center mt-[34px] gap-[15px]">
-                    <h4> {items?.title} </h4>
+                    <p> {items?.title} </p>
                     <div className="shrink-0">
                       <LongArrowicon />
                     </div>

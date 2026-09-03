@@ -222,16 +222,16 @@ export const FooterLogoicon = ({ }) => {
       </g>
       <defs>
         <linearGradient id="paint0_linear_11790_2599" x1="184.162" y1="0.704102" x2="184.162" y2="133.196" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#117BC0" />
-          <stop offset="1" stop-color="white" />
+          <stop stopColor="#117BC0" />
+          <stop offset="1" stopColor="white" />
         </linearGradient>
         <linearGradient id="paint1_linear_11790_2599" x1="184.162" y1="0.704102" x2="184.162" y2="133.196" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#117BC0" />
-          <stop offset="1" stop-color="white" />
+          <stop stopColor="#117BC0" />
+          <stop offset="1" stopColor="white" />
         </linearGradient>
         <linearGradient id="paint2_linear_11790_2599" x1="184.162" y1="0.704102" x2="184.162" y2="133.196" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#117BC0" />
-          <stop offset="1" stop-color="white" />
+          <stop stopColor="#117BC0" />
+          <stop offset="1" stopColor="white" />
         </linearGradient>
       </defs>
     </svg>
@@ -346,8 +346,8 @@ export const Bluecircleicon = ({ }) => {
       <circle cx="10.4351" cy="10.435" r="9.5" transform="rotate(45 10.4351 10.435)" fill="url(#paint0_linear_11939_355)" />
       <defs>
         <linearGradient id="paint0_linear_11939_355" x1="10.4042" y1="-5.74111" x2="29.6392" y2="3.06093" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#117BC0" />
-          <stop offset="1" stop-color="#697DFF" />
+          <stop stopColor="#117BC0" />
+          <stop offset="1" stopColor="#697DFF" />
         </linearGradient>
       </defs>
     </svg>

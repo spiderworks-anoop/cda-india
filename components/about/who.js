@@ -46,9 +46,9 @@ const Aboutwho = ({ data }) => {
                 </div>
               )}
               <span className=" county-tag"> {obj?.title} </span>
-              <h4 className=" mb-[78px] md:mb-[30px]">
+              <p className=" mb-[78px] md:mb-[30px]">
                 {obj?.short_description}
-              </h4>
+              </p>
 
               <div className="overflow-hidden img-zoom">
                 <Image
