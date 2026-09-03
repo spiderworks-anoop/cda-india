@@ -79,9 +79,9 @@ const Mission = ({
 
   return (
     <section className="home-mission" data-aos="fade-up">
-      <div className="container sticky top-[80px]">
-        <div className="flex flex-col lg:flex-row items-center gap-[40px] xl:gap-[83px]">
-          <div className="miss_bg ">
+      <div className="container">
+        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-[40px] xl:gap-[83px]">
+          <div className="miss_bg">
             <Squares
               speed={0.5}
               squareSize={30}

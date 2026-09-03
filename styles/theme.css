@@ -922,16 +922,15 @@ section.Career_List_cntr p {
 .home-mission p {
   color: #9b9b9b;
   font-family: "Plus Jakarta Sans";
-  font-size: 36px;
+  font-size: 30px;
   font-style: normal;
   font-weight: 500;
-  line-height: 48px;
+  line-height: 42px;
   margin-top: 16px;
 }
 
 .home-mission {
   padding: 145px 0;
-  height: 200vh;
 }
 
 .miss_bg {
@@ -946,6 +945,19 @@ section.Career_List_cntr p {
       #0d0d0d 100%);
 }
 
+/* The card holds its place while the (much taller) mission/vision copy scrolls
+   past it. Declared here rather than as a Tailwind `lg:sticky` class because
+   theme.css is imported after Tailwind, so the `.miss_bg` position above wins
+   the tie on specificity and would quietly cancel the utility. */
+@media (min-width: 1024px) {
+  .miss_bg {
+    position: sticky;
+    top: 100px;
+    /* A stretched or centred flex item has no room to travel. */
+    align-self: flex-start;
+  }
+}
+
 /* Below the side by side breakpoint the card is stacked and full width, so a
    fixed min-width would push it past the viewport and the fixed height would
    crop the artwork. Let it size to its content instead. */
@@ -957,16 +969,6 @@ section.Career_List_cntr p {
     height: auto;
     padding-bottom: 25px;
     margin: 0 auto;
-  }
-
-  /* The sticky scroll effect only exists to hold the card in place next to the
-     scrolling copy. Stacked, it just leaves two screens of dead scroll. */
-  .home-mission {
-    height: auto;
-  }
-
-  .home-mission .container {
-    position: static;
   }
 }
 
@@ -4958,8 +4960,8 @@ section#TermsCondition-section {
   }
 
   .home-mission p {
-    font-size: 30px;
-    line-height: 40px;
+    font-size: 28px;
+    line-height: 38px;
   }
 
   .home-service-cntr h4,
@@ -5446,8 +5448,8 @@ section#TermsCondition-section {
   }
 
   .home-mission p {
-    font-size: 28px;
-    line-height: 38px;
+    font-size: 25px;
+    line-height: 35px;
   }
 
   .home-cartificate {
