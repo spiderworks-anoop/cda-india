@@ -29,8 +29,6 @@ function SEO({ data, settings }) {
     return (
         <Head>
 
-            <meta name="robots" content="noindex, nofollow" key="robots" />
-
             {gtmHead}
             <meta name="google-site-verification" content="dghu7IaS1_edNpNrqGVUwJKvGzPld5lFGJG5JD0y_QE" />
             <link rel="canonical" href={`${domain}${canonicalPathname == '/index' ? '' : canonicalPathname == '/' ? '' : canonicalPathname}`} />
