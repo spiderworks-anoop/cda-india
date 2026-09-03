@@ -5,10 +5,8 @@ import { useRouter } from 'next/router';
 import SEO from './Seo';
 
 const Base = ({ children, bottomContent, hideFooter, general, data }) => {
+    
     const router = useRouter()
-
-
-
 
     return (
         <>

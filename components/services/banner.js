@@ -10,7 +10,7 @@ import { HTMLParser } from '@/utils/HTMLParser';
 const SerBanner = ({subtitle, title, discription, bnrimg}) => {
   return (
     <>
-      <section className='ser-banner-sec flex items-end'>
+      <section className='ser-banner-sec min-h-screen flex items-end'>
         <Noise
           patternSize={250}
           patternScaleX={1}

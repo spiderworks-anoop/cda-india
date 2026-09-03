@@ -71,7 +71,7 @@ const Footercontent = ({ footerContentTitle, footerContentDiscription }) => {
   return (
     <section className="footer-content">
       <div className="container">
-        {footerContentTitle && <h1>{footerContentTitle}</h1>}
+        {footerContentTitle && <h2>{footerContentTitle}</h2>}
         <div>{HTMLParser(isExpanded ? footerContentDiscription : truncatedHTML)}</div>
         {shouldShowToggle && (
           <div>

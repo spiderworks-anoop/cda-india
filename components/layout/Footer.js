@@ -290,23 +290,23 @@ const Footer = ({ general }) => {
 
             <div className='grid  md:grid-cols-2 mt-[40px] gap-[15px] md:justify-between '>
               <p className='text-center md:text-left'>
-                Copyright © 2026 Charles&Darwish. All rights reserved.{' '}
+                Copyright © {new Date().getFullYear()} Charles&Darwish. All rights reserved.{' '}
               </p>
               <div className='flex justify-center md:justify-end items-center'>
-                <Link
-                  href={`https://www.spiderworks.in`}
-                  target='_blank'
-                  rel='nofollow'
-                  className='built_for_growth'
-                >
-                  {' '}
-                  <p className='flex items-center gap-[10px]'>
-                    Built for growth{' '}
+                <p className='built_for_growth flex items-center '>
+                  Developed By&nbsp;<Link
+                    href='https://www.spiderworks.in'
+                    target='_blank'
+                    rel='noopener nofollow'
+                    className='inline-flex items-center gap-[6px]'
+                  >
+                    SpiderWorks
                     <Image src={Foot1} alt='' width={27} height={31} />
-                  </p>
-                </Link>
+                  </Link>
+                </p>
               </div>
             </div>
+            
           </div>
         </div>
 

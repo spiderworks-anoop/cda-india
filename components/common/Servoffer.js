@@ -58,7 +58,7 @@ const SerOffer = ({ IsServiceDetails, shorttitle, title, discription, listdata }
                   <p>{service?.short_description}</p>
 
                   <div className='w-full md:max-w-[225px] flex items-center justify-between md:block'>
-                    <h3>{service?.title}</h3>
+                    <h3>{service?.name}</h3>
                     <span className='btn flex items-center gap-[10px]'>
                       View Service <LongArrowicon />
                     </span>
