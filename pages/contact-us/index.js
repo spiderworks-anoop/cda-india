@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import Base from "@/components/layout/Base";
 import Process from "@/components/home/Process";
-import Footercontent from "@/components/common/Footercontent";
 import CommBanner from "@/components/common/banner";
 import ContactForm from "@/components/contact/getform";
 import ContactList from "@/components/contact/list";
@@ -16,7 +15,7 @@ export default function Contact({ general, process, data }) {
 
 
   return (
-    <Base data={data} general={general} bottomContent={"Bottom Content"}>
+    <Base data={data} general={general}>
 
       <div className="Small_banner h-[100dvh]  ">
         <CommBanner title={data?.title}
@@ -33,7 +32,6 @@ export default function Contact({ general, process, data }) {
         procesList={process?.content?.smart_accounting_listing_id}
         ProsImg={process?.content?.media_id_3?.file_path}
       />
-      <Footercontent />
     </Base>
   );
 }

@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import Base from "@/components/layout/Base";
 import Process from "@/components/home/Process";
-import Footercontent from "@/components/common/Footercontent";
 import DMessage from "@/components/director/message";
 import { DirectorApi } from "@/Datas/endpoints/director";
 import { GeneralApi } from "@/Datas/endpoints/general";
@@ -14,7 +13,7 @@ export default function Team({ data, general, process }) {
 
 
   return (
-    <Base data={data} general={general} bottomContent={"Bottom Content"}>
+    <Base data={data} general={general}>
 
       <DMessage data={data} />
 
@@ -23,7 +22,6 @@ export default function Team({ data, general, process }) {
         procesList={process?.content?.smart_accounting_listing_id}
         ProsImg={process?.content?.media_id_3?.file_path}
       />
-      <Footercontent />
     </Base>
   );
 }

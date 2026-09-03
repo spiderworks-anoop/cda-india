@@ -10,7 +10,7 @@ import Link from 'next/link'
 function ThankYou({general}) {
   return (
 
-     <Base general={general} bottomContent={"Bottom Content"}>
+     <Base general={general}>
 
       <div className='h-[120px] bg-[#12283a]'>
 

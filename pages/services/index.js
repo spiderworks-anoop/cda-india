@@ -11,7 +11,6 @@ import Ourclients from "@/components/home/Clients";
 import Associates from "@/components/home/Associates";
 import Faq from "@/components/home/Faq";
 import Process from "@/components/home/Process";
-import Footercontent from "@/components/common/Footercontent";
 import SerBanner from "@/components/services/banner";
 import SerOffer from "@/components/common/Servoffer";
 import SerWhy from "@/components/services/Servwhy";
@@ -25,7 +24,12 @@ export default function Home({ data, listdata, general, financialSolutions, cert
 
 
   return (
-    <Base general={general} data={data} bottomContent={data?.bottom_description}>
+    <Base
+      general={general}
+      data={data}
+      footerContentTitle={data?.content?.title_5}
+      footerContentDiscription={data?.content?.description_5}
+    >
 
       <SerBanner
         title={data?.content?.title_1}
@@ -91,11 +95,6 @@ export default function Home({ data, listdata, general, financialSolutions, cert
         prosTitle={process?.content?.title_1}
         procesList={process?.content?.smart_accounting_listing_id}
         ProsImg={process?.content?.media_id_3?.file_path}
-      />
-
-      <Footercontent
-        footerContentTitle={data?.content?.title_5}
-        footerContentDiscription={data?.content?.description_5}
       />
 
     </Base>

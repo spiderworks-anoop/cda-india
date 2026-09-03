@@ -1,5 +1,4 @@
 import Base from "@/components/layout/Base";
-import Footercontent from "@/components/common/Footercontent";
 import { hasHtmlContent } from "@/components/common/functions/htmlcontent";
 import { GeneralApi } from "@/Datas/endpoints/general";
 import { CompanyApi } from "@/Datas/endpoints/company";
@@ -13,7 +12,6 @@ export default function CompanyPage({ companyPage, general }) {
     <Base
       general={general}
       data={companyPage}
-      bottomContent={companyPage?.bottom_description}
     >
       <section
         id="TermsCondition-section"
@@ -41,11 +39,6 @@ export default function CompanyPage({ companyPage, general }) {
         </div>
       )}
 
-      {hasHtmlContent(companyPage?.bottom_description) && (
-        <Footercontent
-          footerContentDiscription={companyPage?.bottom_description}
-        />
-      )}
     </Base>
   );
 }

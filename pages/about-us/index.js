@@ -12,13 +12,12 @@ import Ourclients from "@/components/home/Clients";
 import Associates from "@/components/home/Associates";
 import Faq from "@/components/home/Faq";
 import Process from "@/components/home/Process";
-import Footercontent from "@/components/common/Footercontent";
 import { AboutUsApi } from "@/Datas/endpoints/aboutus";
 import { GeneralApi } from "@/Datas/endpoints/general";
 import { WidgetApi } from "@/Datas/endpoints/widget";
 
 export default function Home({ data, general, process, testimonials }) {
-  
+
   const aboutRef = useRef(null); // Create ref for About section
 
   const scrollToSection = () => {
@@ -28,7 +27,7 @@ export default function Home({ data, general, process, testimonials }) {
   };
 
   return (
-    <Base general={general} data={data} bottomContent={"Bottom Content"}>
+    <Base general={general} data={data}>
       <CommBanner
         title={data?.content?.title_1}
         discription={data?.content?.description_1}
@@ -63,7 +62,6 @@ export default function Home({ data, general, process, testimonials }) {
         procesList={process?.content?.smart_accounting_listing_id}
         ProsImg={process?.content?.media_id_3?.file_path}
       />
-      {/* <Footercontent /> */}
     </Base>
   );
 }

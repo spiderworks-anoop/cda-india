@@ -5,7 +5,6 @@ import CommBanner from '@/components/common/banner'
 import BlogDetailsitems from '@/components/blog/blogdetails'
 import BlogListitems from '@/components/blog/bloglist'
 import Process from '@/components/home/Process'
-import Footercontent from '@/components/common/Footercontent'
 import { WidgetApi } from '@/Datas/endpoints/widget'
 import { GeneralApi } from '@/Datas/endpoints/general'
 import ContactForm from '@/components/contact/getform'
@@ -16,7 +15,7 @@ export default function BlogDetails({ general, blogDetail, process, data }) {
   // console.log('dd', blogDetail)
 
   return (
-    <Base general={general} bottomContent={blogDetail?.bottom_description} data={blogDetail}>
+    <Base general={general} data={blogDetail}>
       <div className='Small_banner details_blog'>
         <CommBanner
           title={blogDetail?.title}
@@ -65,7 +64,6 @@ export default function BlogDetails({ general, blogDetail, process, data }) {
         ProsImg={process?.content?.media_id_3?.file_path}
       />
 
-      <Footercontent />
     </Base>
   )
 }

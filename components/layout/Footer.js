@@ -27,6 +27,7 @@ import Foot3 from '../../public/images/loca.png'
 import Link from 'next/link'
 import { Urlredirect } from '../common/functions/urlnavigate'
 import Popup from '../common/Popup'
+import Footercontent from '../common/Footercontent'
 import { IoLogoWhatsapp } from 'react-icons/io5'
 
 const FooterSection = ({ items }) => {
@@ -102,7 +103,7 @@ const FooterColumn = ({ title, items }) => {
   )
 }
 
-const Footer = ({ general }) => {
+const Footer = ({ general, footerContentTitle, footerContentDiscription }) => {
 
   // Only offer the brochure when the CMS actually has one. Without it the same
   // button still opens the popup, just as a plain enquiry rather than promising
@@ -150,6 +151,11 @@ const Footer = ({ general }) => {
           leadSource='Footer - Enquiry'
         />
       )}
+
+      <Footercontent
+        footerContentTitle={footerContentTitle}
+        footerContentDiscription={footerContentDiscription}
+      />
 
       <footer id="footer">
         {/* <div className='footer1'>
@@ -306,7 +312,7 @@ const Footer = ({ general }) => {
                 </p>
               </div>
             </div>
-            
+
           </div>
         </div>
 

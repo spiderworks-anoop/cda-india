@@ -6,7 +6,6 @@ import Ourclients from '@/components/home/Clients'
 import Associates from '@/components/home/Associates'
 import Faq from '@/components/home/Faq'
 import Process from '@/components/home/Process'
-import Footercontent from '@/components/common/Footercontent'
 import SerDetHead from '@/components/servicedetails/header'
 import SerDetFinance from '@/components/servicedetails/finance'
 import SerDetAdvantage from '@/components/servicedetails/advantage'
@@ -32,7 +31,11 @@ export default function Home({
 }) {
   // console.log(serviceDetail)
   return (
-    <Base general={general} data={serviceDetail} bottomContent={serviceDetail?.bottom_description}>
+    <Base
+      general={general}
+      data={serviceDetail}
+      footerContentTitle={serviceDetail?.bottom_title}
+    >
       <SerDetHead data={serviceDetail} />
       <SerDetFinance data={serviceDetail} />
       <SerDetAdvantage data={serviceDetail} />
@@ -87,12 +90,6 @@ export default function Home({
         ProsImg={process?.content?.media_id_3?.file_path}
       />
 
-      {serviceDetail?.bottom_description && (
-        <Footercontent
-          footerContentTitle={serviceDetail.bottom_title}
-          footerContentDiscription={serviceDetail.bottom_description}
-        />
-      )}
 
 
 

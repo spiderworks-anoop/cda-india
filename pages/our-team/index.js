@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import Base from "@/components/layout/Base";
 import Process from "@/components/home/Process";
-import Footercontent from "@/components/common/Footercontent";
 import PackageHead from "@/components/packages/head";
 import CommBanner from "@/components/common/banner";
 import PackageListing from "@/components/packages/package";
@@ -18,7 +17,7 @@ export default function Team({ data, members, general, process }) {
 
 
   return (
-    <Base general={general} data={data} bottomContent={"Bottom Content"}>
+    <Base general={general} data={data}>
 
       <div className="Small_banner h-screen ">
 
@@ -45,7 +44,6 @@ export default function Team({ data, members, general, process }) {
         procesList={process?.content?.smart_accounting_listing_id}
         ProsImg={process?.content?.media_id_3?.file_path}
       />
-      <Footercontent />
     </Base>
   );
 }

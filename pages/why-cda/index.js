@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import Base from "@/components/layout/Base";
 import Process from "@/components/home/Process";
-import Footercontent from "@/components/common/Footercontent";
 import PackageHead from "@/components/packages/head";
 import CommBanner from "@/components/common/banner";
 import PackageListing from "@/components/packages/package";
@@ -16,7 +15,7 @@ import { WidgetApi } from "@/Datas/endpoints/widget";
 
 export default function Why({ data, general, process }) {
   return (
-    <Base data={data} general={general} bottomContent={"Bottom Content"}>
+    <Base data={data} general={general}>
       <div className="Small_banner h-screen">
         <CommBanner
           title={data?.content?.short_title_1}
@@ -35,7 +34,6 @@ export default function Why({ data, general, process }) {
         procesList={process?.content?.smart_accounting_listing_id}
          ProsImg={process?.content?.media_id_3?.file_path}
       />
-      <Footercontent />
     </Base>
   );
 }

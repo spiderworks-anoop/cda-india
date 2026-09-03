@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import Base from "@/components/layout/Base";
 import Process from "@/components/home/Process";
-import Footercontent from "@/components/common/Footercontent";
 import CommBanner from "@/components/common/banner";
 import CareerList from "@/components/career/list";
 import { GeneralApi } from "@/Datas/endpoints/general";
@@ -13,7 +12,7 @@ export default function career({ listdata, data, general, process }) {
 
 
   return (
-    <Base data={data} general={general} bottomContent={"Bottom Content"}>
+    <Base data={data} general={general}>
 
       <div className="Small_banner h-[100dvh] ">
         <CommBanner
@@ -30,7 +29,6 @@ export default function career({ listdata, data, general, process }) {
         procesList={process?.content?.smart_accounting_listing_id}
         ProsImg={process?.content?.media_id_3?.file_path}
       />
-      <Footercontent />
     </Base>
   );
 }

@@ -2,7 +2,6 @@ import { useRef } from "react";
 import Head from "next/head";
 import Base from "@/components/layout/Base";
 import Process from "@/components/home/Process";
-import Footercontent from "@/components/common/Footercontent";
 import PackageHead from "@/components/packages/head";
 import CommBanner from "@/components/common/banner";
 import PackageListing from "@/components/packages/package";
@@ -22,7 +21,7 @@ export default function Home({ general, data, process, packageList }) {
         <meta name="robots" content="noindex, nofollow" key="robots" />
       </Head>
 
-      <Base data={data} general={general} bottomContent={"Bottom Content"}>
+      <Base data={data} general={general}>
 
         <div className="Small_banner h-screen ">
           <CommBanner
@@ -55,7 +54,6 @@ export default function Home({ general, data, process, packageList }) {
           procesList={process?.content?.smart_accounting_listing_id}
           ProsImg={process?.content?.media_id_3?.file_path}
         />
-        <Footercontent />
       </Base>
     </>
   );

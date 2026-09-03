@@ -6,7 +6,6 @@ import Ourclients from '@/components/home/Clients'
 import Associates from '@/components/home/Associates'
 import Faq from '@/components/home/Faq'
 import Process from '@/components/home/Process'
-import Footercontent from '@/components/common/Footercontent'
 
 import SerDetFinance from '@/components/servicedetails/finance'
 import SerDetAdvantage from '@/components/servicedetails/advantage'
@@ -33,7 +32,7 @@ export default function Home({
   testimonials
 }) {
   return (
-    <Base data={industryDetail} general={general} bottomContent={industryDetail?.bottom_description}>
+    <Base data={industryDetail} general={general}>
 
       <IndDetBnr data={industryDetail} />
 
@@ -87,11 +86,6 @@ export default function Home({
         prosTitle={process?.content?.title_1}
         procesList={process?.content?.smart_accounting_listing_id}
         ProsImg={process?.content?.media_id_3?.file_path}
-      />
-
-      <Footercontent
-        footerContentTitle={data?.content?.title_5}
-        footerContentDiscription={data?.content?.description_5}
       />
 
     </Base>

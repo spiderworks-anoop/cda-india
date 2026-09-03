@@ -13,7 +13,6 @@ import Ourclients from "@/components/home/Clients";
 import Associates from "@/components/home/Associates";
 import Faq from "@/components/home/Faq";
 import Process from "@/components/home/Process";
-import Footercontent from "@/components/common/Footercontent";
 import { GeneralApi } from "@/Datas/endpoints/general";
 import { WidgetApi } from "@/Datas/endpoints/widget";
 import { HomeApi } from "@/Datas/endpoints";
@@ -72,7 +71,7 @@ export default function Home({
   // console.log("GM", data);
 
   return (
-    <Base general={general} data={data} bottomContent={"Bottom Content"}>
+    <Base general={general} data={data}>
       
       <Banner data={data} />
 
@@ -131,11 +130,6 @@ export default function Home({
         prosTitle={process?.content?.title_1}
         procesList={process?.content?.smart_accounting_listing_id}
         ProsImg={process?.content?.media_id_3?.file_path}
-      />
-
-      <Footercontent
-        footerContentTitle={data?.h1_title}
-        footerContentDiscription={data?.bottom_description}
       />
 
     </Base>

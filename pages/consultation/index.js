@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import Base from "@/components/layout/Base";
 import Process from "@/components/home/Process";
-import Footercontent from "@/components/common/Footercontent";
 import CommBanner from "@/components/common/banner";
 import { GeneralApi } from "@/Datas/endpoints/general";
 import { WidgetApi } from "@/Datas/endpoints/widget";
@@ -13,7 +12,7 @@ export default function Consultation({ general, process, data }) {
 
 
   return (
-    <Base data={data} general={general} bottomContent={"Bottom Content"}>
+    <Base data={data} general={general}>
 
       <div className="Small_banner  ">
         <CommBanner title={data?.title}
@@ -28,7 +27,6 @@ export default function Consultation({ general, process, data }) {
         procesList={process?.content?.smart_accounting_listing_id}
         ProsImg={process?.content?.media_id_3?.file_path}
       />
-      <Footercontent />
     </Base>
   );
 }
